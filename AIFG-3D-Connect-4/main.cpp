@@ -1,8 +1,6 @@
 /// <summary>
-/// simple game loop for SFML[2.5.1]
-/// 
-/// @author Peter Lowe
-/// @date May 2019
+/// @author Michael R Ryan & Mantas Zalnierius
+/// @date 26/11/2021
 /// </summary>
 
 #ifdef _DEBUG 
@@ -23,7 +21,7 @@
 #include "Game.h"
 
 /// <summary>
-/// main enrtry point
+/// main entry point
 /// </summary>
 /// <returns>success or failure</returns>
 int main()
