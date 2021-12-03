@@ -2,6 +2,8 @@
 #define GAME_BOARD_H
 
 #include <array>
+#include <iostream>
+#include "ConsoleGameBoardRenderer.h"
 
 /// <summary>
 /// Represents the piece types stored in the game board.
@@ -52,11 +54,14 @@ public:
 	/// <returns>The PieceType of the piece at the given coordinates.</returns>
 	PieceType const & getPiece(size_t t_x, size_t t_y, size_t t_z) const;
 
+
+	void render();
+
 private:
 
 	// Holds all the game board data.
 	std::array<std::array<std::array<PieceType, 4>, 4>, 4> m_pieces;
-
+	Renderer* m_BoardRenderer;
 };
 
 #endif // !GAME_BOARD_H
