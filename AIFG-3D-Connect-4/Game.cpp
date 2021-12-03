@@ -14,6 +14,8 @@ Game::Game() :
 	m_exitGame{false}
 {
 	gameBoard = new GameBoard();
+	m_consoleRenderer = new ConsoleGameBoardRenderer();
+	m_consoleRenderer->setGameBoard(gameBoard);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -72,7 +74,7 @@ void Game::update(float t_delta)
 void Game::render()
 {
 	m_window.clear(sf::Color::Black);
-	gameBoard->render();
+	m_consoleRenderer->render();
 	m_window.display();
 }
 

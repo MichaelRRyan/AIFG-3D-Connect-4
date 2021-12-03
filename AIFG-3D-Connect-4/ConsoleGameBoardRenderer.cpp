@@ -2,7 +2,7 @@
 
 ConsoleGameBoardRenderer::ConsoleGameBoardRenderer()
 {
-	m_renderBoard = true;
+	m_canRender = true;
 }
 
 ConsoleGameBoardRenderer::~ConsoleGameBoardRenderer()
@@ -12,9 +12,37 @@ ConsoleGameBoardRenderer::~ConsoleGameBoardRenderer()
 
 void ConsoleGameBoardRenderer::render()
 {
-	if (m_gameBoard != nullptr && m_renderBoard)
+	if (m_gameBoard != nullptr && m_canRender)
 	{
-		m_renderBoard = false;
+		for (int row = 0; row < 4; row++)
+		{
+			for (int board = 0; board < 4; board++)
+			{
+				for (int col = 0; col < 4; col++)
+				{
+					renderPiece(m_gameBoard->getPiece(row, board, col));
+				}
+				std::cout << std::endl;
+			}
+			std::cout << std::endl;
+		}
+		m_canRender = false;
+	}
+}
+
+void ConsoleGameBoardRenderer::renderPiece(PieceType t_type)
+{
+	switch (t_type)
+	{
+	case PieceType::None:
+		std::cout << "- ";
+		break;
+	case PieceType::Red:
+		std::cout << "X ";
+		break;
+	case PieceType::Yellow:
+		std::cout << "O ";
+		break;
 	}
 }
 
@@ -22,4 +50,9 @@ void ConsoleGameBoardRenderer::setGameBoard(GameBoard* t_gameBoard)
 {
 	if(t_gameBoard != nullptr) 
 		m_gameBoard = t_gameBoard;
+}
+
+void ConsoleGameBoardRenderer::setCanRender(bool t_canRender)
+{
+	m_canRender = t_canRender;
 }

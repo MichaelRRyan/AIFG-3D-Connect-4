@@ -8,8 +8,6 @@ GameBoard::GameBoard() :
 		for (auto & row : slice) // Gets an array of z for every x and y.
 			for (PieceType & type : row) // Gets every piece for each x, y, z.
 				type = PieceType::None;
-	m_BoardRenderer = new ConsoleGameBoardRenderer();
-	m_BoardRenderer->setGameBoard(this);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -24,10 +22,3 @@ PieceType const& GameBoard::getPiece(size_t t_x, size_t t_y, size_t t_z) const
 {
 	return m_pieces.at(t_x).at(t_y).at(t_z);
 }
-
-void GameBoard::render()
-{
-	m_BoardRenderer->render();
-}
-
-///////////////////////////////////////////////////////////////////////////////
