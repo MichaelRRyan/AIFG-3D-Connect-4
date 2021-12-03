@@ -56,7 +56,6 @@ private:
 
 	// Holds all the game board data.
 	std::array<std::array<std::array<PieceType, 4>, 4>, 4> m_pieces;
-
 };
 
 #endif // !GAME_BOARD_H
