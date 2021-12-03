@@ -2,7 +2,6 @@
 #define GAME_BOARD_H
 
 #include <array>
-#include <iostream>
 
 /// <summary>
 /// Represents the piece types stored in the game board.
@@ -52,6 +51,7 @@ public:
 	/// <param name="t_z">the z coordinate of the piece.</param>
 	/// <returns>The PieceType of the piece at the given coordinates.</returns>
 	PieceType const & getPiece(size_t t_x, size_t t_y, size_t t_z) const;
+
 private:
 
 	// Holds all the game board data.

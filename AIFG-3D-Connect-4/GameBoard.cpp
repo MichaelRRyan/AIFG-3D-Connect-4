@@ -22,3 +22,5 @@ PieceType const& GameBoard::getPiece(size_t t_x, size_t t_y, size_t t_z) const
 {
 	return m_pieces.at(t_x).at(t_y).at(t_z);
 }
+
+///////////////////////////////////////////////////////////////////////////////

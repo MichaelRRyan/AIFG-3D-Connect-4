@@ -7,7 +7,6 @@ ConsoleGameBoardRenderer::ConsoleGameBoardRenderer()
 
 ConsoleGameBoardRenderer::~ConsoleGameBoardRenderer()
 {
-	delete m_gameBoard;
 }
 
 void ConsoleGameBoardRenderer::render()

@@ -75,7 +75,7 @@ private:
 	Renderer* m_consoleRenderer;
 	bool m_exitGame; // control exiting game
 
-	GameBoard* gameBoard;
+	GameBoard* m_gameBoard;
 
 
 
