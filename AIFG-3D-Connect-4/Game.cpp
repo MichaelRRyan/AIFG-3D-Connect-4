@@ -74,10 +74,9 @@ void Game::processKeys(sf::Event t_event)
 void Game::update(float t_delta)
 {
 	m_renderer->render();
-
-	int x, y, z;
-	std::cout << "Enter your move: ";
-	std::cin >> x >> y >> z;
+	m_rulesHandler.update();
+	m_renderer->setCanRender(true);
+	system("cls");
 }
 
 ///////////////////////////////////////////////////////////////////////////////

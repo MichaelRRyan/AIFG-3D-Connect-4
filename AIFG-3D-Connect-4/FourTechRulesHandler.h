@@ -1,6 +1,9 @@
 #ifndef FOUR_TECH_RULES_HANDLER_H
 #define FOUR_TECH_RULES_HANDLER_H
 
+// TEMPORARY.
+#include <iostream>
+
 #include <functional>
 #include "GameBoard.h"
 
