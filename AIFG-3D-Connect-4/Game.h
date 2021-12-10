@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include "GameBoard.h"
 #include "ConsoleGameBoardRenderer.h"
+#include "FourTechRulesHandler.h"
 
 class Game
 {
@@ -68,16 +69,21 @@ private:
 	/// </summary>
 	void exit();
 
+	/// <summary>
+	/// Called when the game is over.
+	/// </summary>
+	/// <param name="t_winner">the winning piece colour.</param>
+	void onGameOver(PieceType t_winner);
+
 	const unsigned m_WINDOW_WIDTH;
 	const unsigned m_WINDOW_HEIGHT;
 
 	//sf::RenderWindow m_window; // main SFML window
-	Renderer* m_consoleRenderer;
+	Renderer * m_renderer;
 	bool m_exitGame; // control exiting game
 
-	GameBoard* m_gameBoard;
-
-
+	GameBoard m_gameBoard;
+	FourTechRulesHandler m_rulesHandler;
 
 };
 
