@@ -1,6 +1,7 @@
 #include "ConsoleGameBoardRenderer.h"
 
-ConsoleGameBoardRenderer::ConsoleGameBoardRenderer()
+ConsoleGameBoardRenderer::ConsoleGameBoardRenderer() :
+	m_gameBoard{ nullptr }
 {
 	m_canRender = true;
 }
