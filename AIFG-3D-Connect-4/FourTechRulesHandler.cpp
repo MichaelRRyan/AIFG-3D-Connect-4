@@ -25,6 +25,8 @@ void FourTechRulesHandler::update()
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max());
 		std::cin.get();
 	}
+
+	checkForGameOver();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -37,6 +39,25 @@ void FourTechRulesHandler::setOnGameOverFunction(OnGameOverFunction t_function)
 void FourTechRulesHandler::setGameBoard(GameBoard * t_gameBoard)
 {
 	m_gameBoard = t_gameBoard;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void FourTechRulesHandler::checkForGameOver()
+{
+	int filledRow = 0;
+
+	for (int x = 0; x < 4; x++)
+	{
+		for (int z = 0; z < 4; z++)
+		{
+
+		}
+	}
+}
+
+int FourTechRulesHandler::getLineValue(size_t t_x, size_t t_y, size_t t_z)
+{
+	return 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

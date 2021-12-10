@@ -48,6 +48,12 @@ public:
 
 private:
 
+	/// <summary>
+	/// Checks if either player have won or a draw has been reached.
+	/// </summary>
+	void checkForGameOver();
+
+	int getLineValue(size_t t_x, size_t t_y, size_t t_z);
 
 	GameBoard * m_gameBoard;
 	OnGameOverFunction m_onGameOverFunction;
