@@ -4,11 +4,11 @@
 /// <summary>
 /// Represents the piece types stored in the game board.
 /// </summary>
-enum class PieceType
+enum class PieceType : char
 {
-	None = 0,
-	Red = 1,
-	Yellow = 2
+	None = '-',
+	Red = 'x',
+	Yellow = 'o'
 };
 
 #endif // !PIECE_TYPE_H

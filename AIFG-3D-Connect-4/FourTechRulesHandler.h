@@ -48,6 +48,7 @@ public:
 
 private:
 
+
 	GameBoard * m_gameBoard;
 	OnGameOverFunction m_onGameOverFunction;
 
