@@ -10,12 +10,12 @@
 Game::Game() :
 	m_WINDOW_WIDTH{ 800u },
 	m_WINDOW_HEIGHT{ 600u },
-	m_window{ sf::VideoMode{ m_WINDOW_WIDTH, m_WINDOW_HEIGHT, 32U }, "SFML Game" },
+	//m_window{ sf::VideoMode{ m_WINDOW_WIDTH, m_WINDOW_HEIGHT, 32U }, "SFML Game" },
 	m_exitGame{false}
 {
-	gameBoard = new GameBoard();
+	m_gameBoard = new GameBoard();
 	m_consoleRenderer = new ConsoleGameBoardRenderer();
-	m_consoleRenderer->setGameBoard(gameBoard);
+	m_consoleRenderer->setGameBoard(m_gameBoard);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -30,7 +30,7 @@ void Game::run()
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 	const float fps{ 60.0f };
 	sf::Time timePerFrame = sf::seconds(1.0f / fps); // 60 fps
-	while (m_window.isOpen())
+	while (!m_exitGame)
 	{
 		processEvents(); // as many as possible
 		timeSinceLastUpdate += clock.restart();
@@ -47,15 +47,17 @@ void Game::run()
 ///////////////////////////////////////////////////////////////////////////////
 void Game::processEvents()
 {
-	sf::Event newEvent;
-	while (m_window.pollEvent(newEvent))
-	{
-		if ( sf::Event::Closed == newEvent.type) // window message
-			exit();
+	
 
-		else if (sf::Event::KeyPressed == newEvent.type) //user pressed a key
-			processKeys(newEvent);
-	}
+	//sf::Event newEvent;
+	//while (m_window.pollEvent(newEvent))
+	//{
+	//	if ( sf::Event::Closed == newEvent.type) // window message
+	//		exit();
+
+	//	else if (sf::Event::KeyPressed == newEvent.type) //user pressed a key
+	//		processKeys(newEvent);
+	//}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -68,20 +70,27 @@ void Game::processKeys(sf::Event t_event)
 ///////////////////////////////////////////////////////////////////////////////
 void Game::update(float t_delta)
 {
+	m_consoleRenderer->render();
+
+	int x, y, z;
+	std::cout << "Enter your move: ";
+	std::cin >> x >> y >> z;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Game::render()
 {
-	m_window.clear(sf::Color::Black);
-	m_consoleRenderer->render();
-	m_window.display();
+	//m_window.clear(sf::Color::Black);
+	
+	//m_consoleRenderer->render();
+	
+	//m_window.display();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Game::exit()
 {
-	m_window.close();
+	//m_window.close();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

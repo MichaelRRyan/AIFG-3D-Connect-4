@@ -1,7 +1,9 @@
 #ifndef CONSOLE_GAME_BOARD_RENDERER_H
 #define CONSOLE_GAME_BOARD_RENDERER_H
 
+#include <iostream>
 #include "Renderer.h"
+
 class ConsoleGameBoardRenderer : public Renderer
 {
 public:

@@ -71,7 +71,7 @@ private:
 	const unsigned m_WINDOW_WIDTH;
 	const unsigned m_WINDOW_HEIGHT;
 
-	sf::RenderWindow m_window; // main SFML window
+	//sf::RenderWindow m_window; // main SFML window
 	Renderer* m_consoleRenderer;
 	bool m_exitGame; // control exiting game
 
