@@ -21,7 +21,8 @@ void ConsoleGameBoardRenderer::render()
 				for (int col = 0; col < 4; col++)
 				{
 					std::cout << static_cast<char>(
-						m_gameBoard->getPiece(row, board, col));
+						m_gameBoard->getPiece(row, board, col))
+						<< " ";
 				}
 				std::cout << std::endl;
 			}

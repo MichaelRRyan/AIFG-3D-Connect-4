@@ -44,13 +44,44 @@ void FourTechRulesHandler::setGameBoard(GameBoard * t_gameBoard)
 ///////////////////////////////////////////////////////////////////////////////
 void FourTechRulesHandler::checkForGameOver()
 {
-	int filledRow = 0;
-
-	for (int x = 0; x < 4; x++)
+	for (int y = 0; y < 4; ++y)
 	{
-		for (int z = 0; z < 4; z++)
-		{
+		int xInRows[4] = { 0, 0, 0, 0 };
 
+		for (int x = 0; x < 4; x++)
+		{
+			int zInRow = 0;
+
+			for (int z = 0; z < 4; z++)
+			{
+				if (PieceType::Red == m_gameBoard->getPiece(x, y, z))
+				{
+					zInRow++;
+					xInRows[z]++;
+				}
+				else if (PieceType::Yellow == m_gameBoard->getPiece(x, y, z))
+				{
+					zInRow--;
+					xInRows[z]--;
+				}
+			}
+
+			if (abs(zInRow) == 4)
+			{
+				m_onGameOverFunction((zInRow > 0) ?
+					PieceType::Red : PieceType::Yellow);
+				return;
+			}
+		}
+
+		for (int i = 0; i < 4; ++i)
+		{
+			if (abs(xInRows[i]) == 4)
+			{
+				m_onGameOverFunction((xInRows[i] > 0) ?
+					PieceType::Red : PieceType::Yellow);
+				return;
+			}
 		}
 	}
 }

@@ -29,21 +29,23 @@ Game::~Game()
 ///////////////////////////////////////////////////////////////////////////////
 void Game::run()
 {	
-	sf::Clock clock;
-	sf::Time timeSinceLastUpdate = sf::Time::Zero;
-	const float fps{ 60.0f };
-	sf::Time timePerFrame = sf::seconds(1.0f / fps); // 60 fps
+	//sf::Clock clock;
+	//sf::Time timeSinceLastUpdate = sf::Time::Zero;
+	//const float fps{ 60.0f };
+	//sf::Time timePerFrame = sf::seconds(1.0f / fps); // 60 fps
 	while (!m_exitGame)
 	{
-		processEvents(); // as many as possible
-		timeSinceLastUpdate += clock.restart();
-		while (timeSinceLastUpdate > timePerFrame)
-		{
-			timeSinceLastUpdate -= timePerFrame;
-			processEvents(); // at least 60 fps
-			update(timePerFrame.asSeconds()); //60 fps
-		}
-		render(); // as many as possible
+		update(1.0f);
+
+		//processEvents(); // as many as possible
+		//timeSinceLastUpdate += clock.restart();
+		//while (timeSinceLastUpdate > timePerFrame)
+		//{
+		//	timeSinceLastUpdate -= timePerFrame;
+		//	processEvents(); // at least 60 fps
+		//	update(timePerFrame.asSeconds()); //60 fps
+		//}
+		//render(); // as many as possible
 	}
 }
 
@@ -73,10 +75,10 @@ void Game::processKeys(sf::Event t_event)
 ///////////////////////////////////////////////////////////////////////////////
 void Game::update(float t_delta)
 {
+	system("cls");
 	m_renderer->render();
 	m_rulesHandler.update();
 	m_renderer->setCanRender(true);
-	system("cls");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -104,6 +106,8 @@ void Game::onGameOver(PieceType t_winner)
 		std::cout << "The red player won!" << std::endl;
 	else
 		std::cout << "The yellow player won!" << std::endl;
+
+	m_exitGame = true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
