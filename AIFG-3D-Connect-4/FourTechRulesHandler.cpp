@@ -44,48 +44,56 @@ void FourTechRulesHandler::setGameBoard(GameBoard * t_gameBoard)
 ///////////////////////////////////////////////////////////////////////////////
 void FourTechRulesHandler::checkForGameOver()
 {
-	for (int y = 0; y < 4; ++y)
+	int8_t xValues[16] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+	for (int x = 0; x < 4; ++x)
 	{
-		int xInRows[4] = { 0, 0, 0, 0 };
+		int8_t yValues[4] = { 0, 0, 0, 0 };
 
-		for (int x = 0; x < 4; x++)
+		for (int y = 0; y < 4; ++y)
 		{
-			int zInRow = 0;
+			int8_t zValue = 0;
 
-			for (int z = 0; z < 4; z++)
+			for (int z = 0; z < 4; ++z)
 			{
 				if (PieceType::Red == m_gameBoard->getPiece(x, y, z))
 				{
-					zInRow++;
-					xInRows[z]++;
+					zValue++;
+					yValues[z]++;
+					xValues[(y * 4) + z]++;
 				}
 				else if (PieceType::Yellow == m_gameBoard->getPiece(x, y, z))
 				{
-					zInRow--;
-					xInRows[z]--;
+					zValue--;
+					yValues[z]--;
+					xValues[(y * 4) + z]--;
 				}
 			}
 
-			if (abs(zInRow) == 4)
-			{
-				m_onGameOverFunction((zInRow > 0) ?
-					PieceType::Red : PieceType::Yellow);
-				return;
-			}
+			if (evaluateRow(zValue)) return;
 		}
 
 		for (int i = 0; i < 4; ++i)
-		{
-			if (abs(xInRows[i]) == 4)
-			{
-				m_onGameOverFunction((xInRows[i] > 0) ?
-					PieceType::Red : PieceType::Yellow);
-				return;
-			}
-		}
+			if (evaluateRow(yValues[i])) return;
 	}
+
+	for (int i = 0; i < 16; ++i)
+		if (evaluateRow(xValues[i])) return;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+bool FourTechRulesHandler::evaluateRow(int t_rowValue)
+{
+	if (abs(t_rowValue) == 4)
+	{
+		PieceType type = (t_rowValue > 0) ? PieceType::Red : PieceType::Yellow;
+		m_onGameOverFunction(type);
+		return true;
+	}
+	return false;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 int FourTechRulesHandler::getLineValue(size_t t_x, size_t t_y, size_t t_z)
 {
 	return 0;

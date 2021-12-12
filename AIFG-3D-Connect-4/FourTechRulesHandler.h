@@ -53,6 +53,14 @@ private:
 	/// </summary>
 	void checkForGameOver();
 
+	/// <summary>
+	/// Checks if there's a win by the total value of a row and calls the game
+	///		over function if so.
+	/// </summary>
+	/// <param name="t_rowValue">the total value of the row.</param>
+	/// <returns>Whether or not the game is over.</returns>
+	bool evaluateRow(int t_rowValue);
+
 	int getLineValue(size_t t_x, size_t t_y, size_t t_z);
 
 	GameBoard * m_gameBoard;
