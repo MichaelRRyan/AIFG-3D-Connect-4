@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleGameBoardRenderer.cpp" />
+    <ClCompile Include="Coordinate.cpp" />
     <ClCompile Include="FourTechRulesHandler.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameBoard.cpp" />
@@ -27,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleGameBoardRenderer.h" />
+    <ClInclude Include="Coordinate.h" />
     <ClInclude Include="FourTechRulesHandler.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameBoard.h" />

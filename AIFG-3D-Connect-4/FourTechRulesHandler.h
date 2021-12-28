@@ -6,6 +6,7 @@
 
 #include <functional>
 #include "GameBoard.h"
+#include "Coordinate.h"
 
 /// <summary>
 /// Runs the 4Tech game and handles the rules. 
@@ -37,34 +38,77 @@ public:
 	/// <param name="t_function">the function to call on game over.</param>
 	void setOnGameOverFunction(OnGameOverFunction t_function);
 
-	// To be filled out later.
+	// TODO: To be filled out later.
 	void setTurnHandler(int * t_turnHandler);
 
 	/// <summary>
 	/// Sets the game board to perform operations on.
 	/// </summary>
-	/// <param name="t_gameBoard">the game board.</param>
+	/// <param name="t_gameBoard">- The game board.</param>
 	void setGameBoard(GameBoard * t_gameBoard);
 
-private:
-
+private: 
+	
 	/// <summary>
 	/// Checks if either player have won or a draw has been reached.
 	/// </summary>
-	void checkForGameOver();
+	/// <param name="t_position">The position of the last placed piece.</param>
+	void checkForGameOver(Coordinate const & t_position);
+
+	/// <summary>
+	/// Checks for a straight win along the three axis.
+	/// </summary>
+	/// <param name="t_position">The position of the last placed piece.</param>
+	/// <returns>Whether or not a win was determined.</returns>
+	bool checkForStraightWin(Coordinate const& t_position);
+
+	/// <summary>
+	/// Checks for a win along the two diagonals on each of the three axis.
+	/// </summary>
+	/// <param name="t_position">The position of the last placed piece.</param>
+	/// <returns>Whether or not a win was determined.</returns>
+	bool checkForSingleAxisDiagonalWin(Coordinate const& t_position);
+
+	/// <summary>
+	/// Checks for a win along the four diagonals along all three axis.
+	/// </summary>
+	/// <param name="t_position">The position of the last placed piece.</param>
+	/// <returns>Whether or not a win was determined.</returns>
+	bool checkForAllAxisDiagonalWin(Coordinate const& t_position);
+	
+	/// <summary>
+	/// Loops four times from the start position and icrements by the increment
+	///		values, checking if the values along the axis add up to a win.
+	/// </summary>
+	/// <param name="t_start">- The start tile to check from.</param>
+	/// <param name="t_xInc">- The x increment.</param>
+	/// <param name="t_yInc">- The y increment.</param>
+	/// <param name="t_zInc">- The z increment.</param>
+	/// <returns>Whether or not the game was won on this axis.</returns>
+	bool evaluateAxis(Coordinate const & t_start, int t_xInc, int t_yInc, int t_zInc);
 
 	/// <summary>
 	/// Checks if there's a win by the total value of a row and calls the game
 	///		over function if so.
 	/// </summary>
 	/// <param name="t_rowValue">the total value of the row.</param>
-	/// <returns>Whether or not the game is over.</returns>
+	/// <returns>Whether or not a win was determined.</returns>
 	bool evaluateRow(int t_rowValue);
 
-	int getLineValue(size_t t_x, size_t t_y, size_t t_z);
+	/// The total number of positions a piece can be placed in on the board.
+	size_t const m_TOTAL_BOARD_TILES;
 
+	/// <summary>
+	/// The game board object to place the pieces on. 
+	///	Assumed to be empty when passed.
+	/// </summary>
 	GameBoard * m_gameBoard;
+
+	/// The function to call with the results once a game over has been found.
 	OnGameOverFunction m_onGameOverFunction;
+
+	/// The total number of pieces placed by this rules handler.
+	size_t m_piecesPlaced;
 
 };
 
