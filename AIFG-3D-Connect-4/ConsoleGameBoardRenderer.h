@@ -1,7 +1,9 @@
 #ifndef CONSOLE_GAME_BOARD_RENDERER_H
 #define CONSOLE_GAME_BOARD_RENDERER_H
 
+#include <iostream>
 #include "Renderer.h"
+
 class ConsoleGameBoardRenderer : public Renderer
 {
 public:
@@ -32,11 +34,6 @@ public:
 	/// <param name="t_canRender"></param>
 	void setCanRender(bool t_canRender) override;
 
-	/// <summary>
-	/// This will render a piece by the type that piece repersents (None = "- ")
-	/// </summary>
-	/// <param name="t_type"></param>
-	void renderPiece(PieceType t_type);
 private:
 	// Lets the renderer know when to render.
 	bool m_canRender;

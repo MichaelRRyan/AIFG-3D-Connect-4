@@ -2,16 +2,7 @@
 #define GAME_BOARD_H
 
 #include <array>
-
-/// <summary>
-/// Represents the piece types stored in the game board.
-/// </summary>
-enum class PieceType
-{
-	None = 0,
-	Red = 1,
-	Yellow = 2
-};
+#include "PieceType.h"
 
 /// <summary>
 /// Represents the game board, holding all data and interface for the board

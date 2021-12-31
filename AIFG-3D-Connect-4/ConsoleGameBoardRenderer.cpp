@@ -1,6 +1,7 @@
 #include "ConsoleGameBoardRenderer.h"
 
-ConsoleGameBoardRenderer::ConsoleGameBoardRenderer()
+ConsoleGameBoardRenderer::ConsoleGameBoardRenderer() :
+	m_gameBoard{ nullptr }
 {
 	m_canRender = true;
 }
@@ -19,29 +20,15 @@ void ConsoleGameBoardRenderer::render()
 			{
 				for (int col = 0; col < 4; col++)
 				{
-					renderPiece(m_gameBoard->getPiece(row, board, col));
+					std::cout << static_cast<char>(
+						m_gameBoard->getPiece(row, board, col))
+						<< " ";
 				}
 				std::cout << std::endl;
 			}
 			std::cout << std::endl;
 		}
 		m_canRender = false;
-	}
-}
-
-void ConsoleGameBoardRenderer::renderPiece(PieceType t_type)
-{
-	switch (t_type)
-	{
-	case PieceType::None:
-		std::cout << "- ";
-		break;
-	case PieceType::Red:
-		std::cout << "X ";
-		break;
-	case PieceType::Yellow:
-		std::cout << "O ";
-		break;
 	}
 }
 
