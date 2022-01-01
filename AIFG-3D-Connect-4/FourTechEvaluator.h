@@ -56,10 +56,10 @@ private: // PRIVATE METHODS.
 	///		returns the winning piece if so.
 	/// </summary>
 	/// <param name="t_board">The board to check on.</param>
-	/// <param name="t_start">- The start tile to check from.</param>
-	/// <param name="t_xInc">- The x increment.</param>
-	/// <param name="t_yInc">- The y increment.</param>
-	/// <param name="t_zInc">- The z increment.</param>
+	/// <param name="t_start">The start tile to check from.</param>
+	/// <param name="t_xInc">The x increment.</param>
+	/// <param name="t_yInc">The y increment.</param>
+	/// <param name="t_zInc">The z increment.</param>
 	/// <returns>The piece that won along the axis or PieceType::None.</returns>
 	static PieceType evaluateAxis(GameBoard & t_board, Coordinate const& t_start,
 								  int t_xInc, int t_yInc, int t_zInc);
@@ -72,12 +72,79 @@ private: // PRIVATE METHODS.
 	/// <returns>The piece that won or PieceType::None.</returns>
 	static PieceType evaluateRow(int t_rowValue);
 
+	/// <summary>
+	/// Loops four times from the start position and icrements by the increment
+	///		values, counting each occurrence of the specified piece type.
+	/// </summary>
+	/// <param name="t_board">The board to check on.</param>
+	/// <param name="t_type">The type of piece to check for.</param>
+	/// <param name="t_start">The start tile to check from.</param>
+	/// <param name="t_xInc">The x increment.</param>
+	/// <param name="t_yInc">The y increment.</param>
+	/// <param name="t_zInc">The z increment.</param>
+	/// <returns>The piece that won along the axis or PieceType::None.</returns>
+	static int countAlongAxis(GameBoard& t_board, PieceType t_type,
+		Coordinate const& t_start,
+		int t_xInc, int t_yInc, int t_zInc);
+
+	/// <summary>
+	/// Counts and returns the number of rows of the type and size specified
+	///		immediately around the passed position.
+	/// </summary>
+	/// <param name="t_board">The board to check on.</param>
+	/// <param name="t_position">The position to check around.</param>
+	/// <param name="t_type">The type to check for.</param>
+	/// <param name="t_size">The size to check for.</param>
+	/// <returns>The number of rows of matching type and size</returns>
+	static int countRowsOfTypeAndSize(GameBoard & t_board, 
+									  Coordinate const & t_position,
+									  PieceType t_type, int t_size);
+
+	
+	/// <summary>
+	/// Counts and returns the number of rows of the type and size specified
+	///		along the three straight axis from the passed position.
+	/// </summary>
+	/// <param name="t_board">The board to check on.</param>
+	/// <param name="t_position">The position to check around.</param>
+	/// <param name="t_type">The type to check for.</param>
+	/// <param name="t_size">The size to check for.</param>
+	/// <returns>The number of rows of matching type and size</returns>
+	static int countStraightRows(GameBoard& t_board,
+								 Coordinate const& t_position,
+								 PieceType t_type, int t_size);
+
+	/// Counts and returns the number of rows of the type and size specified
+	///		along the two diagonals on each of the three axis from the passed
+	///		position.
+	/// </summary>
+	/// <param name="t_board">The board to check on.</param>
+	/// <param name="t_position">The position to check around.</param>
+	/// <param name="t_type">The type to check for.</param>
+	/// <param name="t_size">The size to check for.</param>
+	/// <returns>The number of rows of matching type and size</returns>
+	static int countSingleAxisDiagonalRows(GameBoard& t_board,
+										   Coordinate const& t_position,
+										   PieceType t_type, int t_size);
+
+	/// Counts and returns the number of rows of the type and size specified
+	///		along the four diagonals along all three axis from the passed
+	///		position.
+	/// </summary>
+	/// <param name="t_board">The board to check on.</param>
+	/// <param name="t_position">The position to check around.</param>
+	/// <param name="t_type">The type to check for.</param>
+	/// <param name="t_size">The size to check for.</param>
+	/// <returns>The number of rows of matching type and size</returns>
+	static int countAllAxisDiagonalRows(GameBoard& t_board,
+										Coordinate const& t_position,
+										PieceType t_type, int t_size);
 
 	static bool doesMoveBlockWin(GameBoard& t_board, Move const& t_move);
-	static bool doesMoveBlockThreeInARow(GameBoard& t_board, Move const& t_move);
-	static bool isMoveThreeInARow(GameBoard& t_board, Move const& t_move);
-	static bool isMoveTwoInARow(GameBoard& t_board, Move const& t_move);
-	static int getMoveCentredValue(GameBoard& t_board, Move const& t_move);
+	static int countBlockedThreeInARows(GameBoard& t_board, Move const& t_move);
+	static int countThreeInARows(GameBoard& t_board, Move const& t_move);
+	static int countTwoInARows(GameBoard& t_board, Move const& t_move);
+	static int countCentredAxis(GameBoard& t_board, Move const& t_move);
 
 private: // PRIVATE VARIABLES.
 
