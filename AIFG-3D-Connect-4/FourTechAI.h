@@ -5,6 +5,7 @@
 
 #include "Coordinate.h"
 #include "GameBoard.h"
+#include "FourTechEvaluator.h"
 
 class FourTechAI
 {
