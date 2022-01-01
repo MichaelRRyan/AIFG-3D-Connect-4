@@ -5,7 +5,7 @@ int const FourTechEvaluator::m_BLOCK_WIN_POINTS = 50;
 int const FourTechEvaluator::m_BLOCK_THREE_IN_A_ROW_POINTS = 25;
 int const FourTechEvaluator::m_THREE_IN_A_ROW_POINTS = 15;
 int const FourTechEvaluator::m_TWO_IN_A_ROW_POINTS = 5;
-int const FourTechEvaluator::m_CENTRE_POINTS = 5;
+int const FourTechEvaluator::m_CENTRE_POINTS = 1;
 
 ///////////////////////////////////////////////////////////////////////////////
 bool FourTechEvaluator::isMoveAWin(GameBoard & t_board, Move const & t_move)
@@ -56,8 +56,7 @@ int FourTechEvaluator::evaluateMove(GameBoard & t_board, Move const & t_move)
 		score += m_TWO_IN_A_ROW_POINTS;
 
 	// Checks for centre.
-	if (isMoveInCentre(t_board, t_move))
-		score += m_CENTRE_POINTS;
+	score += m_CENTRE_POINTS * getMoveCentredValue(t_board, t_move);
 
 	return score;
 }
@@ -148,7 +147,10 @@ PieceType FourTechEvaluator::evaluateRow(int t_rowValue)
 ///////////////////////////////////////////////////////////////////////////////
 bool FourTechEvaluator::doesMoveBlockWin(GameBoard& t_board, Move const& t_move)
 {
-	return false;
+	PieceType opponent = (t_move.type == PieceType::Red) ? 
+		PieceType::Yellow : PieceType::Red;
+
+	return isMoveAWin(t_board, { t_move.position, opponent });
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -170,9 +172,13 @@ bool FourTechEvaluator::isMoveTwoInARow(GameBoard& t_board, Move const& t_move)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool FourTechEvaluator::isMoveInCentre(GameBoard& t_board, Move const& t_move)
+int FourTechEvaluator::getMoveCentredValue(GameBoard & t_board, Move const & t_move)
 {
-	return false;
+	int score = 0;
+	if (t_move.position.x == 1 || t_move.position.x == 2) ++score;
+	if (t_move.position.y == 1 || t_move.position.y == 2) ++score;
+	if (t_move.position.z == 1 || t_move.position.z == 2) ++score;
+	return score;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

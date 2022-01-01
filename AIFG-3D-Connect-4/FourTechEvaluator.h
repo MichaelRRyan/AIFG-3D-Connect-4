@@ -77,7 +77,7 @@ private: // PRIVATE METHODS.
 	static bool doesMoveBlockThreeInARow(GameBoard& t_board, Move const& t_move);
 	static bool isMoveThreeInARow(GameBoard& t_board, Move const& t_move);
 	static bool isMoveTwoInARow(GameBoard& t_board, Move const& t_move);
-	static bool isMoveInCentre(GameBoard& t_board, Move const& t_move);
+	static int getMoveCentredValue(GameBoard& t_board, Move const& t_move);
 
 private: // PRIVATE VARIABLES.
 
