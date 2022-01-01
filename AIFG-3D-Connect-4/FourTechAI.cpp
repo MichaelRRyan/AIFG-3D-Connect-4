@@ -17,9 +17,9 @@ Coordinate FourTechAI::getMove()
 
 	for (; position.x < GameBoard::SIZE; ++position.x)
 	{
-		for (; position.y < GameBoard::SIZE; ++position.y)
+		for (position.y = 0; position.y < GameBoard::SIZE; ++position.y)
 		{
-			for (; position.z < GameBoard::SIZE; ++position.z)
+			for (position.z = 0; position.z < GameBoard::SIZE; ++position.z)
 			{
 				// If the position has no piece on it.
 				if (PieceType::None == m_board.getPiece(position))
