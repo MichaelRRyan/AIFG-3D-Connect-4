@@ -1,5 +1,7 @@
 #include "GameBoard.h"
 
+Coordinate::Type const GameBoard::SIZE;
+
 ///////////////////////////////////////////////////////////////////////////////
 GameBoard::GameBoard() :
 	m_pieces() // To remove uninitialised variable warnings.
@@ -11,16 +13,16 @@ GameBoard::GameBoard() :
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void GameBoard::setPiece(size_t t_x, size_t t_y, size_t t_z, 
+void GameBoard::setPiece(Coordinate const & t_position,
 						 PieceType const & t_type)
 {
-	m_pieces.at(t_x).at(t_y).at(t_z) = t_type;
+	m_pieces.at(t_position.x).at(t_position.y).at(t_position.z) = t_type;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-PieceType const& GameBoard::getPiece(size_t t_x, size_t t_y, size_t t_z) const
+PieceType const& GameBoard::getPiece(Coordinate const & t_position) const
 {
-	return m_pieces.at(t_x).at(t_y).at(t_z);
+	return m_pieces.at(t_position.x).at(t_position.y).at(t_position.z);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

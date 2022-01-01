@@ -28,15 +28,7 @@ public:
 	/// <param name="t_gameBoard"></param>
 	void setGameBoard(GameBoard* t_gameBoard) override;
 
-	/// <summary>
-	/// This will set a boolean that lets the renderer know when it can render the board.
-	/// </summary>
-	/// <param name="t_canRender"></param>
-	void setCanRender(bool t_canRender) override;
-
 private:
-	// Lets the renderer know when to render.
-	bool m_canRender;
 
 	// This is the game board, the pieces within the game board is what will be drawn onto the console.
 	GameBoard* m_gameBoard;

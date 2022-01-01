@@ -20,14 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleGameBoardRenderer.cpp" />
-    <ClCompile Include="Coordinate.cpp" />
     <ClCompile Include="FourTechAI.cpp" />
     <ClCompile Include="FourTechEvaluator.cpp" />
     <ClCompile Include="FourTechRulesHandler.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameBoard.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Move.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleGameBoardRenderer.h" />

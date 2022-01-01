@@ -36,16 +36,10 @@
     <ClCompile Include="FourTechRulesHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Coordinate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="FourTechEvaluator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FourTechAI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Move.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

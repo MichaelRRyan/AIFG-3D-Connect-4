@@ -3,6 +3,7 @@
 
 #include <array>
 #include "PieceType.h"
+#include "Coordinate.h"
 
 /// <summary>
 /// Represents the game board, holding all data and interface for the board
@@ -16,19 +17,16 @@ public:
 	/// Constructs the board and initialises every piece type to PieceType::None.
 	/// </summary>
 	GameBoard();
-
+	
 	/// <summary>
 	/// Sets the PieceType of the piece at the given coordinates.
 	/// <para>This method does no error checking for the range of the 
 	///		coordinates so values outside the board bounds will throw an 
 	///		'Out of Bounds' error.
-	/// </para>
 	/// </summary>
-	/// <param name="t_x">the x coordinate of the piece.</param>
-	/// <param name="t_y">the y coordinate of the piece.</param>
-	/// <param name="t_z">the z coordinate of the piece.</param>
+	/// <param name="t_position">The x, y, z position to set.</param>
 	/// <param name="t_type">the new type of the piece.</param>
-	void setPiece(size_t t_x, size_t t_y, size_t t_z, PieceType const & t_type);
+	void setPiece(Coordinate const & t_position, PieceType const & t_type);
 
 	/// <summary>
 	/// Returns the PieceType of the piece at the given coordinates.
@@ -37,16 +35,20 @@ public:
 	///		'Out of Bounds' error.
 	/// </para>
 	/// </summary>
-	/// <param name="t_x">the x coordinate of the piece.</param>
-	/// <param name="t_y">the y coordinate of the piece.</param>
-	/// <param name="t_z">the z coordinate of the piece.</param>
+	/// <param name="t_position">The x, y, z position to set.</param>
 	/// <returns>The PieceType of the piece at the given coordinates.</returns>
-	PieceType const & getPiece(size_t t_x, size_t t_y, size_t t_z) const;
+	PieceType const & getPiece(Coordinate const& t_position) const;
 
-private:
+public: // PUBLIC VARIABLES.
+	
+	/// The max value of each axis.
+	static Coordinate::Type const SIZE{ 4 };
 
+private: // PRIVATE VARIABLES.
+	
 	// Holds all the game board data.
-	std::array<std::array<std::array<PieceType, 4>, 4>, 4> m_pieces;
+	std::array<std::array<std::array<PieceType, SIZE>, SIZE>, SIZE> m_pieces;
+
 };
 
 #endif // !GAME_BOARD_H

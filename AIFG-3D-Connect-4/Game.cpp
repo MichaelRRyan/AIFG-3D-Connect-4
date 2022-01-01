@@ -78,7 +78,6 @@ void Game::update(float t_delta)
 	system("cls");
 	m_renderer->render();
 	m_rulesHandler.update();
-	m_renderer->setCanRender(true);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -100,6 +99,9 @@ void Game::exit()
 ///////////////////////////////////////////////////////////////////////////////
 void Game::onGameOver(PieceType t_winner)
 {
+	system("cls");
+	m_renderer->render();
+
 	if (PieceType::None == t_winner)
 		std::cout << "The game was a draw!" << std::endl;
 	else if (PieceType::Red == t_winner)

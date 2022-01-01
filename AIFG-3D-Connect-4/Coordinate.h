@@ -6,11 +6,13 @@
 /// </summary>
 struct Coordinate
 {
-	size_t x;
-	size_t y;
-	size_t z;
+	using Type = size_t;
 
-	Coordinate(size_t t_x, size_t t_y, size_t t_z) :
+	Type x;
+	Type y;
+	Type z;
+
+	Coordinate(Type t_x, Type t_y, Type t_z) :
 		x{ t_x },
 		y{ t_y },
 		z{ t_z }
