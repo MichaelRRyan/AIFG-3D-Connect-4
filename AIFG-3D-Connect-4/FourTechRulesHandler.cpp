@@ -1,10 +1,12 @@
 #include "FourTechRulesHandler.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-FourTechRulesHandler::FourTechRulesHandler() :
+FourTechRulesHandler::FourTechRulesHandler(GameBoard & t_board) :
 	m_TOTAL_BOARD_TILES{ 64u },
-	m_gameBoard{ nullptr },
-	m_piecesPlaced{ 0u }
+	m_board{ t_board },
+	m_piecesPlaced{ 0u },
+	m_ai{ t_board },
+	m_playersTurn{ true }
 {
 }
 
@@ -14,35 +16,41 @@ FourTechRulesHandler::FourTechRulesHandler() :
 ///////////////////////////////////////////////////////////////////////////////
 void FourTechRulesHandler::update()
 {
-	// Takes the player's input - will be moved to it's own class with time.
-	int x, y, z;
-	std::cout << "Enter your move: ";
-	std::cin >> x >> y >> z;
-
-	if (PieceType::None == m_gameBoard->getPiece(x, y, z))
+	if (m_playersTurn)
 	{
-		m_gameBoard->setPiece(x, y, z, PieceType::Red);
-		++m_piecesPlaced;
-		checkForGameOver({ (size_t)x, (size_t)y, (size_t)z });
+		// Takes the player's input - will be moved to it's own class with time.
+		int x, y, z;
+		std::cout << "Enter your move: ";
+		std::cin >> x >> y >> z;
+
+		if (PieceType::None == m_board.getPiece(x, y, z))
+		{
+			m_board.setPiece(x, y, z, PieceType::Red);
+			++m_piecesPlaced;
+			checkForGameOver({ (size_t)x, (size_t)y, (size_t)z });
+		}
+		else
+		{
+			std::cout << "Invalid position" << std::endl;
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max());
+			std::cin.get();
+		}
 	}
 	else
 	{
-		std::cout << "Invalid position" << std::endl;
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max());
-		std::cin.get();
+		Coordinate pos = m_ai.getMove();
+		m_board.setPiece(pos.x, pos.y, pos.z, PieceType::Yellow);
+		++m_piecesPlaced;
+		checkForGameOver(pos);
 	}
+
+	m_playersTurn = !m_playersTurn;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void FourTechRulesHandler::setOnGameOverFunction(OnGameOverFunction t_function)
 {
 	m_onGameOverFunction = t_function;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void FourTechRulesHandler::setGameBoard(GameBoard * t_gameBoard)
-{
-	m_gameBoard = t_gameBoard;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -128,7 +136,7 @@ bool FourTechRulesHandler::evaluateAxis(Coordinate const & t_start,
 
 	for (int i = 0; i < 4; ++i)
 	{
-		PieceType const& type = m_gameBoard->getPiece(cur.x, cur.y, cur.z);
+		PieceType const & type = m_board.getPiece(cur.x, cur.y, cur.z);
 
 		if (PieceType::Red == type)
 			++value;

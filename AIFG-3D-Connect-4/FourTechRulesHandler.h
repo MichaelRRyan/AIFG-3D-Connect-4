@@ -3,6 +3,7 @@
 
 // TEMPORARY.
 #include <iostream>
+#include "FourTechAI.h"
 
 #include <functional>
 #include "GameBoard.h"
@@ -25,7 +26,7 @@ public:
 	/// <summary>
 	/// Initialises the handler.
 	/// </summary>
-	FourTechRulesHandler();
+	FourTechRulesHandler(GameBoard & t_board);
 
 	/// <summary>
 	/// Checks for input from the relevant player and checks for game over.
@@ -40,12 +41,6 @@ public:
 
 	// TODO: To be filled out later.
 	void setTurnHandler(int * t_turnHandler);
-
-	/// <summary>
-	/// Sets the game board to perform operations on.
-	/// </summary>
-	/// <param name="t_gameBoard">- The game board.</param>
-	void setGameBoard(GameBoard * t_gameBoard);
 
 private: 
 	
@@ -102,13 +97,17 @@ private:
 	/// The game board object to place the pieces on. 
 	///	Assumed to be empty when passed.
 	/// </summary>
-	GameBoard * m_gameBoard;
+	GameBoard & m_board;
 
 	/// The function to call with the results once a game over has been found.
 	OnGameOverFunction m_onGameOverFunction;
 
 	/// The total number of pieces placed by this rules handler.
 	size_t m_piecesPlaced;
+
+	// TEMPORARY.
+	FourTechAI m_ai;
+	bool m_playersTurn;
 
 };
 

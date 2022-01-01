@@ -11,11 +11,11 @@ Game::Game() :
 	m_WINDOW_WIDTH{ 800u },
 	m_WINDOW_HEIGHT{ 600u },
 	//m_window{ sf::VideoMode{ m_WINDOW_WIDTH, m_WINDOW_HEIGHT, 32U }, "SFML Game" },
-	m_exitGame{false}
+	m_exitGame{false},
+	m_rulesHandler{ m_gameBoard }
 {
 	m_renderer = new ConsoleGameBoardRenderer();
 	m_renderer->setGameBoard(&m_gameBoard);
-	m_rulesHandler.setGameBoard(&m_gameBoard);
 	m_rulesHandler.setOnGameOverFunction(
 		[&](PieceType t_winner) { onGameOver(t_winner); });
 }
