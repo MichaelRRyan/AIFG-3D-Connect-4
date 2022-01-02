@@ -4,6 +4,12 @@
 #include "GameBoard.h"
 #include "Move.h"
 
+/// <summary>
+/// Provides methods for evaluating the state of the board after a move.
+/// <para>The class can be used to check if a move will result in a win, or to
+///		assign a score to a potential move based on a number of weighted 
+///		factors.</para>
+/// </summary>
 class FourTechEvaluator
 {
 public: // PUBLIC METHODS.
@@ -140,19 +146,66 @@ private: // PRIVATE METHODS.
 										Coordinate const& t_position,
 										PieceType t_type, int t_size);
 
+	/// <summary>
+	/// Checks if the move passed blocks a win for the opponent on the passed
+	///		game board.
+	/// </summary>
+	/// <param name="t_board">The board to check on.</param>
+	/// <param name="t_move">The move to check.</param>
+	/// <returns>Whether or not the opponent's win was blocked.</returns>
 	static bool doesMoveBlockWin(GameBoard& t_board, Move const& t_move);
+
+	/// <summary>
+	/// Counts the number of blocked potential three in a rows the opponent
+	///		could achieve, if any.
+	/// </summary>
+	/// <param name="t_board">The board to check on.</param>
+	/// <param name="t_move">The move to check.</param>
+	/// <returns>The number of blocked three in a rows.</returns>
 	static int countBlockedThreeInARows(GameBoard& t_board, Move const& t_move);
+
+	/// <summary>
+	/// Counts the number of three in a rows the passed move would achieve.
+	/// </summary>
+	/// <param name="t_board">The board to check on.</param>
+	/// <param name="t_move">The move to check.</param>
+	/// <returns>The number of three in a rows achieved from this move.</returns>
 	static int countThreeInARows(GameBoard& t_board, Move const& t_move);
+
+	/// <summary>
+	/// Counts the number of two in a rows the passed move would achieve.
+	/// </summary>
+	/// <param name="t_board">The board to check on.</param>
+	/// <param name="t_move">The move to check.</param>
+	/// <returns>The number of two in a rows achieved from this move.</returns>
 	static int countTwoInARows(GameBoard& t_board, Move const& t_move);
+
+	/// <summary>
+	/// Counts the number of the three axis this move is centred on.
+	/// </summary>
+	/// <param name="t_board">The board to check on.</param>
+	/// <param name="t_move">The move to check.</param>
+	/// <returns>The number of centred axis.</returns>
 	static int countCentredAxis(GameBoard& t_board, Move const& t_move);
 
 private: // PRIVATE VARIABLES.
 
+	/// The number of points given to a move for a win.
 	static int const m_WIN_POINTS;
+
+	/// The number of points given to a move for blocking an opponent's win.
 	static int const m_BLOCK_WIN_POINTS;
+
+	/// The number of points given to a move for blocking an opponent's three in a row.
 	static int const m_BLOCK_THREE_IN_A_ROW_POINTS;
+
+	/// The number of points given to a move for achieving a three in a row.
 	static int const m_THREE_IN_A_ROW_POINTS;
+
+	/// The number of points given to a move for achieving a two in a row.
 	static int const m_TWO_IN_A_ROW_POINTS;
+
+	/// The number of points given to a move for being centred along an axis.
 	static int const m_CENTRE_POINTS;
 
 };

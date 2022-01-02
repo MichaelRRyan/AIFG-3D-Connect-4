@@ -13,8 +13,7 @@ Coordinate FourTechAI::getMove()
 	std::vector<std::pair<Coordinate, int>> moves;
 
 	// Loops through each position on the board.
-	Coordinate position{ 0u, 0u, 0u };
-
+	Coordinate position;
 	for (; position.x < GameBoard::SIZE; ++position.x)
 	{
 		for (position.y = 0; position.y < GameBoard::SIZE; ++position.y)
