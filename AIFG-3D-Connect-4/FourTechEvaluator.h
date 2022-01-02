@@ -58,28 +58,6 @@ private: // PRIVATE METHODS.
 
 	/// <summary>
 	/// Loops four times from the start position and icrements by the increment
-	///		values, checking if the values along the axis add up to a win and 
-	///		returns the winning piece if so.
-	/// </summary>
-	/// <param name="t_board">The board to check on.</param>
-	/// <param name="t_start">The start tile to check from.</param>
-	/// <param name="t_xInc">The x increment.</param>
-	/// <param name="t_yInc">The y increment.</param>
-	/// <param name="t_zInc">The z increment.</param>
-	/// <returns>The piece that won along the axis or PieceType::None.</returns>
-	static PieceType evaluateAxis(GameBoard & t_board, Coordinate const& t_start,
-								  int t_xInc, int t_yInc, int t_zInc);
-
-	/// <summary>
-	/// Checks if there's a win by the total value of a row and returns the 
-	///		piece that won if so.
-	/// </summary>
-	/// <param name="t_rowValue">the total value of the row.</param>
-	/// <returns>The piece that won or PieceType::None.</returns>
-	static PieceType evaluateRow(int t_rowValue);
-
-	/// <summary>
-	/// Loops four times from the start position and icrements by the increment
 	///		values, counting each occurrence of the specified piece type.
 	/// </summary>
 	/// <param name="t_board">The board to check on.</param>
