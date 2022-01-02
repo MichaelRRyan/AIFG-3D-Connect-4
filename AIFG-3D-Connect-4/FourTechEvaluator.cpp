@@ -1,11 +1,12 @@
 #include "FourTechEvaluator.h"
 
-int const FourTechEvaluator::m_WIN_POINTS = 1000;
-int const FourTechEvaluator::m_BLOCK_WIN_POINTS = 50;
-int const FourTechEvaluator::m_BLOCK_THREE_IN_A_ROW_POINTS = 25;
-int const FourTechEvaluator::m_THREE_IN_A_ROW_POINTS = 15;
-int const FourTechEvaluator::m_TWO_IN_A_ROW_POINTS = 5;
-int const FourTechEvaluator::m_CENTRE_POINTS = 1;
+// Max 7
+int const FourTechEvaluator::m_WIN_POINTS = 5000;
+int const FourTechEvaluator::m_BLOCK_WIN_POINTS = 1500;
+int const FourTechEvaluator::m_BLOCK_THREE_IN_A_ROW_POINTS = 212; // Max 1,484 if blocking 3s along 7 axis.
+int const FourTechEvaluator::m_THREE_IN_A_ROW_POINTS = 30; // Max 210 if involved in 3s along 7 axis.
+int const FourTechEvaluator::m_TWO_IN_A_ROW_POINTS = 4; // Max 28 if involved in 2s along 7 axis.
+int const FourTechEvaluator::m_CENTRE_POINTS = 1; // Max 3 (when centred along all axis).
 
 ///////////////////////////////////////////////////////////////////////////////
 bool FourTechEvaluator::isMoveAWin(GameBoard & t_board, Move const & t_move)
@@ -260,19 +261,38 @@ bool FourTechEvaluator::doesMoveBlockWin(GameBoard& t_board, Move const& t_move)
 ///////////////////////////////////////////////////////////////////////////////
 int FourTechEvaluator::countBlockedThreeInARows(GameBoard& t_board, Move const& t_move)
 {
-	return false;
+	PieceType opponent = (t_move.type == PieceType::Red) ?
+		PieceType::Yellow : PieceType::Red;
+
+	return countRowsOfTypeAndSize(t_board, t_move.position, opponent, 2);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 int FourTechEvaluator::countThreeInARows(GameBoard& t_board, Move const& t_move)
 {
-	return false;
+	// Gets the previous piece at the move position and replaces it with the move.
+	PieceType prevType = t_board.getPiece(t_move.position);
+	t_board.setPiece(t_move.position, t_move.type);
+
+	int count = countRowsOfTypeAndSize(t_board, t_move.position, t_move.type, 3);
+
+	// Replaces the piece to its original type and returns the count.
+	t_board.setPiece(t_move.position, prevType);
+	return count;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 int FourTechEvaluator::countTwoInARows(GameBoard& t_board, Move const& t_move)
 {
-	return false;
+	// Gets the previous piece at the move position and replaces it with the move.
+	PieceType prevType = t_board.getPiece(t_move.position);
+	t_board.setPiece(t_move.position, t_move.type);
+
+	int count = countRowsOfTypeAndSize(t_board, t_move.position, t_move.type, 2);
+
+	// Replaces the piece to its original type and returns the count.
+	t_board.setPiece(t_move.position, prevType);
+	return count;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
