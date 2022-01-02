@@ -55,7 +55,7 @@ void FourTechRulesHandler::update()
 		m_onGameOverFunction(PieceType::None);
 
 	// Switch turns.
-	//m_playersTurn = !m_playersTurn;
+	m_playersTurn = !m_playersTurn;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
