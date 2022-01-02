@@ -204,22 +204,28 @@ int FourTechEvaluator::countSingleAxisDiagonalRows(GameBoard& t_board,
 	int count = 0;
 
 	// Checks the diagonals along the x axis.
-	if (t_pos.y == t_pos.z && countAlongAxis(t_board, t_type, { t_pos.x, 0, 0 }, 0, 1, 1) == t_size)
-		++count;
-	if (t_pos.y == reversed(t_pos.z) && countAlongAxis(t_board, t_type, { t_pos.x, 0, m_LAST_CELL_INDEX }, 0, 1, -1) == t_size)
-		++count;
+	if (t_pos.y == t_pos.z && countAlongAxis(t_board, t_type, 
+		{ t_pos.x, 0, 0 }, 0, 1, 1) == t_size)
+			++count;
+	if (t_pos.y == reversed(t_pos.z) && countAlongAxis(t_board, t_type, 
+		{ t_pos.x, 0, m_LAST_CELL_INDEX }, 0, 1, -1) == t_size)
+			++count;
 
 	// Checks the diagonals along the y axis.
-	if (t_pos.x == t_pos.z && countAlongAxis(t_board, t_type, { 0, t_pos.y, 0 }, 1, 0, 1) == t_size)
-		++count;
-	if (t_pos.x == reversed(t_pos.z) && countAlongAxis(t_board, t_type, { 0, t_pos.y, m_LAST_CELL_INDEX }, 1, 0, -1) == t_size)
-		++count;
+	if (t_pos.x == t_pos.z && countAlongAxis(t_board, t_type, 
+		{ 0, t_pos.y, 0 }, 1, 0, 1) == t_size)
+			++count;
+	if (t_pos.x == reversed(t_pos.z) && countAlongAxis(t_board, t_type, 
+		{ 0, t_pos.y, m_LAST_CELL_INDEX }, 1, 0, -1) == t_size)
+			++count;
 
 	// Checks the diagonals along the z axis.
-	if (t_pos.x == t_pos.y && countAlongAxis(t_board, t_type, { 0, 0, t_pos.z }, 1, 1, 0) == t_size)
-		++count;
-	if (t_pos.x == reversed(t_pos.y) && countAlongAxis(t_board, t_type, { 0, m_LAST_CELL_INDEX, t_pos.z }, 1, -1, 0) == t_size)
-		++count;
+	if (t_pos.x == t_pos.y && countAlongAxis(t_board, t_type, 
+		{ 0, 0, t_pos.z }, 1, 1, 0) == t_size)
+			++count;
+	if (t_pos.x == reversed(t_pos.y) && countAlongAxis(t_board, t_type, 
+		{ 0, m_LAST_CELL_INDEX, t_pos.z }, 1, -1, 0) == t_size)
+			++count;
 
 	return count;
 }
@@ -236,29 +242,34 @@ int FourTechEvaluator::countAllAxisDiagonalRows(GameBoard& t_board,
 
 	// From coordinates { 0, 0, 0 } to { 3, 3, 3 }
 	if (t_pos.x == t_pos.y && t_pos.x == t_pos.z
-		&& countAlongAxis(t_board, t_type, { 0, 0, 0 }, 1, 1, 1) == t_size)
-			++count;
+		&& countAlongAxis(t_board, t_type, 
+			{ 0, 0, 0 }, 1, 1, 1) == t_size)
+				++count;
 
 	// From coordinates { 3, 0, 0 } to { 0, 3, 3 }
 	if (reversed(t_pos.x) == t_pos.y && reversed(t_pos.x) == t_pos.z
-		&& countAlongAxis(t_board, t_type, { m_LAST_CELL_INDEX, 0, 0 }, -1, 1, 1) == t_size)
-			++count;
+		&& countAlongAxis(t_board, t_type, 
+			{ m_LAST_CELL_INDEX, 0, 0 }, -1, 1, 1) == t_size)
+				++count;
 
 	// From coordinates { 0, 3, 0 } to { 3, 0, 3 }
 	if (t_pos.x == reversed(t_pos.y) && t_pos.x == t_pos.z
-		&& countAlongAxis(t_board, t_type, { 0, m_LAST_CELL_INDEX, 0 }, 1, -1, 1) == t_size)
-		++count;
+		&& countAlongAxis(t_board, t_type, 
+			{ 0, m_LAST_CELL_INDEX, 0 }, 1, -1, 1) == t_size)
+				++count;
 
 	// From coordinates { 0, 0, 3 } to { 3, 3, 0 }
 	if (t_pos.x == reversed(t_pos.y) && t_pos.x == reversed(t_pos.z)
-		&& countAlongAxis(t_board, t_type, { 0, 0, m_LAST_CELL_INDEX }, 1, 1, -1) == t_size)
-		++count;
+		&& countAlongAxis(t_board, t_type, 
+			{ 0, 0, m_LAST_CELL_INDEX }, 1, 1, -1) == t_size)
+				++count;
 
 	return count;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool FourTechEvaluator::doesMoveBlockWin(GameBoard& t_board, Move const& t_move)
+bool FourTechEvaluator::doesMoveBlockWin(GameBoard& t_board, 
+										 Move const& t_move)
 {
 	PieceType opponent = (t_move.type == PieceType::Red) ? 
 		PieceType::Yellow : PieceType::Red;
@@ -267,7 +278,8 @@ bool FourTechEvaluator::doesMoveBlockWin(GameBoard& t_board, Move const& t_move)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-int FourTechEvaluator::countBlockedThreeInARows(GameBoard& t_board, Move const& t_move)
+int FourTechEvaluator::countBlockedThreeInARows(GameBoard& t_board,
+												Move const& t_move)
 {
 	PieceType opponent = (t_move.type == PieceType::Red) ?
 		PieceType::Yellow : PieceType::Red;
@@ -276,7 +288,8 @@ int FourTechEvaluator::countBlockedThreeInARows(GameBoard& t_board, Move const& 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-int FourTechEvaluator::countThreeInARows(GameBoard& t_board, Move const& t_move)
+int FourTechEvaluator::countThreeInARows(GameBoard& t_board, 
+										 Move const& t_move)
 {
 	// Gets the previous piece at the move position and replaces it with the move.
 	PieceType prevType = t_board.getPiece(t_move.position);
@@ -304,7 +317,8 @@ int FourTechEvaluator::countTwoInARows(GameBoard& t_board, Move const& t_move)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-int FourTechEvaluator::countCentredAxis(GameBoard & t_board, Move const & t_move)
+int FourTechEvaluator::countCentredAxis(GameBoard & t_board, 
+										Move const & t_move)
 {
 	int score = 0;
 	if (t_move.position.x == 1 || t_move.position.x == 2) ++score;
