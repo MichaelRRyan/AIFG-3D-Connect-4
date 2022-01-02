@@ -155,8 +155,13 @@ int FourTechEvaluator::countAlongAxis(GameBoard& t_board, PieceType t_type,
 
 	for (int i = 0; i < GameBoard::SIZE; ++i)
 	{
-		if (t_type == t_board.getPiece(cur))
+		PieceType curPiece = t_board.getPiece(cur);
+		if (t_type == curPiece)
 			++count;
+
+		// Invalidate the use of the row if there's an opposite colour on it.
+		else if (t_type != curPiece && PieceType::None != curPiece)
+			return 0;
 
 		cur.x += t_xInc;
 		cur.y += t_yInc;
