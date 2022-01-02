@@ -1,6 +1,5 @@
 #include "FourTechEvaluator.h"
 
-// Max 7
 int const FourTechEvaluator::m_WIN_POINTS = 5000;
 int const FourTechEvaluator::m_BLOCK_WIN_POINTS = 1500;
 int const FourTechEvaluator::m_BLOCK_THREE_IN_A_ROW_POINTS = 212; // Max 1,484 if blocking 3s along 7 axis.
