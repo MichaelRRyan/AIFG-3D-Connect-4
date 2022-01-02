@@ -76,6 +76,8 @@ void Game::processKeys(sf::Event t_event)
 void Game::update(float t_delta)
 {
 	system("cls");
+	m_rulesHandler.printMoves();
+	std::cout << std::endl;
 	m_renderer->render();
 	m_rulesHandler.update();
 }
@@ -108,6 +110,8 @@ void Game::onGameOver(PieceType t_winner)
 		std::cout << "The red player won!" << std::endl;
 	else
 		std::cout << "The yellow player won!" << std::endl;
+
+	m_rulesHandler.printMoves();
 
 	m_exitGame = true;
 }

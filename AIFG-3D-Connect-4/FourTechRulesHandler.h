@@ -44,6 +44,9 @@ public:
 	// TODO: To be filled out later.
 	void setTurnHandler(int * t_turnHandler);
 
+	// TEMPORARY.
+	void printMoves() const;
+		
 private: 
 
 	/// The total number of positions a piece can be placed in on the board.
@@ -64,6 +67,7 @@ private:
 	// TEMPORARY.
 	FourTechAI m_ai;
 	bool m_playersTurn;
+	std::vector<Coordinate> m_moveHistory;
 
 };
 
