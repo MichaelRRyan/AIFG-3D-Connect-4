@@ -188,6 +188,14 @@ private: // PRIVATE METHODS.
 	/// <returns>The number of centred axis.</returns>
 	static int countCentredAxis(GameBoard& t_board, Move const& t_move);
 
+	/// <summary>
+	/// Returns the last cell index minus the passed cell number, effectively
+	///		reversing the coordinate.
+	/// </summary>
+	/// <param name="t_cell">The cell index to reverse.</param>
+	/// <returns>The reversed cell index.</returns>
+	static size_t reverse(size_t t_cell);
+
 private: // PRIVATE VARIABLES.
 
 	/// The number of points given to a move for a win.
@@ -207,6 +215,9 @@ private: // PRIVATE VARIABLES.
 
 	/// The number of points given to a move for being centred along an axis.
 	static int const m_CENTRE_POINTS;
+
+	/// The index of the last cell in a row on the game board.
+	static size_t const m_LAST_CELL_INDEX;
 
 };
 
