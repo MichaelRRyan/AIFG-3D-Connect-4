@@ -111,6 +111,7 @@ void Game::onGameOver(PieceType t_winner)
 	else
 		std::cout << "The yellow player won!" << std::endl;
 
+	std::cout << std::endl;
 	m_rulesHandler.printMoves();
 
 	m_exitGame = true;

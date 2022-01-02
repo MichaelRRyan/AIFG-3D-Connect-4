@@ -82,15 +82,15 @@ bool FourTechEvaluator::checkForSingleAxisDiagonalWin(GameBoard& t_board, Move c
 
 	// Checks the diagonals along the x axis.
 	return (pos.y == pos.z && evaluateAxis(t_board, { pos.x, 0, 0 }, 0, 1, 1) == t_move.type)
-		|| (pos.y == reverse(pos.z) && evaluateAxis(t_board, { pos.x, 0, m_LAST_CELL_INDEX }, 0, 1, -1) == t_move.type)
+		|| (pos.y == reversed(pos.z) && evaluateAxis(t_board, { pos.x, 0, m_LAST_CELL_INDEX }, 0, 1, -1) == t_move.type)
 
 		// Checks the diagonals along the y axis.
 		|| (pos.x == pos.z && evaluateAxis(t_board, { 0, pos.y, 0 }, 1, 0, 1) == t_move.type)
-		|| (pos.x == reverse(pos.z) && evaluateAxis(t_board, { 0, pos.y, m_LAST_CELL_INDEX }, 1, 0, -1) == t_move.type)
+		|| (pos.x == reversed(pos.z) && evaluateAxis(t_board, { 0, pos.y, m_LAST_CELL_INDEX }, 1, 0, -1) == t_move.type)
 
 		// Checks the diagonals along the z axis.
 		|| (pos.x == pos.y && evaluateAxis(t_board, { 0, 0, pos.z }, 1, 1, 0) == t_move.type)
-		|| (pos.x == reverse(pos.y) && evaluateAxis(t_board, { 0, m_LAST_CELL_INDEX, pos.z }, 1, -1, 0) == t_move.type);
+		|| (pos.x == reversed(pos.y) && evaluateAxis(t_board, { 0, m_LAST_CELL_INDEX, pos.z }, 1, -1, 0) == t_move.type);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -98,16 +98,23 @@ bool FourTechEvaluator::checkForAllAxisDiagonalWin(GameBoard& t_board, Move cons
 {
 	Coordinate const& pos = t_move.position;
 
+	// Counts the number of pieces of type t_type along the axis if the move
+	//		sits along the axis.
+
+		// From coordinates { 0, 0, 0 } to { 3, 3, 3 }
 	return (pos.x == pos.y && pos.x == pos.z
 			&& evaluateAxis(t_board, { 0, 0, 0 }, 1, 1, 1) == t_move.type)
 
-		|| (reverse(pos.x) == pos.y && reverse(pos.x) == pos.z
+		// From coordinates { 3, 0, 0 } to { 0, 3, 3 }
+		|| (reversed(pos.x) == pos.y && reversed(pos.x) == pos.z
 			&& evaluateAxis(t_board, { m_LAST_CELL_INDEX, 0, 0 }, -1, 1, 1) == t_move.type)
 
-		|| (pos.x == reverse(pos.y) && pos.x == pos.z
+		// From coordinates { 0, 3, 0 } to { 3, 0, 3 }
+		|| (pos.x == reversed(pos.y) && pos.x == pos.z
 			&& evaluateAxis(t_board, { 0, m_LAST_CELL_INDEX, 0 }, 1, -1, 1) == t_move.type)
 
-		|| (pos.x == reverse(pos.y) && pos.x == reverse(pos.z)
+		// From coordinates { 0, 0, 3 } to { 3, 3, 0 }
+		|| (pos.x == reversed(pos.y) && pos.x == reversed(pos.z)
 			&& evaluateAxis(t_board, { 0, 0, m_LAST_CELL_INDEX }, 1, 1, -1) == t_move.type);
 }
 
@@ -205,19 +212,19 @@ int FourTechEvaluator::countSingleAxisDiagonalRows(GameBoard& t_board,
 	// Checks the diagonals along the x axis.
 	if (t_pos.y == t_pos.z && countAlongAxis(t_board, t_type, { t_pos.x, 0, 0 }, 0, 1, 1) == t_size)
 		++count;
-	if (t_pos.y == reverse(t_pos.z) && countAlongAxis(t_board, t_type, { t_pos.x, 0, m_LAST_CELL_INDEX }, 0, 1, -1) == t_size)
+	if (t_pos.y == reversed(t_pos.z) && countAlongAxis(t_board, t_type, { t_pos.x, 0, m_LAST_CELL_INDEX }, 0, 1, -1) == t_size)
 		++count;
 
 	// Checks the diagonals along the y axis.
 	if (t_pos.x == t_pos.z && countAlongAxis(t_board, t_type, { 0, t_pos.y, 0 }, 1, 0, 1) == t_size)
 		++count;
-	if (t_pos.x == reverse(t_pos.z) && countAlongAxis(t_board, t_type, { 0, t_pos.y, m_LAST_CELL_INDEX }, 1, 0, -1) == t_size)
+	if (t_pos.x == reversed(t_pos.z) && countAlongAxis(t_board, t_type, { 0, t_pos.y, m_LAST_CELL_INDEX }, 1, 0, -1) == t_size)
 		++count;
 
 	// Checks the diagonals along the z axis.
 	if (t_pos.x == t_pos.y && countAlongAxis(t_board, t_type, { 0, 0, t_pos.z }, 1, 1, 0) == t_size)
 		++count;
-	if (t_pos.x == reverse(t_pos.y) && countAlongAxis(t_board, t_type, { 0, m_LAST_CELL_INDEX, t_pos.z }, 1, -1, 0) == t_size)
+	if (t_pos.x == reversed(t_pos.y) && countAlongAxis(t_board, t_type, { 0, m_LAST_CELL_INDEX, t_pos.z }, 1, -1, 0) == t_size)
 		++count;
 
 	return count;
@@ -239,17 +246,17 @@ int FourTechEvaluator::countAllAxisDiagonalRows(GameBoard& t_board,
 			++count;
 
 	// From coordinates { 3, 0, 0 } to { 0, 3, 3 }
-	if (reverse(t_pos.x) == t_pos.y && reverse(t_pos.x) == t_pos.z
+	if (reversed(t_pos.x) == t_pos.y && reversed(t_pos.x) == t_pos.z
 		&& countAlongAxis(t_board, t_type, { m_LAST_CELL_INDEX, 0, 0 }, -1, 1, 1) == t_size)
 			++count;
 
 	// From coordinates { 0, 3, 0 } to { 3, 0, 3 }
-	if (t_pos.x == reverse(t_pos.y) && t_pos.x == t_pos.z
+	if (t_pos.x == reversed(t_pos.y) && t_pos.x == t_pos.z
 		&& countAlongAxis(t_board, t_type, { 0, m_LAST_CELL_INDEX, 0 }, 1, -1, 1) == t_size)
 		++count;
 
 	// From coordinates { 0, 0, 3 } to { 3, 3, 0 }
-	if (t_pos.x == reverse(t_pos.y) && t_pos.x == m_LAST_CELL_INDEX - t_pos.z
+	if (t_pos.x == reversed(t_pos.y) && t_pos.x == reversed(t_pos.z)
 		&& countAlongAxis(t_board, t_type, { 0, 0, m_LAST_CELL_INDEX }, 1, 1, -1) == t_size)
 		++count;
 
@@ -313,7 +320,7 @@ int FourTechEvaluator::countCentredAxis(GameBoard & t_board, Move const & t_move
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-size_t FourTechEvaluator::reverse(size_t t_cell)
+size_t FourTechEvaluator::reversed(size_t t_cell)
 {
 	return m_LAST_CELL_INDEX - t_cell;
 }

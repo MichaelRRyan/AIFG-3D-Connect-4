@@ -194,7 +194,7 @@ private: // PRIVATE METHODS.
 	/// </summary>
 	/// <param name="t_cell">The cell index to reverse.</param>
 	/// <returns>The reversed cell index.</returns>
-	static size_t reverse(size_t t_cell);
+	static size_t reversed(size_t t_cell);
 
 private: // PRIVATE VARIABLES.
 
