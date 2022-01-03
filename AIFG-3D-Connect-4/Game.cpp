@@ -11,11 +11,11 @@ Game::Game() :
 	m_WINDOW_WIDTH{ 800u },
 	m_WINDOW_HEIGHT{ 600u },
 	//m_window{ sf::VideoMode{ m_WINDOW_WIDTH, m_WINDOW_HEIGHT, 32U }, "SFML Game" },
-	m_exitGame{false}
+	m_exitGame{false},
+	m_rulesHandler{ m_gameBoard }
 {
 	m_renderer = new ConsoleGameBoardRenderer();
 	m_renderer->setGameBoard(&m_gameBoard);
-	m_rulesHandler.setGameBoard(&m_gameBoard);
 	m_rulesHandler.setOnGameOverFunction(
 		[&](PieceType t_winner) { onGameOver(t_winner); });
 }
@@ -76,9 +76,10 @@ void Game::processKeys(sf::Event t_event)
 void Game::update(float t_delta)
 {
 	system("cls");
+	m_rulesHandler.printMoves();
+	std::cout << std::endl;
 	m_renderer->render();
 	m_rulesHandler.update();
-	m_renderer->setCanRender(true);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -100,12 +101,18 @@ void Game::exit()
 ///////////////////////////////////////////////////////////////////////////////
 void Game::onGameOver(PieceType t_winner)
 {
+	system("cls");
+	m_renderer->render();
+
 	if (PieceType::None == t_winner)
 		std::cout << "The game was a draw!" << std::endl;
 	else if (PieceType::Red == t_winner)
 		std::cout << "The red player won!" << std::endl;
 	else
 		std::cout << "The yellow player won!" << std::endl;
+
+	std::cout << std::endl;
+	m_rulesHandler.printMoves();
 
 	m_exitGame = true;
 }

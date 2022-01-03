@@ -22,11 +22,5 @@ public:
 	/// </summary>
 	/// <param name="t_gameBoard"></param>
 	virtual void setGameBoard(GameBoard* t_gameBoard) = 0;
-
-	/// <summary>
-	/// This sets a boolean, so that the application knows when it can render the board again (i.e after a process event)
-	/// </summary>
-	/// <param name="t_canRenderer"></param>
-	virtual void setCanRender(bool t_canRenderer) = 0;
 };
 #endif
