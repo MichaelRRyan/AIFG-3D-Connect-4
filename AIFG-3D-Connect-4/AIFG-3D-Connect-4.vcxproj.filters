@@ -45,6 +45,9 @@
     <ClCompile Include="ConsoleInput.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TurnHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -81,6 +84,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ConsoleInput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TurnHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -4,11 +4,10 @@
 FourTechRulesHandler::FourTechRulesHandler(GameBoard & t_board) :
 	m_TOTAL_BOARD_TILES{ 64u },
 	m_board{ t_board },
-	m_piecesPlaced{ 0u },
-	m_playersTurn{ true }
+	m_piecesPlaced{ 0u }
 {
-	m_playerInput = new ConsoleInput(t_board);
-	m_ai = new FourTechAI(t_board);
+	m_turnHandler.setPlayer1(new ConsoleInput(t_board));
+	m_turnHandler.setPlayer2(new FourTechAI(t_board));
 }
 
 // TEMPORARY.
@@ -17,19 +16,9 @@ FourTechRulesHandler::FourTechRulesHandler(GameBoard & t_board) :
 ///////////////////////////////////////////////////////////////////////////////
 void FourTechRulesHandler::update()
 {
-	Coordinate pos{ 0, 0, 0 };
-	bool vaildInput = false;
-	if (m_playersTurn)
-	{
-		pos = m_playerInput->getCoordinate();
-	}
-	else
-	{
-		pos = m_ai->getCoordinate();
-	}
-
+	Coordinate pos = m_turnHandler.getCoordinate();
 	// Get the piece type and place it.
-	PieceType type = m_playersTurn ? PieceType::Red : PieceType::Yellow;
+	PieceType type = m_turnHandler.getPlayersTurn() ? PieceType::Red : PieceType::Yellow;
 	m_board.setPiece(pos, type);
 
 	// Increase the number of pieces placed and add the move to the history.
@@ -44,8 +33,7 @@ void FourTechRulesHandler::update()
 	else if (m_piecesPlaced == m_TOTAL_BOARD_TILES)
 		m_onGameOverFunction(PieceType::None);
 
-	// Switch turns.
-	m_playersTurn = !m_playersTurn;
+	m_turnHandler.changeTurn();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

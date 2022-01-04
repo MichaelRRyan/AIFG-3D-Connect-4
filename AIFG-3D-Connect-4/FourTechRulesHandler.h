@@ -3,14 +3,13 @@
 
 // TEMPORARY.
 #include <iostream>
-#include "FourTechAI.h"
-
+#include <vector>
 #include <functional>
 
 #include "GameBoard.h"
 #include "Coordinate.h"
 #include "FourTechEvaluator.h"
-#include "ConsoleInput.h"
+#include "TurnHandler.h"
 
 /// <summary>
 /// Runs the 4Tech game and handles the rules. 
@@ -65,11 +64,10 @@ private:
 	/// The total number of pieces placed by this rules handler.
 	size_t m_piecesPlaced;
 
+	TurnHandler m_turnHandler;
+
 	// TEMPORARY.
-	bool m_playersTurn;
 	std::vector<Coordinate> m_moveHistory;
-	Input* m_playerInput;
-	Input* m_ai;
 };
 
 #endif // !FOUR_TECH_RULES_HANDLER_H

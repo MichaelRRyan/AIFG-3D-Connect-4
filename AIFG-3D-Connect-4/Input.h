@@ -1,4 +1,4 @@
-#ifndef INOUT_H
+#ifndef INPUT_H
 #define INPUT_H
 #include "Coordinate.h"
 class Input
