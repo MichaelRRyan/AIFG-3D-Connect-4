@@ -28,21 +28,14 @@ public:
 	virtual ~FourTechAI() = default;
 
 	/// <summary>
-	/// This will get the best move position the AI wants to put in the game board.
-	/// </summary>
-	/// <returns>returns the best position the AI wants to put in the game board.</returns>
-	Coordinate getCoordinate() override;
-
-private:
-	/// <summary>
 	/// Get's the immediate best next move.
 	/// </summary>
 	/// <returns>The position of the best move.</returns>
-	Coordinate getMove();
+	Coordinate getCoordinate() override;
 
+private:
 	/// The game board to play on.
 	GameBoard & m_board;
-
 };
 
 #endif // !FOUR_TECH_AI_H

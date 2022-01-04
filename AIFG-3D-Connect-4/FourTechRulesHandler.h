@@ -41,8 +41,11 @@ public:
 	/// <param name="t_function">the function to call on game over.</param>
 	void setOnGameOverFunction(OnGameOverFunction t_function);
 
-	// TODO: To be filled out later.
-	void setTurnHandler(int * t_turnHandler);
+	/// <summary>
+	/// This will set the turn Handler.
+	/// </summary>
+	/// <param name="t_turnHandler">Turn handler that handles who's turn it is and the swithces of turns</param>
+	void setTurnHandler(TurnHandler t_turnHandler);
 
 	// TEMPORARY.
 	void printMoves() const;

@@ -35,26 +35,25 @@ public:
 	void setPlayer2(Input* t_player2);
 
 	/// <summary>
-	/// This will get the coordinate of either player 1 player 2, where they want to place
-	/// thier piece onto the game board.
-	/// </summary>
-	/// <returns>returns the position either player 1 or 2 want to place in the game board.</returns>
-	Coordinate getCoordinate();
-
-	/// <summary>
 	/// This will change the turns to Player 1 -> Player 2 and vice versa.
 	/// </summary>
 	void changeTurn();
 
 	/// <summary>
+	/// Returns the position and type of piece for the gamebaord.
+	/// </summary>
+	/// <returns>Returns a Move object.</returns>
+	Move getMove();
+
+	/// <summary>
 	/// This will return who's active turn it is.
 	/// </summary>
 	/// <returns>returns who the active player is.</returns>
-	inline bool getPlayersTurn() { return m_playersTurn; }
+	inline bool getPlayersTurn() { return m_playerOnesTurn; }
 private:
 	Input* m_player1; // Player 1 can be a user or AI.
 	Input* m_player2; // Player 2 can be a user or AI.
-	Coordinate m_coordinate; // The position the players want to place thier piece.
-	bool m_playersTurn; // handles who's turns is the active one.
+	Move m_move; // contains the coordinate and the type of piece for the game board.
+	bool m_playerOnesTurn; // handles who's turns is the active one.
 };
 #endif

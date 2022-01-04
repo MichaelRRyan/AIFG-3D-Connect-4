@@ -18,6 +18,8 @@ Game::Game() :
 	m_renderer->setGameBoard(&m_gameBoard);
 	m_rulesHandler.setOnGameOverFunction(
 		[&](PieceType t_winner) { onGameOver(t_winner); });
+	TurnHandler turnHandler;
+	m_rulesHandler.setTurnHandler(turnHandler);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
