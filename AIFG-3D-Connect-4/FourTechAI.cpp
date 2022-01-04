@@ -45,6 +45,7 @@ Coordinate FourTechAI::getMove()
 
 Coordinate FourTechAI::getCoordinate()
 {
+	// Will get the best move the AI wants.
 	return getMove();
 }
 

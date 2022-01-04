@@ -16,6 +16,7 @@ FourTechRulesHandler::FourTechRulesHandler(GameBoard & t_board) :
 ///////////////////////////////////////////////////////////////////////////////
 void FourTechRulesHandler::update()
 {
+	// Gets the position either the player or AI wants.
 	Coordinate pos = m_turnHandler.getCoordinate();
 	// Get the piece type and place it.
 	PieceType type = m_turnHandler.getPlayersTurn() ? PieceType::Red : PieceType::Yellow;
@@ -33,6 +34,7 @@ void FourTechRulesHandler::update()
 	else if (m_piecesPlaced == m_TOTAL_BOARD_TILES)
 		m_onGameOverFunction(PieceType::None);
 
+	// Change the turn order
 	m_turnHandler.changeTurn();
 }
 

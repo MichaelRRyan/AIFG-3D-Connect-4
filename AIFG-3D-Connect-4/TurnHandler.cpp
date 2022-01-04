@@ -2,6 +2,7 @@
 
 TurnHandler::TurnHandler() : m_coordinate(0,0,0), m_playersTurn(true)
 {
+	// Set the players to nullptr, the user will set these up later.
 	m_player1 = nullptr;
 	m_player2 = nullptr;
 }
@@ -24,6 +25,7 @@ void TurnHandler::setPlayer2(Input* t_player2)
 
 Coordinate TurnHandler::getCoordinate()
 {
+	// Handles the turn order and gets the position the player or AI wants.
 	if (m_playersTurn)
 	{
 		m_coordinate = m_player1->getCoordinate();

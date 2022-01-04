@@ -64,6 +64,7 @@ private:
 	/// The total number of pieces placed by this rules handler.
 	size_t m_piecesPlaced;
 
+	// This repersents a turn handler, which handles turns and handles the change of turns.
 	TurnHandler m_turnHandler;
 
 	// TEMPORARY.

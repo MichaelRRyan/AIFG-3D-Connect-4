@@ -22,8 +22,15 @@ public:
 	/// <param name="t_board">The game board to play on.</param>
 	FourTechAI(GameBoard & t_board);
 
+	/// <summary>
+	/// Destructor for the AI.
+	/// </summary>
 	virtual ~FourTechAI() = default;
 
+	/// <summary>
+	/// This will get the best move position the AI wants to put in the game board.
+	/// </summary>
+	/// <returns>returns the best position the AI wants to put in the game board.</returns>
 	Coordinate getCoordinate() override;
 
 private:
