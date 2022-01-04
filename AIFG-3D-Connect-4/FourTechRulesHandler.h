@@ -10,6 +10,7 @@
 #include "GameBoard.h"
 #include "Coordinate.h"
 #include "FourTechEvaluator.h"
+#include "ConsoleInput.h"
 
 /// <summary>
 /// Runs the 4Tech game and handles the rules. 
@@ -65,10 +66,10 @@ private:
 	size_t m_piecesPlaced;
 
 	// TEMPORARY.
-	FourTechAI m_ai;
 	bool m_playersTurn;
 	std::vector<Coordinate> m_moveHistory;
-
+	Input* m_playerInput;
+	Input* m_ai;
 };
 
 #endif // !FOUR_TECH_RULES_HANDLER_H

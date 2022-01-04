@@ -43,4 +43,9 @@ Coordinate FourTechAI::getMove()
 	return bestMove->first; // Returns the position of the best move.
 }
 
+Coordinate FourTechAI::getCoordinate()
+{
+	return getMove();
+}
+
 ///////////////////////////////////////////////////////////////////////////////

@@ -5,9 +5,10 @@ FourTechRulesHandler::FourTechRulesHandler(GameBoard & t_board) :
 	m_TOTAL_BOARD_TILES{ 64u },
 	m_board{ t_board },
 	m_piecesPlaced{ 0u },
-	m_ai{ t_board },
 	m_playersTurn{ true }
 {
+	m_playerInput = new ConsoleInput(t_board);
+	m_ai = new FourTechAI(t_board);
 }
 
 // TEMPORARY.
@@ -17,25 +18,14 @@ FourTechRulesHandler::FourTechRulesHandler(GameBoard & t_board) :
 void FourTechRulesHandler::update()
 {
 	Coordinate pos{ 0, 0, 0 };
-
+	bool vaildInput = false;
 	if (m_playersTurn)
 	{
-		// Takes the player's input - will be moved to it's own class with time.
-		std::cout << "Enter your move: ";
-
-		std::cin >> pos.x >> pos.y >> pos.z;
-
-		if (PieceType::None != m_board.getPiece(pos))
-		{
-			std::cout << "Invalid position" << std::endl;
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max());
-			std::cin.get();
-			return;
-		}
+		pos = m_playerInput->getCoordinate();
 	}
 	else
 	{
-		pos = m_ai.getMove();
+		pos = m_ai->getCoordinate();
 	}
 
 	// Get the piece type and place it.
