@@ -3,13 +3,13 @@
 
 // TEMPORARY.
 #include <iostream>
-#include "FourTechAI.h"
-
+#include <vector>
 #include <functional>
 
 #include "GameBoard.h"
 #include "Coordinate.h"
 #include "FourTechEvaluator.h"
+#include "TurnHandler.h"
 
 /// <summary>
 /// Runs the 4Tech game and handles the rules. 
@@ -41,8 +41,11 @@ public:
 	/// <param name="t_function">the function to call on game over.</param>
 	void setOnGameOverFunction(OnGameOverFunction t_function);
 
-	// TODO: To be filled out later.
-	void setTurnHandler(int * t_turnHandler);
+	/// <summary>
+	/// This will set the turn Handler.
+	/// </summary>
+	/// <param name="t_turnHandler">Turn handler that handles who's turn it is and the swithces of turns</param>
+	void setTurnHandler(TurnHandler t_turnHandler);
 
 	// TEMPORARY.
 	void printMoves() const;
@@ -64,11 +67,11 @@ private:
 	/// The total number of pieces placed by this rules handler.
 	size_t m_piecesPlaced;
 
-	// TEMPORARY.
-	FourTechAI m_ai;
-	bool m_playersTurn;
-	std::vector<Coordinate> m_moveHistory;
+	// This repersents a turn handler, which handles turns and handles the change of turns.
+	TurnHandler m_turnHandler;
 
+	// TEMPORARY.
+	std::vector<Coordinate> m_moveHistory;
 };
 
 #endif // !FOUR_TECH_RULES_HANDLER_H

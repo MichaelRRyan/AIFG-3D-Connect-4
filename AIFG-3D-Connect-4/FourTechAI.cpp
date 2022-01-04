@@ -7,7 +7,7 @@ FourTechAI::FourTechAI(GameBoard & t_board) :
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Coordinate FourTechAI::getMove()
+Coordinate FourTechAI::getCoordinate()
 {
 	// Move position and score.
 	std::vector<std::pair<Coordinate, int>> moves;
@@ -25,7 +25,7 @@ Coordinate FourTechAI::getMove()
 				{
 					// Gets the score of the move.
 					int moveScore = FourTechEvaluator::evaluateMove(m_board,
-										{ position, PieceType::Yellow });
+						{ position, PieceType::Yellow });
 
 					// Stores the move position and score.
 					moves.push_back({ position, moveScore });
@@ -35,12 +35,11 @@ Coordinate FourTechAI::getMove()
 	}
 
 	// Finds the highest scoring move.
-	auto const * bestMove = &moves.front();
-	for (auto const & move : moves)
+	auto const* bestMove = &moves.front();
+	for (auto const& move : moves)
 		if (move.second > bestMove->second)
 			bestMove = &move;
 
 	return bestMove->first; // Returns the position of the best move.
 }
-
 ///////////////////////////////////////////////////////////////////////////////
