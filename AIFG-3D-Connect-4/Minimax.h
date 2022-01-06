@@ -2,6 +2,7 @@
 #define MINIMAX_H
 
 #include <vector>
+#include <cmath>
 
 #include "GameBoard.h"
 #include "Coordinate.h"
@@ -23,9 +24,12 @@ private:
 		int score;
 	};
 
-	static Ply * minimax(GameBoard& t_board, PieceType t_pieceType, Move t_move, size_t t_depth, size_t t_maxDepth);
+	static int minimax(GameBoard& t_board, Move t_move, size_t t_remainingDepth);
 
-	static std::vector<Coordinate> * getAllAvailableMoves(GameBoard const & t_board);
+	static std::vector<Coordinate> * getAvailableMoves(GameBoard const & t_board);
+
+	static int const m_MAX_SCORE;
+	static int const m_MIN_SCORE;
 
 };
 
