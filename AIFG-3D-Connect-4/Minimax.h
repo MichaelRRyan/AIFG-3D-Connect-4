@@ -23,7 +23,7 @@ private:
 		int score;
 	};
 
-	static Ply minimax(GameBoard& t_board, PieceType t_pieceType, Move t_move, size_t t_depth, size_t t_maxDepth);
+	static Ply * minimax(GameBoard& t_board, PieceType t_pieceType, Move t_move, size_t t_depth, size_t t_maxDepth);
 
 	static std::vector<Coordinate> * getAllAvailableMoves(GameBoard const & t_board);
 
