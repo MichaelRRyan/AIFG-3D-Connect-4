@@ -2,58 +2,57 @@
 
 int const Minimax::m_MAX_SCORE = std::numeric_limits<int>::max();
 int const Minimax::m_MIN_SCORE = std::numeric_limits<int>::min();
+int Minimax::m_maxDepth = 2;
 
 ///////////////////////////////////////////////////////////////////////////////
 Coordinate Minimax::getCoordinate(GameBoard & t_board, 
-								  PieceType t_pieceType, 
-								  size_t t_maxDepth)
+								  PieceType t_pieceType)
 {
+	std::vector<Coordinate> * availableMoves = getAvailableMoves(t_board);
 
-	std::vector<Coordinate>* availableMoves =
-		getAvailableMoves(t_board);
-
-	Ply bestPly;
-	bestPly.score = m_MIN_SCORE;
+	Ply bestPly{ Move(), m_MIN_SCORE };
 
 	for (Coordinate const& coord : *availableMoves)
 	{
 		Move move{ coord, t_pieceType };
 
-		// Does the move.
-		t_board.setPiece(coord, move.type);
-
 		// Recursively calls minimax and saves the value.
-		int score = minimax(t_board, t_pieceType, move, 1, t_maxDepth);
+		int score = minimax(t_board, move, 1);
 
 		if (score > bestPly.score)
 		{
 			bestPly.score = score;
 			bestPly.move = move;
 		}
-
-		// Returns the piece to it's original empty state.
-		t_board.setPiece(coord, PieceType::None);
 	}
-
-	// Cleans up.
-	delete availableMoves;
-
+	
+	delete availableMoves; // Cleans up.
 	return bestPly.move.position; // Returns the best ply.
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-int Minimax::minimax(GameBoard & t_board, Move t_move, size_t t_remainingDepth)
+void Minimax::setMaxDepth(int t_depth)
 {
-	if (t_remainingDepth > 0)
+	m_maxDepth = t_depth;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+int Minimax::minimax(GameBoard & t_board, Move t_move, int t_depth)
+{
+	// If the depth is odd, we're min.
+	bool isMin = t_depth % 2 == 1;
+
+	if (FourTechEvaluator::isMoveAWin(t_board, t_move))
+		return (isMin) ? m_MAX_SCORE : m_MIN_SCORE;
+
+	if (t_depth < m_maxDepth || !isMin)
 	{
 		// Performs the move we're checking.
 		t_board.setPiece(t_move.position, t_move.type);
 
-		std::vector<Coordinate> * availableMoves = 
-			getAvailableMoves(t_board);
+		std::vector<Coordinate> * availableMoves = getAvailableMoves(t_board);
 
-		// If the depth is odd, we're min.
-		bool isMin = t_remainingDepth % 2 == 1;
+		
 		int bestScore = isMin ? m_MAX_SCORE : m_MIN_SCORE;
 
 		if (isMin)
@@ -61,14 +60,14 @@ int Minimax::minimax(GameBoard & t_board, Move t_move, size_t t_remainingDepth)
 			// Recursively calls minimax and keeps the lowest score.
 			for (Coordinate const& coord : *availableMoves)
 				bestScore = std::min(bestScore, minimax(t_board,
-					{ coord, opposite(t_move.type) }, t_remainingDepth - 1));
+					{ coord, opposite(t_move.type) }, t_depth + 1));
 		}
 		else
 		{
 			// Recursively calls minimax and keeps the highest score.
 			for (Coordinate const& coord : *availableMoves)
 				bestScore = std::max(bestScore, minimax(t_board,
-					{ coord, opposite(t_move.type) }, t_remainingDepth - 1));
+					{ coord, opposite(t_move.type) }, t_depth + 1));
 		}
 
 		// Cleans up.
@@ -80,7 +79,7 @@ int Minimax::minimax(GameBoard & t_board, Move t_move, size_t t_remainingDepth)
 		return bestScore;
 	}
 
-	// If greater than or equal to the depth, return the best estimated coord.
+	// Return the best estimated coord if already met the depth.
 	return FourTechEvaluator::evaluateMove(t_board, t_move);
 }
 

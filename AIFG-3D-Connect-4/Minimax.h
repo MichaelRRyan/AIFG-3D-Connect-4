@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <cmath>
+#include <functional>
 
 #include "GameBoard.h"
 #include "Coordinate.h"
@@ -14,7 +15,9 @@ class Minimax
 {
 public:
 
-	static Coordinate getCoordinate(GameBoard & t_board, PieceType t_pieceType, size_t t_maxDepth);
+	static Coordinate getCoordinate(GameBoard & t_board, PieceType t_pieceType);
+
+	static void setMaxDepth(int t_depth);
 
 private:
 
@@ -24,12 +27,14 @@ private:
 		int score;
 	};
 
-	static int minimax(GameBoard& t_board, Move t_move, size_t t_remainingDepth);
+	static int minimax(GameBoard& t_board, Move t_move, int t_depth);
 
-	static std::vector<Coordinate> * getAvailableMoves(GameBoard const & t_board);
+	static std::vector<Coordinate> * getAvailableMoves(GameBoard const& t_board);
 
 	static int const m_MAX_SCORE;
 	static int const m_MIN_SCORE;
+
+	static int m_maxDepth;
 
 };
 

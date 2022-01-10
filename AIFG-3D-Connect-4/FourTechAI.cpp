@@ -9,6 +9,6 @@ FourTechAI::FourTechAI(GameBoard & t_board) :
 ///////////////////////////////////////////////////////////////////////////////
 Coordinate FourTechAI::getCoordinate()
 {
-	return Minimax::getCoordinate(m_board, PieceType::Yellow, 3);
+	return Minimax::getCoordinate(m_board, PieceType::Yellow);
 }
 ///////////////////////////////////////////////////////////////////////////////
