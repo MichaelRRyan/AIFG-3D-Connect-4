@@ -1,7 +1,7 @@
 #include "Minimax.h"
 
-int const Minimax::m_MAX_SCORE = std::numeric_limits<int>::max();
-int const Minimax::m_MIN_SCORE = std::numeric_limits<int>::min();
+int const Minimax::m_INT_MAX = std::numeric_limits<int>::max();
+int const Minimax::m_INT_MIN = std::numeric_limits<int>::min();
 int Minimax::m_maxDepth = 3;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -14,15 +14,22 @@ void Minimax::setMaxDepth(int t_depth)
 Coordinate Minimax::getCoordinate(GameBoard & t_board, 
 								  PieceType t_pieceType)
 {
+#ifdef OUTPUT_DURATION
+	auto start = std::chrono::high_resolution_clock::now();
+#endif // OUTPUT_DURATION
+
 	// Gets all available moves and sets up a best move variables.
 	std::vector<Coordinate> * availableMoves = getAvailableMoves(t_board);
-	int bestScore = m_MIN_SCORE;
+	int bestScore = m_INT_MIN;
+	int alpha = m_INT_MIN;
+	int beta = m_INT_MAX;
 	Coordinate bestCoord;
 
 	for (Coordinate const & coord : * availableMoves)
 	{
 		// Recursively calls minimax and saves the value.
-		int score = minimax(t_board, { coord, t_pieceType }, 1);
+		int score = minimax(t_board, { coord, t_pieceType }, 1, 
+							alpha, beta);
 
 		// Stores the move as the best if better than the previous best.
 		if (score > bestScore)
@@ -33,11 +40,20 @@ Coordinate Minimax::getCoordinate(GameBoard & t_board,
 	}
 	
 	delete availableMoves; // Cleans up the moves.
+
+#ifdef OUTPUT_DURATION
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+	std::cout << "Minimax took: " << duration.count() / 1000.0f << std::endl;
+	system("pause");
+#endif // OUTPUT_DURATION
+
 	return bestCoord; // Returns the best move position.
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-int Minimax::minimax(GameBoard & t_board, Move t_move, int t_depth)
+int Minimax::minimax(GameBoard & t_board, Move t_move, 
+					 int t_depth, int t_alpha, int t_beta)
 {
 	// If the depth is odd, we're min.
 	bool isMin = t_depth % 2 == 1;
@@ -45,7 +61,7 @@ int Minimax::minimax(GameBoard & t_board, Move t_move, int t_depth)
 	// Returns the max score if the AI will win this move or the min score if
 	//		the enemy wins this turn.
 	if (FourTechEvaluator::isMoveAWin(t_board, t_move))
-		return (isMin) ? m_MAX_SCORE - 1 : m_MIN_SCORE + 1;
+		return (isMin) ? m_INT_MAX - 1 : m_INT_MIN + 1;
 
 	// If below the max depth or if ending on max (meaning t_move, which will
 	//		will be evaluated, is the enemies move).
@@ -55,21 +71,23 @@ int Minimax::minimax(GameBoard & t_board, Move t_move, int t_depth)
 		t_board.setPiece(t_move.position, t_move.type);
 
 		std::vector<Coordinate> * availableMoves = getAvailableMoves(t_board);
-		int bestScore = isMin ? m_MAX_SCORE : m_MIN_SCORE;
+		int bestScore = isMin ? m_INT_MAX : m_INT_MIN;
 
 		if (isMin)
 		{
 			// Recursively calls minimax and keeps the lowest score.
 			for (Coordinate const& coord : *availableMoves)
 				bestScore = std::min(bestScore, minimax(t_board,
-					{ coord, opposite(t_move.type) }, t_depth + 1));
+								{ coord, opposite(t_move.type) }, 
+								t_depth + 1, t_alpha, t_beta));
 		}
 		else
 		{
 			// Recursively calls minimax and keeps the highest score.
 			for (Coordinate const& coord : *availableMoves)
 				bestScore = std::max(bestScore, minimax(t_board,
-					{ coord, opposite(t_move.type) }, t_depth + 1));
+								{ coord, opposite(t_move.type) }, 
+								t_depth + 1, t_alpha, t_beta));
 		}
 
 		// Cleans up the moves.
