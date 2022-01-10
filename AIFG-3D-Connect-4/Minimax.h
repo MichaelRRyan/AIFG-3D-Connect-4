@@ -53,12 +53,18 @@ private:
 	static int minimax(GameBoard& t_board, Move t_move, 
 					   int t_depth, int t_alpha, int t_beta);
 
+	/// An alias for the function declaration for forEachValidMove().
+	using EachMoveFunc = std::function<bool(Coordinate const& t_coord)>;
+
 	/// <summary>
-	/// Returns a vector of all available moves on the board.
+	/// Calls the passed function for each valid move on the board. Exits if
+	///		the passed function returns true.
 	/// </summary>
 	/// <param name="t_board">The board to check for moves on.</param>
-	/// <returns>All available move positions.</returns>
-	static std::vector<Coordinate> * getAvailableMoves(GameBoard const& t_board);
+	/// <param name="t_func">The function to call.</param>
+	static void forEachValidMove(GameBoard const & t_board, 
+								 EachMoveFunc const & t_func);
+
 
 	/// The maximum value of an integer.
 	static int const m_INT_MAX;

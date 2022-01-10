@@ -15,35 +15,35 @@ Coordinate Minimax::getCoordinate(GameBoard & t_board,
 								  PieceType t_pieceType)
 {
 #ifdef OUTPUT_DURATION
-	auto start = std::chrono::high_resolution_clock::now();
+	using namespace std::chrono;
+	auto start = high_resolution_clock::now();
 #endif // OUTPUT_DURATION
 
-	// Gets all available moves and sets up a best move variables.
-	std::vector<Coordinate> * availableMoves = getAvailableMoves(t_board);
+	// Sets up a best move variables.
 	int alpha = m_INT_MIN;
 	int beta = m_INT_MAX;
 	Coordinate bestCoord;
 
-	for (Coordinate const & coord : * availableMoves)
-	{
-		// Recursively calls minimax and saves the value.
-		int score = minimax(t_board, { coord, t_pieceType }, 1, 
-							alpha, beta);
-
-		// Stores the move as the best if better than the previous best.
-		if (score > alpha)
+	forEachValidMove(t_board,
+		[&](Coordinate const& t_coord)
 		{
-			alpha = score;
-			bestCoord = coord;
-			if (alpha >= beta) break;
-		}
-	}
-	
-	delete availableMoves; // Cleans up the moves.
+			// Recursively calls minimax and saves the value.
+			int v = minimax(t_board, { t_coord, t_pieceType }, 1, alpha, beta);
+
+			// Stores the move as the best if better than the previous best.
+			if (v > alpha)
+			{
+				alpha = v;
+				bestCoord = t_coord;
+				if (alpha >= beta) true;
+			}
+
+			return false;
+		});
 
 #ifdef OUTPUT_DURATION
-	auto end = std::chrono::high_resolution_clock::now();
-	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+	auto end = high_resolution_clock::now();
+	auto duration = duration_cast<milliseconds>(end - start);
 	std::cout << "Minimax took: " << duration.count() / 1000.0f << std::endl;
 	system("pause");
 #endif // OUTPUT_DURATION
@@ -70,47 +70,27 @@ int Minimax::minimax(GameBoard & t_board, Move t_move,
 		// Performs the move we're checking.
 		t_board.setPiece(t_move.position, t_move.type);
 
-		std::vector<Coordinate> * availableMoves = getAvailableMoves(t_board);
-		int bestScore;
-
-		if (isMin)
-		{
-			// Recursively calls minimax and keeps the lowest score.
-			for (Coordinate const& coord : *availableMoves)
+		// Calls the following lambda for each valid move.
+		forEachValidMove(t_board,
+			[&](Coordinate const& t_coord)
 			{
-				t_beta = std::min(t_beta, minimax(t_board,
-					{ coord, opposite(t_move.type) },
-					t_depth + 1, t_alpha, t_beta));
+				// Recursively calls minimax and takes the value returned.
+				int value = minimax(t_board,
+					{ t_coord, opposite(t_move.type) },
+					t_depth + 1, t_alpha, t_beta);
 
-				if (t_alpha >= t_beta) 
-					break;
-			}
+				// Sets the relevant value (alpha or beta) if applicable.
+				if (isMin) t_beta = std::min(t_beta, value);
+				else t_alpha = std::max(t_alpha, value);
 
-			bestScore = t_beta;
-		}
-		else
-		{
-			// Recursively calls minimax and keeps the highest score.
-			for (Coordinate const& coord : *availableMoves)
-			{
-				t_alpha = std::max(t_alpha, minimax(t_board,
-					{ coord, opposite(t_move.type) },
-					t_depth + 1, t_alpha, t_beta));
+				// Should we prune?
+				if (t_alpha >= t_beta) return true; // Stops looping each move.
+				return false; // Continue looping each move.
+			});
 
-				if (t_alpha >= t_beta) 
-					break;
-			}
-
-			bestScore = t_alpha;
-		}
-
-		// Cleans up the moves.
-		delete availableMoves;
-
-		// Returns the piece to it's original empty state.
+		// Returns the piece to it's original empty state and returns.
 		t_board.setPiece(t_move.position, PieceType::None);
-
-		return bestScore;
+		return (isMin) ? t_beta : t_alpha; // Returns the relevant value.
 	}
 
 	// Return the best estimated coord if already met the depth.
@@ -118,11 +98,9 @@ int Minimax::minimax(GameBoard & t_board, Move t_move,
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-std::vector<Coordinate> * Minimax::getAvailableMoves(GameBoard const & t_board)
+void Minimax::forEachValidMove(GameBoard const & t_board, 
+							   EachMoveFunc const & t_func)
 {
-	// Move position and score.
-	std::vector<Coordinate>* moves = new std::vector<Coordinate>;
-
 	// Loops through each position on the board.
 	Coordinate position;
 	for (; position.x < GameBoard::SIZE; ++position.x)
@@ -134,14 +112,12 @@ std::vector<Coordinate> * Minimax::getAvailableMoves(GameBoard const & t_board)
 				// If the position has no piece on it.
 				if (PieceType::None == t_board.getPiece(position))
 				{
-					// Stores the move position.
-					moves->push_back(position);
+					// Calls the function with the current board position.
+					if (t_func(position)) return;
 				}
 			}
 		}
 	}
-
-	return moves;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
