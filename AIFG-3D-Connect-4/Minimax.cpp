@@ -14,27 +14,26 @@ void Minimax::setMaxDepth(int t_depth)
 Coordinate Minimax::getCoordinate(GameBoard & t_board, 
 								  PieceType t_pieceType)
 {
-	// Gets all available moves and sets up a temporary best move.
+	// Gets all available moves and sets up a best move variables.
 	std::vector<Coordinate> * availableMoves = getAvailableMoves(t_board);
-	Ply bestPly{ Move(), m_MIN_SCORE };
+	int bestScore = m_MIN_SCORE;
+	Coordinate bestCoord;
 
 	for (Coordinate const & coord : * availableMoves)
 	{
-		Move move{ coord, t_pieceType };
-
 		// Recursively calls minimax and saves the value.
-		int score = minimax(t_board, move, 1);
+		int score = minimax(t_board, { coord, t_pieceType }, 1);
 
 		// Stores the move as the best if better than the previous best.
-		if (score > bestPly.score)
+		if (score > bestScore)
 		{
-			bestPly.score = score;
-			bestPly.move = move;
+			bestScore = score;
+			bestCoord = coord;
 		}
 	}
 	
 	delete availableMoves; // Cleans up the moves.
-	return bestPly.move.position; // Returns the best ply.
+	return bestCoord; // Returns the best move position.
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -46,7 +45,7 @@ int Minimax::minimax(GameBoard & t_board, Move t_move, int t_depth)
 	// Returns the max score if the AI will win this move or the min score if
 	//		the enemy wins this turn.
 	if (FourTechEvaluator::isMoveAWin(t_board, t_move))
-		return (isMin) ? m_MAX_SCORE : m_MIN_SCORE;
+		return (isMin) ? m_MAX_SCORE - 1 : m_MIN_SCORE + 1;
 
 	// If below the max depth or if ending on max (meaning t_move, which will
 	//		will be evaluated, is the enemies move).
