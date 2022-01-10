@@ -20,7 +20,6 @@ Coordinate Minimax::getCoordinate(GameBoard & t_board,
 
 	// Gets all available moves and sets up a best move variables.
 	std::vector<Coordinate> * availableMoves = getAvailableMoves(t_board);
-	int bestScore = m_INT_MIN;
 	int alpha = m_INT_MIN;
 	int beta = m_INT_MAX;
 	Coordinate bestCoord;
@@ -32,10 +31,11 @@ Coordinate Minimax::getCoordinate(GameBoard & t_board,
 							alpha, beta);
 
 		// Stores the move as the best if better than the previous best.
-		if (score > bestScore)
+		if (score > alpha)
 		{
-			bestScore = score;
+			alpha = score;
 			bestCoord = coord;
+			if (alpha >= beta) break;
 		}
 	}
 	
@@ -71,23 +71,37 @@ int Minimax::minimax(GameBoard & t_board, Move t_move,
 		t_board.setPiece(t_move.position, t_move.type);
 
 		std::vector<Coordinate> * availableMoves = getAvailableMoves(t_board);
-		int bestScore = isMin ? m_INT_MAX : m_INT_MIN;
+		int bestScore;
 
 		if (isMin)
 		{
 			// Recursively calls minimax and keeps the lowest score.
 			for (Coordinate const& coord : *availableMoves)
-				bestScore = std::min(bestScore, minimax(t_board,
-								{ coord, opposite(t_move.type) }, 
-								t_depth + 1, t_alpha, t_beta));
+			{
+				t_beta = std::min(t_beta, minimax(t_board,
+					{ coord, opposite(t_move.type) },
+					t_depth + 1, t_alpha, t_beta));
+
+				if (t_alpha >= t_beta) 
+					break;
+			}
+
+			bestScore = t_beta;
 		}
 		else
 		{
 			// Recursively calls minimax and keeps the highest score.
 			for (Coordinate const& coord : *availableMoves)
-				bestScore = std::max(bestScore, minimax(t_board,
-								{ coord, opposite(t_move.type) }, 
-								t_depth + 1, t_alpha, t_beta));
+			{
+				t_alpha = std::max(t_alpha, minimax(t_board,
+					{ coord, opposite(t_move.type) },
+					t_depth + 1, t_alpha, t_beta));
+
+				if (t_alpha >= t_beta) 
+					break;
+			}
+
+			bestScore = t_alpha;
 		}
 
 		// Cleans up the moves.
