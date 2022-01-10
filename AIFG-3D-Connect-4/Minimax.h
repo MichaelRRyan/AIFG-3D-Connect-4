@@ -15,9 +15,9 @@ class Minimax
 {
 public:
 
-	static Coordinate getCoordinate(GameBoard & t_board, PieceType t_pieceType);
-
 	static void setMaxDepth(int t_depth);
+
+	static Coordinate getCoordinate(GameBoard & t_board, PieceType t_pieceType);
 
 private:
 
