@@ -13,7 +13,7 @@
 
 // Displays the time Minimax took to run.
 // Implementation written by Ben Millar.
-#define OUTPUT_DURATION
+//#define OUTPUT_DURATION
 
 /// <summary>
 /// A class for getting the best next move position in a game of 4Tec using an
