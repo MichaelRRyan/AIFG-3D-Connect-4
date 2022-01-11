@@ -27,4 +27,9 @@ void SfmlRenderer::render()
 void SfmlRenderer::setGameBoard(GameBoard* t_gameBoard)
 {
 	m_gameBoard = t_gameBoard;
+	// Make every board be aware of the game board.
+	for (auto& grid : m_grids)
+	{
+		grid.setGameBoard(t_gameBoard);
+	}
 }

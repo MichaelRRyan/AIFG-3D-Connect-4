@@ -36,13 +36,15 @@ void Game::run()
 	{
 		processEvents(); // as many as possible
 		timeSinceLastUpdate += clock.restart();
+		render(); // as many as possible
 		while (timeSinceLastUpdate > timePerFrame)
 		{
 			timeSinceLastUpdate -= timePerFrame;
 			processEvents(); // at least 60 fps
 			update(timePerFrame.asSeconds()); //60 fps
+			render(); // as many as possible
+			if (m_exitGame) break;
 		}
-		render(); // as many as possible
 	}
 }
 

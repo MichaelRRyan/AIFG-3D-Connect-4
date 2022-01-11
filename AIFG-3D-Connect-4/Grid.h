@@ -29,12 +29,42 @@ public:
 	/// Gets the grid index of a board.
 	/// </summary>
 	inline int getGridIndex() { return m_gridIndex; };
-private:
-	// Pieces within the grid.
-	std::vector<sf::RectangleShape> m_pieces;
 
+	/// <summary>
+	/// Sets the game board, so the grid knows of the board state.
+	/// </summary>
+	/// <param name="t_gameBoard">Game board</param>
+	void setGameBoard(GameBoard* t_gameBoard);
+private:
+	// rects within the grid.
+	std::vector<sf::RectangleShape> m_rects;
+
+	// The pieces within the grid.
+	std::vector<sf::CircleShape> m_pieces;
+
+	// The grid index, that tells what board it is. The top most board will be a value of 0.
 	int m_gridIndex;
 
 	// Size of each piece within the grid.
 	const unsigned int m_PIECE_SIZE = 64;
+
+	GameBoard* m_gameBoard;
+
+	/// <summary>
+	/// Sets a piece depending on the type of piece it is.
+	/// </summary>
+	/// <param name="t_color">The color of the piece</param>
+	/// <param name="t_piece">shape of the piece</param>
+	/// <param name="t_row">row position for the piece.</param>
+	/// <param name="t_col">col position for the piece.</param>
+	void setUpPiece(sf::Color t_color, sf::CircleShape t_piece, Coordinate::Type t_row, Coordinate::Type t_col);
+
+	/// <summary>
+	/// Sets up the rects for the grid.
+	/// </summary>
+	/// <param name="t_color">The color of the grid.</param>
+	/// <param name="t_rect">rect for the grid.</param>
+	/// <param name="t_row">row position for the rect.</param>
+	/// <param name="t_col">col position of the rect.</param>
+	void setUpRect(sf::Color t_color, sf::RectangleShape t_rect, Coordinate::Type t_row, Coordinate::Type t_col);
 };
