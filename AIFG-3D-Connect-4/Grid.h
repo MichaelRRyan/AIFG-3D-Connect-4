@@ -46,10 +46,10 @@ private:
 	const float m_PIECE_SIZE = 64;
 
 	// The spacing between each grid.
-	const unsigned int m_Y_SPACING_Multiplier = 50;
+	const int m_Y_SPACING_Multiplier = 50;
 
 	// The offset from the top of a grid.
-	const unsigned int m_Y_OFFSET = 15;
+	const int m_Y_OFFSET = 15;
 
 	float m_topLeftX;
 
