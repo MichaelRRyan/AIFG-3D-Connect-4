@@ -21,21 +21,19 @@ Coordinate Minimax::getCoordinate(GameBoard & t_board,
 
 	// Sets up a best move variables.
 	int alpha = m_INT_MIN;
-	int beta = m_INT_MAX;
 	Coordinate bestCoord;
 
 	forEachValidMove(t_board,
 		[&](Coordinate const& t_coord)
 		{
 			// Recursively calls minimax and saves the value.
-			int v = minimax(t_board, { t_coord, t_pieceType }, 1, alpha, beta);
+			int v = minimax(t_board, { t_coord, t_pieceType }, 1, alpha, m_INT_MAX);
 
 			// Stores the move as the best if better than the previous best.
 			if (v > alpha)
 			{
 				alpha = v;
 				bestCoord = t_coord;
-				if (alpha >= beta) true;
 			}
 
 			return false;
@@ -65,7 +63,7 @@ int Minimax::minimax(GameBoard & t_board, Move t_move,
 
 	// If below the max depth or if ending on max (meaning t_move, which will
 	//		will be evaluated, is the enemies move).
-	if (t_depth < m_maxDepth || !isMin)
+	if (t_depth < m_maxDepth)
 	{
 		// Performs the move we're checking.
 		t_board.setPiece(t_move.position, t_move.type);
@@ -94,7 +92,7 @@ int Minimax::minimax(GameBoard & t_board, Move t_move,
 	}
 
 	// Return the best estimated coord if already met the depth.
-	return FourTechEvaluator::evaluateMove(t_board, t_move);
+	return FourTechEvaluator::evaluateMove(t_board, t_move) * ((isMin) ? 1 : -1);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
