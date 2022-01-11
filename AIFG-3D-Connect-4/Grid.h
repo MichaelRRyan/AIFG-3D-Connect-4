@@ -46,7 +46,17 @@ private:
 	int m_gridIndex;
 
 	// Size of each piece within the grid.
-	const unsigned int m_PIECE_SIZE = 64;
+	const float m_PIECE_SIZE = 64;
+
+	// The spacing between each grid.
+	const unsigned int m_Y_SPACING_Multiplier = 50;
+
+	// The offset from the top of a grid.
+	const unsigned int m_Y_OFFSET = 15;
+
+	float m_topLeftX;
+
+	float m_topLeftY;
 
 	GameBoard* m_gameBoard;
 
@@ -54,17 +64,16 @@ private:
 	/// Sets a piece depending on the type of piece it is.
 	/// </summary>
 	/// <param name="t_color">The color of the piece</param>
-	/// <param name="t_piece">shape of the piece</param>
 	/// <param name="t_row">row position for the piece.</param>
 	/// <param name="t_col">col position for the piece.</param>
-	void setUpPiece(sf::Color t_color, sf::CircleShape t_piece, Coordinate::Type t_row, Coordinate::Type t_col);
+	/// <returns>returns a created piece</returns>
+	sf::CircleShape getNewPiece(sf::Color t_color, Coordinate::Type t_row, Coordinate::Type t_col);
 
 	/// <summary>
 	/// Sets up the rects for the grid.
 	/// </summary>
 	/// <param name="t_color">The color of the grid.</param>
-	/// <param name="t_rect">rect for the grid.</param>
 	/// <param name="t_row">row position for the rect.</param>
 	/// <param name="t_col">col position of the rect.</param>
-	void setUpRect(sf::Color t_color, sf::RectangleShape t_rect, Coordinate::Type t_row, Coordinate::Type t_col);
+	void setUpRect(sf::Color t_color, Coordinate::Type t_row, Coordinate::Type t_col);
 };
