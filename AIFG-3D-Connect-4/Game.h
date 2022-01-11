@@ -85,6 +85,7 @@ private:
 	GameBoard m_gameBoard;
 	FourTechRulesHandler m_rulesHandler;
 
+	// Repersents the grids within the game.
 	std::vector<Grid> m_grids;
 
 };

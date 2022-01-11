@@ -1,5 +1,6 @@
 #include "Grid.h"
 
+///////////////////////////////////////////////////////////////////////////////
 Grid::Grid(int t_gridIndex)
 {
 	m_gridIndex = t_gridIndex;
@@ -17,11 +18,13 @@ Grid::Grid(int t_gridIndex)
 	}
 }
 
+///////////////////////////////////////////////////////////////////////////////
 Grid::~Grid()
 {
 
 }
 
+///////////////////////////////////////////////////////////////////////////////
 void Grid::render(sf::RenderWindow& t_window)
 {
 	for (auto rect : m_rects)
@@ -42,11 +45,13 @@ void Grid::render(sf::RenderWindow& t_window)
 	}
 }
 
+///////////////////////////////////////////////////////////////////////////////
 void Grid::setGameBoard(GameBoard* t_gameBoard)
 {
 	m_gameBoard = t_gameBoard;
 }
 
+///////////////////////////////////////////////////////////////////////////////
 sf::CircleShape Grid::getNewPiece(sf::Color t_color, Coordinate::Type t_row, Coordinate::Type t_col)
 {
 	// Create pieces on the grid depending on what type of piece it is. 
@@ -58,6 +63,7 @@ sf::CircleShape Grid::getNewPiece(sf::Color t_color, Coordinate::Type t_row, Coo
 	return piece;
 }
 
+///////////////////////////////////////////////////////////////////////////////
 void Grid::setUpRect(sf::Color t_color, Coordinate::Type t_row, Coordinate::Type t_col)
 {
 	// This sets up each board to be in the center of the screen and appear one after the other going downwards.
@@ -71,3 +77,4 @@ void Grid::setUpRect(sf::Color t_color, Coordinate::Type t_row, Coordinate::Type
 	rect.setPosition(x,y);
 	m_rects.push_back(rect);
 }
+///////////////////////////////////////////////////////////////////////////////

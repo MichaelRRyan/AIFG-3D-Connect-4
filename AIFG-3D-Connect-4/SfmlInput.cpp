@@ -1,13 +1,15 @@
 #include "SfmlInput.h"
 #include <iostream>
+///////////////////////////////////////////////////////////////////////////////
 SfmlInput::SfmlInput(GameBoard& t_gameBoard, std::vector<Grid>& t_grids) : m_gameBoard(t_gameBoard), m_grids(t_grids)
 {
 }
 
+///////////////////////////////////////////////////////////////////////////////
 Coordinate SfmlInput::getCoordinate()
 {
 	sf::Event newEvent;
-	Coordinate pos = Coordinate(-1, -1, -1 );
+	Coordinate pos = Coordinate(-1, -1, -1 ); // Default value if no key/mouse is pressed
 	while (Window::getWindow().pollEvent(newEvent))
 	{
 		if (sf::Event::Closed == newEvent.type) // window message
@@ -23,17 +25,19 @@ Coordinate SfmlInput::getCoordinate()
 			sf::Vector2f mousePos = Window::getWindow().mapPixelToCoords(sf::Mouse::getPosition(Window::getWindow()));
 			for (int i = 0; i < m_grids.size(); i++)
 			{
+				// Gets the cells within a grid.
 				std::vector<sf::RectangleShape> rects = m_grids.at(i).getRects();
 				for (int j = 0; j < rects.size(); j++)
 				{
+					// Checks if the mouse pos is within a cell when pressed.
 					if (rects.at(j).getGlobalBounds().contains(mousePos))
 					{
-						int index = i * 16 + j;
-						int board = index / 16;
-						int row = (index % 16) / GameBoard::SIZE;
-						int col = (index % 16) - (row * GameBoard::SIZE);
+						int index = i * Grid::SIZE + j;
+						int grid = index / Grid::SIZE; // The grid you have pressed your mouse on.
+						int row = (index % Grid::SIZE) / GameBoard::SIZE; // The row you have pressed your mouse on.
+						int col = (index % Grid::SIZE) - (row * GameBoard::SIZE); // The col you have pressed your mouse on.
 						pos.x = row;
-						pos.y = board;
+						pos.y = grid;
 						pos.z = col;
 					}
 				}
@@ -44,6 +48,7 @@ Coordinate SfmlInput::getCoordinate()
 	return pos;
 }
 
+///////////////////////////////////////////////////////////////////////////////
 void SfmlInput::processKeys(sf::Event t_newEvent)
 {
 	if (sf::Keyboard::Escape == t_newEvent.key.code)
@@ -51,3 +56,4 @@ void SfmlInput::processKeys(sf::Event t_newEvent)
 		Window().getWindow().close();
 	}
 }
+///////////////////////////////////////////////////////////////////////////////
