@@ -11,11 +11,13 @@ Game::Game() :
 	m_exitGame{false},
 	m_rulesHandler{ m_gameBoard }
 {
-	m_renderer = new SfmlRenderer();
+	m_renderer = new SfmlRenderer(m_grids);
 	m_renderer->setGameBoard(&m_gameBoard);
 	m_rulesHandler.setOnGameOverFunction(
 		[&](PieceType t_winner) { onGameOver(t_winner); });
-	TurnHandler turnHandler;
+	TurnHandler* turnHandler = new TurnHandler();
+	turnHandler->setPlayer1(new SfmlInput(m_gameBoard, m_grids));
+	turnHandler->setPlayer2(new FourTechAI(m_gameBoard));
 	m_rulesHandler.setTurnHandler(turnHandler);
 }
 

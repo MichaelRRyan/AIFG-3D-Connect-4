@@ -29,6 +29,7 @@
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Minimax.cpp" />
+    <ClCompile Include="SfmlInput.cpp" />
     <ClCompile Include="SfmlRenderer.cpp" />
     <ClCompile Include="TurnHandler.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -48,6 +49,7 @@
     <ClInclude Include="Move.h" />
     <ClInclude Include="PieceType.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="SfmlInput.h" />
     <ClInclude Include="SfmlRenderer.h" />
     <ClInclude Include="TurnHandler.h" />
     <ClInclude Include="Window.h" />

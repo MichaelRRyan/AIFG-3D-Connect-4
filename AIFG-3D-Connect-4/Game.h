@@ -12,6 +12,7 @@
 #include "FourTechRulesHandler.h"
 #include "SfmlRenderer.h"
 #include "Window.h"
+#include "Grid.h"
 
 class Game
 {
@@ -83,6 +84,8 @@ private:
 
 	GameBoard m_gameBoard;
 	FourTechRulesHandler m_rulesHandler;
+
+	std::vector<Grid> m_grids;
 
 };
 

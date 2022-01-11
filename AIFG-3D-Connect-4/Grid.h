@@ -35,6 +35,10 @@ public:
 	/// </summary>
 	/// <param name="t_gameBoard">Game board</param>
 	void setGameBoard(GameBoard* t_gameBoard);
+
+	inline std::vector<sf::RectangleShape> getRects() { return m_rects; }
+
+	inline const float getRectSize() { return m_PIECE_SIZE; }
 private:
 	// rects within the grid.
 	std::vector<sf::RectangleShape> m_rects;

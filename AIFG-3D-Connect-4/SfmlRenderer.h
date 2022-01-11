@@ -15,7 +15,7 @@ public:
 	/// <summary>
 	/// Constructor for the SFML renderer.
 	/// </summary>
-	SfmlRenderer();
+	SfmlRenderer(std::vector<Grid>& t_grid);
 
 	/// <summary>
 	/// Default Destructor for the SFML renderer.
@@ -36,6 +36,6 @@ private:
 	GameBoard* m_gameBoard;
 
 	// Grids for the 4 Tec, there will be 4 grids in total.
-	std::vector<Grid> m_grids;
+	std::vector<Grid>& m_grids;
 };
 #endif
