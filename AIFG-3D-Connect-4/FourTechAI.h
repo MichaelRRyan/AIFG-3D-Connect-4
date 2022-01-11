@@ -5,8 +5,8 @@
 
 #include "Coordinate.h"
 #include "GameBoard.h"
-#include "FourTechEvaluator.h"
 #include "Input.h"
+#include "Minimax.h"
 
 /// <summary>
 /// A simple class used to find the next best move for the yellow player

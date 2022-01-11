@@ -27,6 +27,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameBoard.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Minimax.cpp" />
     <ClCompile Include="TurnHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -39,6 +40,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameBoard.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Minimax.h" />
     <ClInclude Include="Move.h" />
     <ClInclude Include="PieceType.h" />
     <ClInclude Include="Renderer.h" />
