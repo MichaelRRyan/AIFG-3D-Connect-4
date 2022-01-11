@@ -39,9 +39,6 @@ private:
 	// rects within the grid.
 	std::vector<sf::RectangleShape> m_rects;
 
-	// The pieces within the grid.
-	std::vector<sf::CircleShape> m_pieces;
-
 	// The grid index, that tells what board it is. The top most board will be a value of 0.
 	int m_gridIndex;
 
