@@ -31,6 +31,11 @@ public:
 	FourTechRulesHandler(GameBoard & t_board);
 
 	/// <summary>
+	/// Destrutor that cleans all heap allocated memory.
+	/// </summary>
+	~FourTechRulesHandler();
+
+	/// <summary>
 	/// Checks for input from the relevant player and checks for game over.
 	/// </summary>
 	void update();

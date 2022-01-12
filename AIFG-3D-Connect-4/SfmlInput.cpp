@@ -1,7 +1,9 @@
 #include "SfmlInput.h"
 #include <iostream>
 ///////////////////////////////////////////////////////////////////////////////
-SfmlInput::SfmlInput(GameBoard& t_gameBoard, std::vector<Grid>& t_grids) : m_gameBoard(t_gameBoard), m_grids(t_grids)
+SfmlInput::SfmlInput(GameBoard& t_gameBoard, std::vector<Grid>& t_grids) : 
+	m_gameBoard(t_gameBoard), 
+	m_grids(t_grids)
 {
 }
 
@@ -26,7 +28,7 @@ Coordinate SfmlInput::getCoordinate()
 			for (int i = 0; i < m_grids.size(); i++)
 			{
 				// Gets the cells within a grid.
-				std::vector<sf::RectangleShape> rects = m_grids.at(i).getRects();
+				const std::vector<sf::RectangleShape>& rects = m_grids.at(i).getRects();
 				for (int j = 0; j < rects.size(); j++)
 				{
 					// Checks if the mouse pos is within a cell when pressed.

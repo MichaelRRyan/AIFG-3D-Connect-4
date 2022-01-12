@@ -8,6 +8,11 @@ FourTechRulesHandler::FourTechRulesHandler(GameBoard & t_board) :
 {
 }
 
+FourTechRulesHandler::~FourTechRulesHandler()
+{
+	delete m_turnHandler;
+}
+
 // TEMPORARY.
 #include <limits>
 

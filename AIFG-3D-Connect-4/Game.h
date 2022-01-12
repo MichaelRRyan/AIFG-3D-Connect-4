@@ -13,6 +13,9 @@
 #include "SfmlRenderer.h"
 #include "Window.h"
 #include "Grid.h"
+#include "SfmlInput.h"
+#include "ConsoleInput.h"
+#include "FourTechAI.h"
 
 class Game
 {

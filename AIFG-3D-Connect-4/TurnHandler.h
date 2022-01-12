@@ -1,8 +1,7 @@
 #ifndef TURN_HANDLER_H
 #define TURN_HANDLER_H
 #include "ConsoleInput.h"
-#include "FourTechAI.h"
-#include "SfmlInput.h"
+#include "Move.h"
 /// <summary>
 /// This repersents a turn handler, which will handle the AI's and player's turns 
 /// and also the swithcing of turns.

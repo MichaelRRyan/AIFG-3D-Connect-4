@@ -40,7 +40,7 @@ public:
 	/// Gets the cells for a grid.
 	/// </summary>
 	/// <returns>returns a vector of cells from a grid.</returns>
-	inline std::vector<sf::RectangleShape> getRects() { return m_rects; }
+	inline const std::vector<sf::RectangleShape>& getRects() { return m_rects; }
 
 	// The number of cells for each grid.
 	static const int SIZE{ 16 };
