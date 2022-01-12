@@ -32,7 +32,7 @@ void Button::onButtonPress()
 	// HANDLES IF THE USER PRESS A BUTTON.
 }
 
-void Button::update(sf::Time t_deltaTime)
+void Button::update(float t_deltaTime)
 {
 	// CHECKS WHICH BUTTON IS SELECTED AND IF ONE IS, THEN CHANGE THE ALPHA OF THAT BUTTON.
 	if (m_isFocused)

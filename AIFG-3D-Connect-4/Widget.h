@@ -5,7 +5,7 @@ class Widget
 public:
 	Widget() = default;
 	virtual ~Widget() = default;
-	virtual void update(sf::Time t_deltaTime) = 0;
+	virtual void update(float t_deltaTime) = 0;
 	virtual void draw(sf::RenderWindow& t_window) const = 0;
 	virtual void setPosition(sf::Vector2f t_newPos) = 0;
 	virtual const sf::Vector2f getPosition() const = 0;

@@ -1,0 +1,22 @@
+#pragma once
+#include "Scene.h"
+#include "Game.h"
+#include <functional>
+#include "Button.h"
+#include "Widget.h"
+class MainMenuScene : public Scene
+{
+public:
+	MainMenuScene(Game& t_game, std::function<void(Game&, int)> t_function, sf::Font m_font);
+	~MainMenuScene();
+	void update(float t_deltaTime) override; // Updates a scene.
+	const bool& isEnded() const override; // return if the scene has ended.
+	const GameState& getNewGameState() const; // Gets the next scene after the current scene.
+	void render(sf::RenderWindow& t_window) override; // Renders a scene.
+	void processEvent(sf::Event t_event) override;
+	void setUpScene() override;
+private:
+	std::vector<Widget*> m_widgets;
+	Game& m_game;
+	sf::Font m_font;
+};

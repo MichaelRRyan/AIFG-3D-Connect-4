@@ -10,7 +10,7 @@
 #include "GameBoard.h"
 #include "ConsoleGameBoardRenderer.h"
 #include "FourTechRulesHandler.h"
-#include "SfmlRenderer.h"
+#include "SfmlGameBoardRenderer.h"
 #include "Window.h"
 #include "Grid.h"
 #include "SfmlInput.h"

@@ -1,10 +1,9 @@
-#include "SfmlRenderer.h"
+#include "SfmlGameBoardRenderer.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-SfmlRenderer::SfmlRenderer(std::vector<Grid>& t_grid, std::vector<Widget*>& t_widgets) :
+SfmlGameBoardRenderer::SfmlGameBoardRenderer(std::vector<Grid>& t_grid) :
 	m_gameBoard(nullptr),
-	m_grids(t_grid),
-	m_widgets(t_widgets)
+	m_grids(t_grid)
 {
 	// Sets up each grid and assings the grid index to each grid.
 	for (Coordinate::Type board = 0u; board < 4; board++)
@@ -14,27 +13,23 @@ SfmlRenderer::SfmlRenderer(std::vector<Grid>& t_grid, std::vector<Widget*>& t_wi
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-SfmlRenderer::~SfmlRenderer()
+SfmlGameBoardRenderer::~SfmlGameBoardRenderer()
 {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void SfmlRenderer::render()
+void SfmlGameBoardRenderer::render()
 {
 	Window::getWindow().clear(sf::Color::Black);
-	//for (auto grid : m_grids)
-	//{
-	//	grid.render(Window::getWindow());
-	//}
-	for (auto widget : m_widgets)
+	for (auto grid : m_grids)
 	{
-		widget->draw(Window::getWindow());
+		grid.render(Window::getWindow());
 	}
 	Window::getWindow().display();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void SfmlRenderer::setGameBoard(GameBoard* t_gameBoard)
+void SfmlGameBoardRenderer::setGameBoard(GameBoard* t_gameBoard)
 {
 	m_gameBoard = t_gameBoard;
 	// Make every board be aware of the game board.

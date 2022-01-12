@@ -12,17 +12,7 @@ Game::Game() :
 	m_rulesHandler{ m_gameBoard }
 {
 	if (!m_font.loadFromFile("ASSETS//FONTS//ariblk.ttf")) {};
-
-	m_widgets.push_back(new Button(*this, sf::Vector2f(120.0f, 120), &Game::setDifficulty, sf::Vector2f(100.0f, 100.0f), "EASY", m_font, 2));
-	m_widgets.push_back(new Button(*this, sf::Vector2f(120, 120), &Game::setDifficulty, sf::Vector2f(100.0f, 200.0f), "MEDIUM", m_font, 3));
-	m_widgets.push_back(new Button(*this, sf::Vector2f(120, 120), &Game::setDifficulty, sf::Vector2f(100.0f, 300.0f), "HARD", m_font, 4));
-
-	for (auto& widget : m_widgets)
-	{
-		widget->centerText();
-	}
-
-	m_renderer = new SfmlRenderer(m_grids, m_widgets);
+	m_renderer = new SfmlGameBoardRenderer(m_grids);
 	m_renderer->setGameBoard(&m_gameBoard);
 	m_rulesHandler.setOnGameOverFunction(
 		[&](PieceType t_winner) { onGameOver(t_winner); });
@@ -74,10 +64,6 @@ void Game::processEvents()
 			processKeys(newEvent);
 		if (sf::Event::MouseButtonPressed == newEvent.type)
 		{
-			for (auto& widget : m_widgets)
-			{
-				widget->processEvents(newEvent);
-			}
 		}
 	}
 }
