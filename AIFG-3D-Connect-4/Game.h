@@ -17,6 +17,9 @@
 #include "ConsoleInput.h"
 #include "FourTechAI.h"
 
+class Button;
+class Widget;
+
 class Game
 {
 public:
@@ -81,6 +84,8 @@ private:
 	/// <param name="t_winner">the winning piece colour.</param>
 	void onGameOver(PieceType t_winner);
 
+	void setDifficulty(int t_difficulty);
+
 	//sf::RenderWindow m_window; // main SFML window
 	Renderer * m_renderer;
 	bool m_exitGame; // control exiting game
@@ -91,7 +96,14 @@ private:
 	// Repersents the grids within the game.
 	std::vector<Grid> m_grids;
 
+	std::vector<Widget*> m_widgets;
+
+	sf::Font m_font;
+
 };
+
+#include "Button.h"
+#include "Widget.h"
 
 #endif // !GAME_H
 

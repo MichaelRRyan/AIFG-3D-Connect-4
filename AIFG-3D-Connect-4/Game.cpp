@@ -11,7 +11,18 @@ Game::Game() :
 	m_exitGame{false},
 	m_rulesHandler{ m_gameBoard }
 {
-	m_renderer = new SfmlRenderer(m_grids);
+	if (!m_font.loadFromFile("ASSETS//FONTS//ariblk.ttf")) {};
+
+	m_widgets.push_back(new Button(*this, sf::Vector2f(120.0f, 120), &Game::setDifficulty, sf::Vector2f(100.0f, 100.0f), "EASY", m_font, 2));
+	m_widgets.push_back(new Button(*this, sf::Vector2f(120, 120), &Game::setDifficulty, sf::Vector2f(100.0f, 200.0f), "MEDIUM", m_font, 3));
+	m_widgets.push_back(new Button(*this, sf::Vector2f(120, 120), &Game::setDifficulty, sf::Vector2f(100.0f, 300.0f), "HARD", m_font, 4));
+
+	for (auto& widget : m_widgets)
+	{
+		widget->centerText();
+	}
+
+	m_renderer = new SfmlRenderer(m_grids, m_widgets);
 	m_renderer->setGameBoard(&m_gameBoard);
 	m_rulesHandler.setOnGameOverFunction(
 		[&](PieceType t_winner) { onGameOver(t_winner); });
@@ -61,6 +72,13 @@ void Game::processEvents()
 
 		else if (sf::Event::KeyPressed == newEvent.type) //user pressed a key
 			processKeys(newEvent);
+		if (sf::Event::MouseButtonPressed == newEvent.type)
+		{
+			for (auto& widget : m_widgets)
+			{
+				widget->processEvents(newEvent);
+			}
+		}
 	}
 }
 
@@ -109,6 +127,11 @@ void Game::onGameOver(PieceType t_winner)
 	m_rulesHandler.printMoves();
 
 	m_exitGame = true;
+}
+
+void Game::setDifficulty(int t_difficulty)
+{
+	Minimax::setMaxDepth(t_difficulty);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -1,9 +1,10 @@
 #include "SfmlRenderer.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-SfmlRenderer::SfmlRenderer(std::vector<Grid>& t_grid) :
+SfmlRenderer::SfmlRenderer(std::vector<Grid>& t_grid, std::vector<Widget*>& t_widgets) :
 	m_gameBoard(nullptr),
-	m_grids(t_grid)
+	m_grids(t_grid),
+	m_widgets(t_widgets)
 {
 	// Sets up each grid and assings the grid index to each grid.
 	for (Coordinate::Type board = 0u; board < 4; board++)
@@ -21,9 +22,13 @@ SfmlRenderer::~SfmlRenderer()
 void SfmlRenderer::render()
 {
 	Window::getWindow().clear(sf::Color::Black);
-	for (auto grid : m_grids)
+	//for (auto grid : m_grids)
+	//{
+	//	grid.render(Window::getWindow());
+	//}
+	for (auto widget : m_widgets)
 	{
-		grid.render(Window::getWindow());
+		widget->draw(Window::getWindow());
 	}
 	Window::getWindow().display();
 }

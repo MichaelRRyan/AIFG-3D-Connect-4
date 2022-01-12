@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="ConsoleGameBoardRenderer.cpp" />
     <ClCompile Include="ConsoleInput.cpp" />
     <ClCompile Include="FourTechAI.cpp" />
@@ -35,6 +36,7 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
     <ClInclude Include="ConsoleGameBoardRenderer.h" />
     <ClInclude Include="ConsoleInput.h" />
     <ClInclude Include="Coordinate.h" />
@@ -52,6 +54,7 @@
     <ClInclude Include="SfmlInput.h" />
     <ClInclude Include="SfmlRenderer.h" />
     <ClInclude Include="TurnHandler.h" />
+    <ClInclude Include="Widget.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>

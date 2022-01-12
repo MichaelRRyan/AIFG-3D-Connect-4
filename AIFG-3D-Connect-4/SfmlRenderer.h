@@ -6,6 +6,9 @@
 #include <SFML/Graphics.hpp>
 #include "Window.h"
 
+class Button;
+class Widget;
+
 /// <summary>
 /// This is a SFML renderer, that will render game objects using SFML objects.
 /// </summary>
@@ -15,7 +18,7 @@ public:
 	/// <summary>
 	/// Constructor for the SFML renderer.
 	/// </summary>
-	SfmlRenderer(std::vector<Grid>& t_grid);
+	SfmlRenderer(std::vector<Grid>& t_grid, std::vector<Widget*>& t_widgets);
 
 	/// <summary>
 	/// Default Destructor for the SFML renderer.
@@ -37,5 +40,11 @@ private:
 
 	// Grids for the 4 Tec, there will be 4 grids in total.
 	std::vector<Grid>& m_grids;
+
+	std::vector<Widget*> m_widgets;
 };
+
+#include "Button.h"
+#include "Widget.h"
+
 #endif
