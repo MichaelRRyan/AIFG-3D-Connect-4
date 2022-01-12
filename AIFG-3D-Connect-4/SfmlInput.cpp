@@ -35,7 +35,7 @@ Coordinate SfmlInput::getCoordinate()
 					if (rects.at(j).getGlobalBounds().contains(mousePos))
 					{
 						int index = i * Grid::SIZE + j;
-						int grid = index / Grid::SIZE; // The grid you have pressed your mouse on.
+						int grid = m_grids.at(i).getGridIndex();
 						int row = (index % Grid::SIZE) / GameBoard::SIZE; // The row you have pressed your mouse on.
 						int col = (index % Grid::SIZE) - (row * GameBoard::SIZE); // The col you have pressed your mouse on.
 						pos.x = row;
