@@ -3,11 +3,16 @@
 
 #include "Scene.h"
 #include <map>
+#include <functional>
+
+class MainMenuScene;
+class Game;
 
 class SceneManager
 {
 public:
-	SceneManager();
+	SceneManager() = default;
+	SceneManager(Game& t_game, std::function<void(Game&, int)> t_function, sf::Font m_font);
 	~SceneManager();
 
 	/// <summary>
@@ -18,7 +23,7 @@ public:
 	/// <summary>
 	/// Renders the current screen.
 	/// </summary>
-	void render(sf::RenderWindow& t_window);
+	void render();
 
 	/// <summary>
 	/// Handles Inputs for the current scene.
@@ -28,6 +33,10 @@ public:
 private:
 	void setNewGameState(GameState t_newGameState);
 	Scene* m_currentScene; // The current Scene.
+	MainMenuScene* m_mainMenuScene;
 	std::map<GameState, Scene*> m_sceneHaspMap;
 };
+
+#include "MainMenuScene.h"
+#include "Game.h"
 #endif

@@ -3,7 +3,7 @@
 #include "Game.h"
 #include <functional>
 #include "Button.h"
-#include "Widget.h"
+#include "SfmlUIRenderer.h"
 class MainMenuScene : public Scene
 {
 public:
@@ -12,11 +12,11 @@ public:
 	void update(float t_deltaTime) override; // Updates a scene.
 	const bool& isEnded() const override; // return if the scene has ended.
 	const GameState& getNewGameState() const; // Gets the next scene after the current scene.
-	void render(sf::RenderWindow& t_window) override; // Renders a scene.
+	void render() override; // Renders a scene.
 	void processEvent(sf::Event t_event) override;
-	void setUpScene() override;
 private:
 	std::vector<Widget*> m_widgets;
+	Renderer* m_renderer;
 	Game& m_game;
 	sf::Font m_font;
 };

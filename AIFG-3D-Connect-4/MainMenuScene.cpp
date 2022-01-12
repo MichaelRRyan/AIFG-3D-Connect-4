@@ -13,6 +13,8 @@ MainMenuScene::MainMenuScene(Game& t_game, std::function<void(Game&, int)> t_fun
 	{
 		widget->centerText();
 	}
+
+	m_renderer = new SfmlUIRenderer(t_game, t_function, t_font, m_widgets);
 }
 
 MainMenuScene::~MainMenuScene()
@@ -37,8 +39,9 @@ const GameState& MainMenuScene::getNewGameState() const
 	return GameState::GameScene;
 }
 
-void MainMenuScene::render(sf::RenderWindow& t_window)
+void MainMenuScene::render()
 {
+	m_renderer->render();
 }
 
 void MainMenuScene::processEvent(sf::Event t_event)
@@ -47,8 +50,4 @@ void MainMenuScene::processEvent(sf::Event t_event)
 	{
 		widget->processEvents(t_event);
 	}
-}
-
-void MainMenuScene::setUpScene()
-{
 }

@@ -15,6 +15,7 @@ Button::Button(Game& t_game, sf::Vector2f t_size, std::function<void(Game&, int)
 	m_text.setString(m_string);
 	m_text.setCharacterSize(60);
 	m_text.setFillColor(sf::Color::Black);
+	m_isFocused = false;
 }
 
 Button::~Button()
@@ -37,13 +38,11 @@ void Button::update(float t_deltaTime)
 	// CHECKS WHICH BUTTON IS SELECTED AND IF ONE IS, THEN CHANGE THE ALPHA OF THAT BUTTON.
 	if (m_isFocused)
 	{
-		m_body.setFillColor(sf::Color{ 255, 255, 255, 255 });
-		m_text.setFillColor(sf::Color{ 0, 0, 0, 255 });
+		m_body.setFillColor(sf::Color{ m_body.getFillColor().r, m_body.getFillColor().g, m_body.getFillColor().b, 100 });
 	}
 	else
 	{
-		m_body.setFillColor(sf::Color{ 255, 255, 255, 100 });
-		m_text.setFillColor(sf::Color{ 0, 0, 0, 100 });
+		m_body.setFillColor(sf::Color::Red);
 	}
 	// CHECKS WHICH BUTTON IS SELECTED AND IF ONE IS, THEN CHANGE THE ALPHA OF THAT BUTTON.
 }
@@ -122,6 +121,18 @@ void Button::processEvents(sf::Event t_event)
 		if (m_body.getGlobalBounds().contains(mousePos))
 		{
 			onButtonPress();
+		}
+	}
+	else if (sf::Event::MouseMoved == t_event.type)
+	{
+		sf::Vector2f mousePos = Window::getWindow().mapPixelToCoords(sf::Mouse::getPosition(Window::getWindow()));
+		if (m_body.getGlobalBounds().contains(mousePos))
+		{
+			setFocus(true);
+		}
+		else
+		{
+			setFocus(false);
 		}
 	}
 }

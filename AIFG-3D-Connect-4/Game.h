@@ -16,10 +16,7 @@
 #include "SfmlInput.h"
 #include "ConsoleInput.h"
 #include "FourTechAI.h"
-
-class Button;
-class Widget;
-
+#include "SceneManager.h"
 class Game
 {
 public:
@@ -96,14 +93,9 @@ private:
 	// Repersents the grids within the game.
 	std::vector<Grid> m_grids;
 
-	std::vector<Widget*> m_widgets;
-
 	sf::Font m_font;
 
+	SceneManager m_sceneManager;
 };
-
-#include "Button.h"
-#include "Widget.h"
-
 #endif // !GAME_H
 
