@@ -1,7 +1,10 @@
-#pragma once
+#ifndef GRID_H
+#define GRID_H
+
 #include <SFML/Graphics.hpp>
 #include "GameBoard.h"
 #include "Window.h"
+
 /// <summary>
 /// This repernsets a grid within the 4 Tec Game
 /// </summary>
@@ -35,6 +38,15 @@ public:
 	/// </summary>
 	/// <param name="t_gameBoard">Game board</param>
 	void setGameBoard(GameBoard* t_gameBoard);
+
+	/// <summary>
+	/// Gets the cells for a grid.
+	/// </summary>
+	/// <returns>returns a vector of cells from a grid.</returns>
+	inline const std::vector<sf::RectangleShape>& getRects() { return m_rects; }
+
+	// The number of cells for each grid.
+	static const int SIZE{ 16 };
 private:
 	// rects within the grid.
 	std::vector<sf::RectangleShape> m_rects;
@@ -51,8 +63,10 @@ private:
 	// The offset from the top of a grid.
 	const float m_Y_OFFSET = 15;
 
+	// Offset in the top left X.
 	float m_topLeftX;
 
+	// Offset in the top left Y.
 	float m_topLeftY;
 
 	GameBoard* m_gameBoard;
@@ -74,3 +88,4 @@ private:
 	/// <param name="t_col">col position of the rect.</param>
 	void setUpRect(sf::Color t_color, Coordinate::Type t_row, Coordinate::Type t_col);
 };
+#endif

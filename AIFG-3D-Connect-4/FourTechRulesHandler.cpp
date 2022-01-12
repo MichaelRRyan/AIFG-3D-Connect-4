@@ -8,6 +8,11 @@ FourTechRulesHandler::FourTechRulesHandler(GameBoard & t_board) :
 {
 }
 
+FourTechRulesHandler::~FourTechRulesHandler()
+{
+	delete m_turnHandler;
+}
+
 // TEMPORARY.
 #include <limits>
 
@@ -18,8 +23,8 @@ void FourTechRulesHandler::update()
 	Move move;
 	while (true) // Loops until it finds a position that that player/AI can place.
 	{ 
-		move = m_turnHandler.getMove();
-		if (PieceType::None == m_board.getPiece(move.position)){ break; }
+		move = m_turnHandler->getMove();
+		if (move.position.x != -1 && PieceType::None == m_board.getPiece(move.position)){ break; }
 	}
 	Coordinate pos = move.position;
 	// Get the piece type and place it.
@@ -39,7 +44,7 @@ void FourTechRulesHandler::update()
 		m_onGameOverFunction(PieceType::None);
 
 	// Switches turn to either the player or the AI.
-	m_turnHandler.changeTurn();
+	m_turnHandler->changeTurn();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -49,11 +54,9 @@ void FourTechRulesHandler::setOnGameOverFunction(OnGameOverFunction t_function)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void FourTechRulesHandler::setTurnHandler(TurnHandler t_turnHandler)
+void FourTechRulesHandler::setTurnHandler(TurnHandler* t_turnHandler)
 {
 	m_turnHandler = t_turnHandler;
-	m_turnHandler.setPlayer1(new ConsoleInput(m_board));
-	m_turnHandler.setPlayer2(new FourTechAI(m_board));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
