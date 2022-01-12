@@ -8,25 +8,15 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Game::Game() :
-	m_exitGame{false},
-	m_rulesHandler{ m_gameBoard }
+	m_exitGame{false}
 {
 	if (!m_font.loadFromFile("ASSETS//FONTS//ariblk.ttf")) {};
-	m_sceneManager = SceneManager(*this, &Game::setDifficulty, m_font);
-	m_renderer = new SfmlGameBoardRenderer(m_grids);
-	m_renderer->setGameBoard(&m_gameBoard);
-	m_rulesHandler.setOnGameOverFunction(
-		[&](PieceType t_winner) { onGameOver(t_winner); });
-	TurnHandler* turnHandler = new TurnHandler();
-	turnHandler->setPlayer1(new SfmlInput(m_gameBoard, m_grids));
-	turnHandler->setPlayer2(new FourTechAI(m_gameBoard));
-	m_rulesHandler.setTurnHandler(turnHandler);
+	m_sceneManager = SceneManager(*this, &Game::setDifficulty, &Game::onGameOver, m_font);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 Game::~Game()
 {
-	if (m_renderer) delete m_renderer;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -81,10 +71,6 @@ void Game::processKeys(sf::Event t_event)
 void Game::update(float t_delta)
 {
 	m_sceneManager.update(t_delta);
-	//system("cls");
-	//m_rulesHandler.printMoves();
-	//std::cout << std::endl;
-	//m_rulesHandler.update();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -103,7 +89,6 @@ void Game::exit()
 void Game::onGameOver(PieceType t_winner)
 {
 	system("cls");
-	m_renderer->render();
 
 	if (PieceType::None == t_winner)
 		std::cout << "The game was a draw!" << std::endl;
@@ -113,7 +98,7 @@ void Game::onGameOver(PieceType t_winner)
 		std::cout << "The yellow player won!" << std::endl;
 
 	std::cout << std::endl;
-	m_rulesHandler.printMoves();
+	//t_rulesHandler.printMoves();
 
 	m_exitGame = true;
 }

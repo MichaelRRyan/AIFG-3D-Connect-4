@@ -12,7 +12,6 @@
 #include "FourTechRulesHandler.h"
 #include "SfmlGameBoardRenderer.h"
 #include "Window.h"
-#include "Grid.h"
 #include "SfmlInput.h"
 #include "ConsoleInput.h"
 #include "FourTechAI.h"
@@ -83,15 +82,8 @@ private:
 
 	void setDifficulty(int t_difficulty);
 
-	//sf::RenderWindow m_window; // main SFML window
-	Renderer * m_renderer;
+
 	bool m_exitGame; // control exiting game
-
-	GameBoard m_gameBoard;
-	FourTechRulesHandler m_rulesHandler;
-
-	// Repersents the grids within the game.
-	std::vector<Grid> m_grids;
 
 	sf::Font m_font;
 

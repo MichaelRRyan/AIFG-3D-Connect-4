@@ -18,6 +18,5 @@ public:
 	virtual void processEvent(sf::Event t_event) = 0;
 protected:
 	bool m_isEnded;
-	GameState m_nextScene;
 };
 #endif

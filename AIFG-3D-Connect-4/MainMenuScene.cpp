@@ -5,9 +5,9 @@ MainMenuScene::MainMenuScene(Game& t_game, std::function<void(Game&, int)> t_fun
 	m_font(t_font),
 	m_game(t_game)
 {
-	m_widgets.push_back(new Button(m_game, sf::Vector2f(120.0f, 120), t_function, sf::Vector2f(100.0f, 100.0f), "EASY", m_font, 2));
-	m_widgets.push_back(new Button(m_game, sf::Vector2f(120, 120), t_function, sf::Vector2f(100.0f, 200.0f), "MEDIUM", m_font, 3));
-	m_widgets.push_back(new Button(m_game, sf::Vector2f(120, 120), t_function, sf::Vector2f(100.0f, 300.0f), "HARD", m_font, 4));
+	m_widgets.push_back(new Button(m_game, sf::Vector2f(120.0f, 120.0f), t_function, sf::Vector2f(680.0f, 275.0f), "EASY", m_font, 2));
+	m_widgets.push_back(new Button(m_game, sf::Vector2f(120.0f, 120.0f), t_function, sf::Vector2f(680.0f, 475.0f), "MEDIUM", m_font, 3));
+	m_widgets.push_back(new Button(m_game, sf::Vector2f(120.0f, 120.0f), t_function, sf::Vector2f(680.0f, 675.0f), "HARD", m_font, 4));
 
 	for (auto& widget : m_widgets)
 	{
@@ -36,7 +36,7 @@ const bool& MainMenuScene::isEnded() const
 
 const GameState& MainMenuScene::getNewGameState() const
 {
-	return GameState::GameScene;
+	return m_nextState;
 }
 
 void MainMenuScene::render()

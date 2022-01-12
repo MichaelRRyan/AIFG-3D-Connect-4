@@ -1,9 +1,14 @@
 #include "SceneManager.h"
 
-SceneManager::SceneManager(Game& t_game, std::function<void(Game&, int)> t_function, sf::Font m_font)
+SceneManager::SceneManager(Game& t_game, std::function<void(Game&, int)> t_function, std::function<void(Game&, PieceType)> t_gameOverfunction, sf::Font m_font)
 {
 	m_mainMenuScene = new MainMenuScene(t_game, t_function, m_font);
+	m_gamePlayScene = new GamePlayScene(t_game, t_gameOverfunction);
 	m_currentScene = m_mainMenuScene;
+
+	m_sceneHaspMap.emplace(GameState::GameScene, m_gamePlayScene);
+	m_sceneHaspMap.emplace(GameState::MainMenuScene, m_mainMenuScene);
+	m_sceneHaspMap.emplace(GameState::MainMenuScene, nullptr);
 }
 
 SceneManager::~SceneManager()

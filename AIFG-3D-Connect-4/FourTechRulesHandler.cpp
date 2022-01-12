@@ -1,10 +1,11 @@
 #include "FourTechRulesHandler.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-FourTechRulesHandler::FourTechRulesHandler(GameBoard & t_board) :
+FourTechRulesHandler::FourTechRulesHandler(Game& t_game, GameBoard & t_board) :
 	m_TOTAL_BOARD_TILES{ 64u },
 	m_board{ t_board },
-	m_piecesPlaced{ 0u }
+	m_piecesPlaced{ 0u },
+	m_game(t_game)
 {
 }
 
@@ -37,11 +38,11 @@ void FourTechRulesHandler::update()
 	
 	// Checks if the move won the game.
 	if (FourTechEvaluator::isMoveAWin(m_board, { pos, type }))
-		m_onGameOverFunction(type);
+		m_onGameOverFunction(m_game, type);
 
 	// Calls a draw if all tiles are filled with no win.
 	else if (m_piecesPlaced == m_TOTAL_BOARD_TILES)
-		m_onGameOverFunction(PieceType::None);
+		m_onGameOverFunction(m_game, PieceType::None);
 
 	// Switches turn to either the player or the AI.
 	m_turnHandler->changeTurn();

@@ -27,6 +27,7 @@
     <ClCompile Include="FourTechRulesHandler.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameBoard.cpp" />
+    <ClCompile Include="GamePlayScene.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuScene.cpp" />
@@ -49,6 +50,7 @@
     <ClInclude Include="FourTechRulesHandler.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameBoard.h" />
+    <ClInclude Include="GamePlayScene.h" />
     <ClInclude Include="GameStates.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Input.h" />

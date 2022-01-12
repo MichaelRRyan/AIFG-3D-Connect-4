@@ -4,7 +4,9 @@
 #include "Scene.h"
 #include <map>
 #include <functional>
+#include "PieceType.h"
 
+class GamePlayScene;
 class MainMenuScene;
 class Game;
 
@@ -12,7 +14,7 @@ class SceneManager
 {
 public:
 	SceneManager() = default;
-	SceneManager(Game& t_game, std::function<void(Game&, int)> t_function, sf::Font m_font);
+	SceneManager(Game& t_game, std::function<void(Game&, int)> t_ButtonClickfunction, std::function<void(Game&, PieceType)> t_gameOverfunction, sf::Font m_font);
 	~SceneManager();
 
 	/// <summary>
@@ -36,11 +38,14 @@ public:
 
 private:
 	Scene* m_currentScene; // The current Scene.
+	GamePlayScene* m_gamePlayScene;
 	MainMenuScene* m_mainMenuScene;
+
 	std::map<GameState, Scene*> m_sceneHaspMap;
 	
 };
 
 #include "MainMenuScene.h"
+#include "GamePlayScene.h"
 #include "Game.h"
 #endif

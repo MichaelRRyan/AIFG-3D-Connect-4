@@ -3,5 +3,6 @@
 enum class GameState
 {
 	MainMenuScene,
-	GameScene
+	GameScene,
+	None
 };
