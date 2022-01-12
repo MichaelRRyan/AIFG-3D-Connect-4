@@ -15,7 +15,6 @@ Button::Button(Game& t_game, sf::Vector2f t_size, std::function<void(Game&, int)
 	m_text.setString(m_string);
 	m_text.setCharacterSize(60);
 	m_text.setFillColor(sf::Color::Black);
-	m_isFocused = false;
 }
 
 Button::~Button()
@@ -27,7 +26,6 @@ void Button::onButtonPress()
 	// HANDLES IF THE USER PRESS A BUTTON.
 	if (m_function != nullptr)
 	{
-		std::cout << "hit";
 		m_function(*m_game, m_depthLevel);
 	}
 	// HANDLES IF THE USER PRESS A BUTTON.
@@ -35,16 +33,6 @@ void Button::onButtonPress()
 
 void Button::update(float t_deltaTime)
 {
-	// CHECKS WHICH BUTTON IS SELECTED AND IF ONE IS, THEN CHANGE THE ALPHA OF THAT BUTTON.
-	if (m_isFocused)
-	{
-		m_body.setFillColor(sf::Color{ m_body.getFillColor().r, m_body.getFillColor().g, m_body.getFillColor().b, 100 });
-	}
-	else
-	{
-		m_body.setFillColor(sf::Color::Red);
-	}
-	// CHECKS WHICH BUTTON IS SELECTED AND IF ONE IS, THEN CHANGE THE ALPHA OF THAT BUTTON.
 }
 
 void Button::draw(sf::RenderWindow& t_window) const
@@ -61,36 +49,6 @@ void Button::setPosition(sf::Vector2f t_newPos)
 		rectBounds.left + (rectBounds.width / 2),
 		rectBounds.top + (rectBounds.height / 2)
 	);
-}
-
-const sf::Vector2f Button::getPosition() const
-{
-	return m_body.getPosition();
-}
-
-sf::Vector2f Button::getSize() const
-{
-	return m_body.getSize();
-}
-
-inline bool Button::getFocused()
-{
-	return m_isFocused;
-}
-
-inline void Button::setFocus(bool t_isFocused)
-{
-	m_isFocused = t_isFocused;
-}
-
-void Button::setTextColour(sf::Color t_color)
-{
-	m_text.setFillColor(t_color);
-}
-
-void Button::setWidgetColor(sf::Color t_color)
-{
-	m_body.setFillColor(t_color);
 }
 
 void Button::centerText()
@@ -128,11 +86,11 @@ void Button::processEvents(sf::Event t_event)
 		sf::Vector2f mousePos = Window::getWindow().mapPixelToCoords(sf::Mouse::getPosition(Window::getWindow()));
 		if (m_body.getGlobalBounds().contains(mousePos))
 		{
-			setFocus(true);
+			m_body.setFillColor(sf::Color{ m_body.getFillColor().r, m_body.getFillColor().g, m_body.getFillColor().b, 100 });
 		}
 		else
 		{
-			setFocus(false);
+			m_body.setFillColor(sf::Color::Red);
 		}
 	}
 }

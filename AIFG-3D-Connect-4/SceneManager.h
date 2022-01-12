@@ -30,11 +30,15 @@ public:
 	/// </summary>
 	void processEvent(sf::Event t_event);
 
-private:
 	void setNewGameState(GameState t_newGameState);
+
+	inline const Scene* getCurrentScene() const { return m_currentScene; }
+
+private:
 	Scene* m_currentScene; // The current Scene.
 	MainMenuScene* m_mainMenuScene;
 	std::map<GameState, Scene*> m_sceneHaspMap;
+	
 };
 
 #include "MainMenuScene.h"

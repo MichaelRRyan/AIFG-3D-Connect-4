@@ -12,15 +12,9 @@ public:
 	~Button();
 	void update(float t_deltaTime) override;
 	void draw(sf::RenderWindow& t_window) const override;
-	void setPosition(sf::Vector2f t_newPos) override;
-	const sf::Vector2f getPosition() const override;
-	sf::Vector2f getSize() const override;
-	inline bool getFocused() override;
-	inline void setFocus(bool t_isFocused) override;
-	void setTextColour(sf::Color t_color) override;
-	void setWidgetColor(sf::Color t_color) override;
 	void centerText() override;
 	void processEvents(sf::Event t_event) override;
+	void setPosition(sf::Vector2f t_pos) override;
 private:
 	void onButtonPress();
 	std::function<void(Game&, int)> m_function;
@@ -28,7 +22,6 @@ private:
 	sf::RectangleShape m_body;
 	sf::Text m_text;
 	sf::Font m_font;
-	bool m_isFocused;
 	Game* m_game;
 	int m_depthLevel;
 };

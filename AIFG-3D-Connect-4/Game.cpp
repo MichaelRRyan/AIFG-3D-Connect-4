@@ -121,6 +121,7 @@ void Game::onGameOver(PieceType t_winner)
 void Game::setDifficulty(int t_difficulty)
 {
 	Minimax::setMaxDepth(t_difficulty);
+	m_sceneManager.setNewGameState(m_sceneManager.getCurrentScene()->getNewGameState());
 }
 
 ///////////////////////////////////////////////////////////////////////////////
