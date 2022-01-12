@@ -1,8 +1,11 @@
-#pragma once
+#ifndef SFML_INPUT_H
+#define SFML_INPUT_H
+
 #include "Input.h"
 #include "GameBoard.h"
 #include <vector>
 #include "Grid.h"
+
 class SfmlInput : public Input
 {
 public:
@@ -35,3 +38,4 @@ private:
 	// The grids in the game.
 	std::vector<Grid>& m_grids;
 };
+#endif

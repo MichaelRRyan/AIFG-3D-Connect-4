@@ -1,5 +1,8 @@
-#pragma once
+#ifndef WINDOW_H
+#define WINDOW_H
+
 #include <SFML/Graphics.hpp>
+
 /// <summary>
 /// This is static class that holds information on a SFML window.
 /// </summary>
@@ -29,3 +32,4 @@ private:
 	static const unsigned int m_WINDOW_HEIGHT = 1200;
 	static sf::RenderWindow m_window;
 };
+#endif

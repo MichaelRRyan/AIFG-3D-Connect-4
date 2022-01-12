@@ -1,5 +1,5 @@
-#ifndef Sfml_Renderer_H
-#define Sfml_Renderer_H
+#ifndef SFML_RENDERER_H
+#define SFML_RENDERER_H
 
 #include "Renderer.h"
 #include "Grid.h"

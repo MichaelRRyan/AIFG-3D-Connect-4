@@ -1,7 +1,10 @@
-#pragma once
+#ifndef GRID_H
+#define GRID_H
+
 #include <SFML/Graphics.hpp>
 #include "GameBoard.h"
 #include "Window.h"
+
 /// <summary>
 /// This repernsets a grid within the 4 Tec Game
 /// </summary>
@@ -85,3 +88,4 @@ private:
 	/// <param name="t_col">col position of the rect.</param>
 	void setUpRect(sf::Color t_color, Coordinate::Type t_row, Coordinate::Type t_col);
 };
+#endif
