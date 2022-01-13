@@ -64,8 +64,6 @@ public:
 
 private:
 	Scene* m_currentScene; // The current Scene.
-	GamePlayScene* m_gamePlayScene;
-	MainMenuScene* m_mainMenuScene;
 
 	std::map<GameState, Scene*> m_sceneHaspMap; // map that has all the scenes with GameStates as keys.
 	

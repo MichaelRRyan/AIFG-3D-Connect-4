@@ -2,13 +2,11 @@
 
 SceneManager::SceneManager(Game& t_game, std::function<void(Game&, int)> t_buttonClickfunction, std::function<void(Game&, PieceType)> t_gameOverfunction, sf::Font t_font)
 {
-	m_mainMenuScene = new MainMenuScene(t_game, t_buttonClickfunction, t_font);
-	m_gamePlayScene = new GamePlayScene(t_game, t_gameOverfunction);
-	m_currentScene = m_mainMenuScene;
+	m_sceneHaspMap.emplace(GameState::GameScene, new GamePlayScene(t_game, t_gameOverfunction));
+	m_sceneHaspMap.emplace(GameState::MainMenuScene, new MainMenuScene(t_game, t_buttonClickfunction, t_font));
+	m_sceneHaspMap.emplace(GameState::None, nullptr);
 
-	m_sceneHaspMap.emplace(GameState::GameScene, m_gamePlayScene);
-	m_sceneHaspMap.emplace(GameState::MainMenuScene, m_mainMenuScene);
-	m_sceneHaspMap.emplace(GameState::MainMenuScene, nullptr);
+	m_currentScene = m_sceneHaspMap[GameState::MainMenuScene];
 }
 
 SceneManager::~SceneManager()

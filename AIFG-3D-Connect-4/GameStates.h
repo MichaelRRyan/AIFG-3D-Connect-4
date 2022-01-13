@@ -6,9 +6,9 @@
 /// </summary>
 enum class GameState
 {
+	None,
 	MainMenuScene,
-	GameScene,
-	None
+	GameScene
 };
 
 #endif

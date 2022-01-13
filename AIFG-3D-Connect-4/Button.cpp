@@ -1,18 +1,16 @@
 #include "Button.h"
 
 Button::Button(Game& t_game, sf::Vector2f t_size, std::function<void(Game&, int)> t_function, sf::Vector2f t_pos, std::string t_buttonText, sf::Font& t_font, int t_depthLevel) :
-	m_string(t_buttonText),
 	m_font(t_font),
 	m_game(&t_game),
 	m_function(t_function),
 	m_depthLevel(t_depthLevel)
 {
-	m_string = t_buttonText;
 	m_body.setSize(t_size);
 	m_body.setPosition(t_pos);
 	m_body.setFillColor(sf::Color::Red);
 	m_text.setFont(t_font);
-	m_text.setString(m_string);
+	m_text.setString(t_buttonText);
 	m_text.setCharacterSize(60);
 	m_text.setFillColor(sf::Color::Black);
 }

@@ -69,7 +69,6 @@ private:
 	void onButtonPress();
 
 	std::function<void(Game&, int)> m_function; // On game over function.
-	std::string m_string;
 	sf::RectangleShape m_body;
 	sf::Text m_text;
 	sf::Font m_font;
