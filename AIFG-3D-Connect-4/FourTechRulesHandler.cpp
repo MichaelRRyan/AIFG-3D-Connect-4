@@ -20,10 +20,18 @@ void FourTechRulesHandler::update()
 {
 	// Gets the position either the player or AI wants.
 	Move move;
-	while (true) // Loops until it finds a position that that player/AI can place.
+
+	// Loops until it finds a position that that player/AI can place, or the
+	//		window closes.
+	while (true) 
 	{ 
 		move = m_turnHandler->getMove();
-		if (move.position.x != -1 && PieceType::None == m_board.getPiece(move.position)){ break; }
+		if (move.position.x != -1 
+			&& PieceType::None == m_board.getPiece(move.position))
+			break;
+
+		// Handle the case of the input closing the window.
+		if (!Window::getWindow().isOpen()) return;
 	}
 	Coordinate pos = move.position;
 	// Get the piece type and place it.

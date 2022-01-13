@@ -6,7 +6,7 @@ Grid::Grid(int t_gridIndex)
 	m_gridIndex = t_gridIndex;
 
 	// Pre-calcuation for positioning of grid and pieces within the grid.
-	m_topLeftX = (Window::getWindowWidth() / 2) - m_PIECE_SIZE * 2;
+	m_topLeftX = (Window::getWindow().getView().getSize().x / 2) - m_PIECE_SIZE * 2;
 	m_topLeftY = m_Y_OFFSET + (m_Y_SPACING_Multiplier * m_gridIndex) + m_PIECE_SIZE * m_gridIndex * GameBoard::SIZE;
 
 	for (Coordinate::Type col = 0u; col < GameBoard::SIZE; col++)

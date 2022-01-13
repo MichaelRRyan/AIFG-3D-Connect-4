@@ -1,11 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-/// <summary>
-/// @author Michael R Ryan & Mantas Zalnierius
-/// @date 26/11/2021
-/// </summary>
-
 #include <SFML/Graphics.hpp>
 #include "GameBoard.h"
 #include "ConsoleGameBoardRenderer.h"
@@ -20,6 +15,8 @@
 /// <summary>
 /// Handles initialisation, the game loop, and frame rate. This class contains 
 ///		all others.
+/// @author Michael R Ryan & Mantas Zalnierius
+/// @date 26/11/2021
 /// </summary>
 class Game
 {
