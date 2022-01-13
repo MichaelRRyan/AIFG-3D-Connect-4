@@ -1,5 +1,5 @@
-#ifndef SFML_RENDERER_H
-#define SFML_RENDERER_H
+#ifndef SFML_GAME_BOARD_RENDERER_H
+#define SFML_GAME_BOARD_RENDERER_H
 
 #include "Renderer.h"
 #include "Grid.h"
@@ -9,18 +9,18 @@
 /// <summary>
 /// This is a SFML renderer, that will render game objects using SFML objects.
 /// </summary>
-class SfmlRenderer : public Renderer
+class SfmlGameBoardRenderer : public Renderer
 {
 public:
 	/// <summary>
 	/// Constructor for the SFML renderer.
 	/// </summary>
-	SfmlRenderer(std::vector<Grid>& t_grid);
+	SfmlGameBoardRenderer(std::vector<Grid>& t_grid);
 
 	/// <summary>
 	/// Default Destructor for the SFML renderer.
 	/// </summary>
-	~SfmlRenderer();
+	~SfmlGameBoardRenderer();
 
 	/// <summary>
 	/// Overriden Render function that will render using the SFML render window.

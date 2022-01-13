@@ -11,6 +11,8 @@
 #include "FourTechEvaluator.h"
 #include "TurnHandler.h"
 
+class Game;
+
 /// <summary>
 /// Runs the 4Tech game and handles the rules. 
 /// <para>Calls a turn handler to get input from the relevant player and
@@ -23,12 +25,12 @@ class FourTechRulesHandler
 public:
 
 	// Declares a type alias to the OnGameOverFunction type.
-	using OnGameOverFunction = std::function<void(PieceType)>;
+	using OnGameOverFunction = std::function<void(Game&, PieceType)>;
 
 	/// <summary>
 	/// Initialises the handler.
 	/// </summary>
-	FourTechRulesHandler(GameBoard & t_board);
+	FourTechRulesHandler(Game& t_game, GameBoard & t_board);
 
 	/// <summary>
 	/// Destrutor that cleans all heap allocated memory.
@@ -56,7 +58,7 @@ public:
 	void printMoves() const;
 		
 private: 
-
+	Game& m_game;
 	/// The total number of positions a piece can be placed in on the board.
 	size_t const m_TOTAL_BOARD_TILES;
 
@@ -78,5 +80,5 @@ private:
 	// TEMPORARY.
 	std::vector<Coordinate> m_moveHistory;
 };
-
+#include "Game.h"
 #endif // !FOUR_TECH_RULES_HANDLER_H

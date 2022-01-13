@@ -51,7 +51,7 @@
     <ClCompile Include="Minimax.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SfmlRenderer.cpp">
+    <ClCompile Include="SfmlGameBoardRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Grid.cpp">
@@ -61,6 +61,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SfmlInput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SfmlUIRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GamePlayScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -107,7 +125,7 @@
     <ClInclude Include="Minimax.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SfmlRenderer.h">
+    <ClInclude Include="SfmlGameBoardRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Grid.h">
@@ -117,6 +135,30 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SfmlInput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SfmlUIRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GamePlayScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

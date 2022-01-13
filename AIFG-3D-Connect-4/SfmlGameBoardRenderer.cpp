@@ -1,7 +1,7 @@
-#include "SfmlRenderer.h"
+#include "SfmlGameBoardRenderer.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-SfmlRenderer::SfmlRenderer(std::vector<Grid>& t_grid) :
+SfmlGameBoardRenderer::SfmlGameBoardRenderer(std::vector<Grid>& t_grid) :
 	m_gameBoard(nullptr),
 	m_grids(t_grid)
 {
@@ -13,12 +13,12 @@ SfmlRenderer::SfmlRenderer(std::vector<Grid>& t_grid) :
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-SfmlRenderer::~SfmlRenderer()
+SfmlGameBoardRenderer::~SfmlGameBoardRenderer()
 {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void SfmlRenderer::render()
+void SfmlGameBoardRenderer::render()
 {
 	Window::getWindow().clear(sf::Color::Black);
 	for (auto grid : m_grids)
@@ -29,7 +29,7 @@ void SfmlRenderer::render()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void SfmlRenderer::setGameBoard(GameBoard* t_gameBoard)
+void SfmlGameBoardRenderer::setGameBoard(GameBoard* t_gameBoard)
 {
 	m_gameBoard = t_gameBoard;
 	// Make every board be aware of the game board.
