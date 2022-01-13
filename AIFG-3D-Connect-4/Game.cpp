@@ -82,6 +82,7 @@ void Game::render()
 ///////////////////////////////////////////////////////////////////////////////
 void Game::exit()
 {
+	m_exitGame = true;
 	Window::getWindow().close();
 }
 
@@ -99,6 +100,8 @@ void Game::onGameOver(PieceType t_winner)
 
 	std::cout << std::endl;
 	//t_rulesHandler.printMoves();
+
+	system("pause");
 
 	m_exitGame = true;
 }
