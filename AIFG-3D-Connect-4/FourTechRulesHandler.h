@@ -58,9 +58,8 @@ public:
 	void printMoves() const;
 		
 private: 
+
 	Game& m_game;
-	/// The total number of positions a piece can be placed in on the board.
-	size_t const m_TOTAL_BOARD_TILES;
 
 	/// <summary>
 	/// The game board object to place the pieces on. 
@@ -70,9 +69,6 @@ private:
 
 	/// The function to call with the results once a game over has been found.
 	OnGameOverFunction m_onGameOverFunction;
-
-	/// The total number of pieces placed by this rules handler.
-	size_t m_piecesPlaced;
 
 	// This repersents a turn handler, which handles turns and handles the change of turns.
 	TurnHandler* m_turnHandler;
