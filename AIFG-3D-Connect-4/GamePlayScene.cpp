@@ -1,7 +1,7 @@
 #include "GamePlayScene.h"
 
 GamePlayScene::GamePlayScene(Game& t_game, std::function<void(Game&, PieceType)> t_function) :
-	Scene(false),
+	Scene(GameState::None),
 	m_rulesHandler(t_game, m_gameBoard)
 {
 	m_renderer = new SfmlGameBoardRenderer(m_grids);
@@ -23,16 +23,6 @@ void GamePlayScene::update(float t_deltaTime)
 	m_rulesHandler.printMoves();
 	std::cout << std::endl;
 	m_rulesHandler.update();
-}
-
-const bool& GamePlayScene::isEnded() const
-{
-	return m_isEnded;
-}
-
-const GameState& GamePlayScene::getNewGameState() const
-{
-	return m_nextState;
 }
 
 void GamePlayScene::render()

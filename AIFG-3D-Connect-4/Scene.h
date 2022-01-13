@@ -10,33 +10,34 @@
 class Scene
 {
 public:
+
 	/// <summary>
-	/// Constructs base class with a boolean that will let the Scene know if has ended.
+	/// Constructs the base class with a Game State of the next scene.
 	/// </summary>
-	/// <param name="t_isEnded">A boolean to tell the Scene if it has ended.</param>
-	Scene(bool t_isEnded);
+	/// <param name="t_nextGameState">The next scene's Game State.</param>
+	Scene(GameState t_nextGameState);
 
 	/// <summary>
 	/// Default destructor for the Scene. 
 	/// </summary>
-	virtual ~Scene() = default;
-
-	/// <summary>
-	/// Updates a Scene.
-	/// </summary>
-	virtual void update(float t_deltaTime) = 0;
+	virtual ~Scene() { }
 
 	/// <summary>
 	/// Gets a boolean to check if the Scene has ended.
 	/// </summary>
 	/// <returns>Boolean to check if a Scene has ended.</returns>
-	virtual const bool& isEnded() const = 0;
+	virtual const bool & isEnded() const;
 
 	/// <summary>
 	/// Gets the next Game State after a Scene.
 	/// </summary>
 	/// <returns></returns>
-	virtual const GameState& getNewGameState() const = 0;
+	virtual const GameState & getNewGameState() const;
+
+	/// <summary>
+	/// Updates a Scene.
+	/// </summary>
+	virtual void update(float t_deltaTime) = 0;
 
 	/// <summary>
 	/// Renders a Scene.
@@ -48,7 +49,11 @@ public:
 	/// </summary>
 	/// <param name="t_event">New event.</param>
 	virtual void processEvent(sf::Event t_event) = 0;
+
 protected:
+
 	bool m_isEnded;
+	GameState m_nextGameState;
+
 };
 #endif

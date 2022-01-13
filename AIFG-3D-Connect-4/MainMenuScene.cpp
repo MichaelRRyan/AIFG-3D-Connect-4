@@ -1,53 +1,66 @@
 #include "MainMenuScene.h"
 
-MainMenuScene::MainMenuScene(Game& t_game, std::function<void(Game&, int)> t_function, sf::Font t_font) :
-	Scene(false),
+///////////////////////////////////////////////////////////////////////////////
+MainMenuScene::MainMenuScene(Game& t_game, std::function<void(Game&, int)> t_setDifficultyFunction, sf::Font t_font) :
+	Scene(GameState::PlayerSelectionScene),
 	m_font(t_font),
 	m_game(t_game)
 {
-	m_widgets.push_back(new Button(m_game, sf::Vector2f(120.0f, 120.0f), t_function, sf::Vector2f(680.0f, 275.0f), "EASY", m_font, 2));
-	m_widgets.push_back(new Button(m_game, sf::Vector2f(120.0f, 120.0f), t_function, sf::Vector2f(680.0f, 475.0f), "MEDIUM", m_font, 3));
-	m_widgets.push_back(new Button(m_game, sf::Vector2f(120.0f, 120.0f), t_function, sf::Vector2f(680.0f, 675.0f), "HARD", m_font, 4));
-
-	for (auto& widget : m_widgets)
-	{
-		widget->centerText();
-	}
-
-	m_renderer = new SfmlUIRenderer(t_game, t_function, t_font, m_widgets);
+	setupWidgets();
+	m_renderer = new SfmlUIRenderer(t_font, m_widgets);
 }
 
+///////////////////////////////////////////////////////////////////////////////
 MainMenuScene::~MainMenuScene()
 {
 }
 
+///////////////////////////////////////////////////////////////////////////////
 void MainMenuScene::update(float t_deltaTime)
 {
 	for (auto& widget : m_widgets)
-	{
 		widget->update(t_deltaTime);
-	}
 }
 
-const bool& MainMenuScene::isEnded() const
-{
-	return m_isEnded;
-}
-
-const GameState& MainMenuScene::getNewGameState() const
-{
-	return m_nextState;
-}
-
+///////////////////////////////////////////////////////////////////////////////
 void MainMenuScene::render()
 {
 	m_renderer->render();
 }
 
+///////////////////////////////////////////////////////////////////////////////
 void MainMenuScene::processEvent(sf::Event t_event)
 {
 	for (auto& widget : m_widgets)
-	{
 		widget->processEvents(t_event);
-	}
 }
+
+///////////////////////////////////////////////////////////////////////////////
+void MainMenuScene::setupWidgets()
+{
+	m_widgets.push_back(new Button(sf::Vector2f(420.0f, 120.0f),
+		sf::Vector2f(600.0f, 275.0f), "EASY", m_font,
+		[&](Button& t_self) {
+			Minimax::setMaxDepth(2);
+			m_isEnded = true;
+		}));
+
+	m_widgets.push_back(new Button(sf::Vector2f(420.0f, 120.0f),
+		sf::Vector2f(600.0f, 475.0f), "MEDIUM", m_font,
+		[&](Button& t_self) {
+			Minimax::setMaxDepth(3);
+			m_isEnded = true;
+		}));
+
+	m_widgets.push_back(new Button(sf::Vector2f(420.0f, 120.0f),
+		sf::Vector2f(600.0f, 675.0f), "HARD", m_font,
+		[&](Button& t_self) {
+			Minimax::setMaxDepth(4);
+			m_isEnded = true;
+		}));
+
+	for (auto& widget : m_widgets)
+		widget->centerText();
+}
+
+///////////////////////////////////////////////////////////////////////////////

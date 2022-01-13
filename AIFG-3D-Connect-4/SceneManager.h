@@ -8,6 +8,7 @@
 
 class GamePlayScene;
 class MainMenuScene;
+class PlayerSelectionScene;
 class Game;
 
 /// <summary>
@@ -70,5 +71,6 @@ private:
 };
 #include "MainMenuScene.h"
 #include "GamePlayScene.h"
+#include "PlayerSelectionScene.h"
 #include "Game.h"
 #endif

@@ -8,6 +8,7 @@ enum class GameState
 {
 	None,
 	MainMenuScene,
+	PlayerSelectionScene,
 	GameScene
 };
 

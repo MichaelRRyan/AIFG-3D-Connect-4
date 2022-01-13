@@ -32,6 +32,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuScene.cpp" />
     <ClCompile Include="Minimax.cpp" />
+    <ClCompile Include="PlayerSelectionScene.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SfmlInput.cpp" />
@@ -58,6 +59,7 @@
     <ClInclude Include="Minimax.h" />
     <ClInclude Include="Move.h" />
     <ClInclude Include="PieceType.h" />
+    <ClInclude Include="PlayerSelectionScene.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
