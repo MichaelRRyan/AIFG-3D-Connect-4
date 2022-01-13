@@ -42,7 +42,7 @@ void GamePlayScene::setPlayerTypes(PlayerType t_p1, PlayerType t_p2)
 		m_turnHandler.setPlayer1(new FourTechAI(m_gameBoard, PieceType::Red));
 
 	// Sets the second player input.
-	if (t_p1 == PlayerType::Human)
+	if (t_p2 == PlayerType::Human)
 		m_turnHandler.setPlayer2(new SfmlInput(m_gameBoard, m_grids));
 	else
 		m_turnHandler.setPlayer2(new FourTechAI(m_gameBoard, PieceType::Yellow));
