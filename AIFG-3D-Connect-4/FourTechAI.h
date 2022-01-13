@@ -20,7 +20,8 @@ public:
 	/// Constructs the object and assigns the stored game board reference.
 	/// </summary>
 	/// <param name="t_board">The game board to play on.</param>
-	FourTechAI(GameBoard & t_board);
+	/// <param name="t_pieceType">The AI's piece type.</param>
+	FourTechAI(GameBoard & t_board, PieceType t_pieceType);
 
 	/// <summary>
 	/// Destructor for the AI.
@@ -34,8 +35,11 @@ public:
 	Coordinate getCoordinate() override;
 
 private:
+
 	/// The game board to play on.
 	GameBoard & m_board;
+	PieceType m_pieceType;
+
 };
 
 #endif // !FOUR_TECH_AI_H

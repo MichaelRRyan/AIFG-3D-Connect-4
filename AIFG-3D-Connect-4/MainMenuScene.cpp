@@ -1,7 +1,7 @@
 #include "MainMenuScene.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-MainMenuScene::MainMenuScene(Game& t_game, std::function<void(Game&, int)> t_setDifficultyFunction, sf::Font t_font) :
+MainMenuScene::MainMenuScene(Game& t_game, sf::Font t_font) :
 	Scene(GameState::PlayerSelectionScene),
 	m_font(t_font),
 	m_game(t_game)
@@ -13,6 +13,8 @@ MainMenuScene::MainMenuScene(Game& t_game, std::function<void(Game&, int)> t_set
 ///////////////////////////////////////////////////////////////////////////////
 MainMenuScene::~MainMenuScene()
 {
+	for (Widget * widget : m_widgets)
+		delete widget;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

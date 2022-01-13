@@ -17,9 +17,8 @@ public:
 	/// Constructor for the MainMenuScene.
 	/// </summary>
 	/// <param name="t_game">The game.</param>
-	/// <param name="t_function">Function pointer to the button click function.</param>
 	/// <param name="m_font">The font.</param>
-	MainMenuScene(Game& t_game, std::function<void(Game&, int)> t_function, sf::Font t_font);
+	MainMenuScene(Game& t_game, sf::Font t_font);
 
 	/// <summary>
 	/// Default destructor for the MainMenuScene.

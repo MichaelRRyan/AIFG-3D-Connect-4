@@ -7,10 +7,9 @@ GamePlayScene::GamePlayScene(Game& t_game, std::function<void(Game&, PieceType)>
 	m_renderer = new SfmlGameBoardRenderer(m_grids);
 	m_renderer->setGameBoard(&m_gameBoard);
 	m_rulesHandler.setOnGameOverFunction(t_function);
-	TurnHandler* turnHandler = new TurnHandler();
-	turnHandler->setPlayer1(new SfmlInput(m_gameBoard, m_grids));
-	turnHandler->setPlayer2(new FourTechAI(m_gameBoard));
-	m_rulesHandler.setTurnHandler(turnHandler);
+	m_turnHandler.setPlayer1(new SfmlInput(m_gameBoard, m_grids));
+	m_turnHandler.setPlayer2(new FourTechAI(m_gameBoard, PieceType::Yellow));
+	m_rulesHandler.setTurnHandler(&m_turnHandler);
 }
 
 GamePlayScene::~GamePlayScene()
@@ -32,4 +31,19 @@ void GamePlayScene::render()
 
 void GamePlayScene::processEvent(sf::Event t_event)
 {
+}
+
+void GamePlayScene::setPlayerTypes(PlayerType t_p1, PlayerType t_p2)
+{
+	// Sets the first player input.
+	if (t_p1 == PlayerType::Human)
+		m_turnHandler.setPlayer1(new SfmlInput(m_gameBoard, m_grids));
+	else
+		m_turnHandler.setPlayer1(new FourTechAI(m_gameBoard, PieceType::Red));
+
+	// Sets the second player input.
+	if (t_p1 == PlayerType::Human)
+		m_turnHandler.setPlayer2(new SfmlInput(m_gameBoard, m_grids));
+	else
+		m_turnHandler.setPlayer2(new FourTechAI(m_gameBoard, PieceType::Yellow));
 }

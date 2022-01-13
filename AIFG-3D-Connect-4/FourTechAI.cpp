@@ -1,14 +1,15 @@
 #include "FourTechAI.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-FourTechAI::FourTechAI(GameBoard & t_board) :
-	m_board{ t_board }
+FourTechAI::FourTechAI(GameBoard & t_board, PieceType t_pieceType) :
+	m_board{ t_board },
+	m_pieceType{ t_pieceType }
 {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 Coordinate FourTechAI::getCoordinate()
 {
-	return Minimax::getCoordinate(m_board, PieceType::Yellow);
+	return Minimax::getCoordinate(m_board, m_pieceType);
 }
 ///////////////////////////////////////////////////////////////////////////////

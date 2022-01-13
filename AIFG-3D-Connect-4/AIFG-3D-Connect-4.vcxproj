@@ -29,6 +29,7 @@
     <ClCompile Include="GameBoard.cpp" />
     <ClCompile Include="GamePlayScene.cpp" />
     <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="Label.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuScene.cpp" />
     <ClCompile Include="Minimax.cpp" />
@@ -55,11 +56,13 @@
     <ClInclude Include="GameStates.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Label.h" />
     <ClInclude Include="MainMenuScene.h" />
     <ClInclude Include="Minimax.h" />
     <ClInclude Include="Move.h" />
     <ClInclude Include="PieceType.h" />
     <ClInclude Include="PlayerSelectionScene.h" />
+    <ClInclude Include="PlayerType.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />

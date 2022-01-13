@@ -7,6 +7,7 @@
 #include "FourTechRulesHandler.h"
 #include "SfmlInput.h"
 #include "FourTechAI.h"
+#include "PlayerType.h"
 
 class Game;
 
@@ -45,11 +46,19 @@ public:
 	/// <param name="t_event">New event.</param>
 	void processEvent(sf::Event t_event) override;
 
+	/// <summary>
+	/// Sets the input types of the players to either Human or AI.
+	/// </summary>
+	/// <param name="t_p1">Player 1 type.</param>
+	/// <param name="t_p2">Player 2 type.</param>
+	void setPlayerTypes(PlayerType t_p1, PlayerType t_p2);
+
 private:
 
 	std::vector<Grid> m_grids;
 	Renderer* m_renderer;
 	GameBoard m_gameBoard;
+	TurnHandler m_turnHandler;
 	FourTechRulesHandler m_rulesHandler;
 };
 #include "Game.h"

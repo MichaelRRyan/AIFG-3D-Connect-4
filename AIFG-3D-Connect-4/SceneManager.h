@@ -26,10 +26,9 @@ public:
 	/// Overloaded constructor for the SceneManager.
 	/// </summary>
 	/// <param name="t_game">The game.</param>
-	/// <param name="t_ButtonClickfunction">Function pointer to a button click event function.</param>
 	/// <param name="t_gameOverfunction">Function pointer to a game over function.</param>
 	/// <param name="m_font">The font.</param>
-	SceneManager(Game& t_game, std::function<void(Game&, int)> t_buttonClickfunction, std::function<void(Game&, PieceType)> t_gameOverfunction, sf::Font t_font);
+	SceneManager(Game& t_game, std::function<void(Game&, PieceType)> t_gameOverfunction, sf::Font t_font);
 
 	/// <summary>
 	/// Default destructor for the SceneManager.
@@ -67,6 +66,9 @@ private:
 	Scene* m_currentScene; // The current Scene.
 
 	std::map<GameState, Scene*> m_sceneHaspMap; // map that has all the scenes with GameStates as keys.
+
+	// Keeps a pointer for callback reasons.
+	GamePlayScene * m_gamePlayScene;
 	
 };
 #include "MainMenuScene.h"
