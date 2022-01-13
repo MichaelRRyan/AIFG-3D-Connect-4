@@ -17,6 +17,10 @@
 #include "FourTechAI.h"
 #include "SceneManager.h"
 
+/// <summary>
+/// Handles initialisation, the game loop, and frame rate. This class contains 
+///		all others.
+/// </summary>
 class Game
 {
 public:
