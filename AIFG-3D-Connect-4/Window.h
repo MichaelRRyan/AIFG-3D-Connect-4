@@ -27,9 +27,10 @@ public:
 	/// </summary>
 	/// <returns>Returns the SFML render window</returns>
 	inline static sf::RenderWindow& getWindow() { return m_window; }
+
 private:
-	static const unsigned int m_WINDOW_WIDTH = 1600;
-	static const unsigned int m_WINDOW_HEIGHT = 1200;
+	static const unsigned int m_WINDOW_WIDTH = 1000;
+	static const unsigned int m_WINDOW_HEIGHT = 750;
 	static sf::RenderWindow m_window;
 };
 #endif

@@ -10,6 +10,8 @@
 Game::Game() :
 	m_exitGame{false}
 {
+	Window::getWindow().setView(sf::View({ 800.0f, 600.0f }, { 1600.0f, 1200.0f }));
+
 	if (!m_font.loadFromFile("ASSETS//FONTS//ariblk.ttf")) {};
 	m_sceneManager = new SceneManager(*this, &Game::onGameOver, m_font);
 }
@@ -53,10 +55,9 @@ void Game::processEvents()
 
 		else if (sf::Event::KeyPressed == newEvent.type) //user pressed a key
 			processKeys(newEvent);
-		if (sf::Event::MouseButtonPressed == newEvent.type || sf::Event::MouseMoved == newEvent.type)
-		{
+
+		else if (sf::Event::MouseButtonPressed == newEvent.type || sf::Event::MouseMoved == newEvent.type)
 			m_sceneManager->processEvent(newEvent);
-		}
 	}
 }
 
