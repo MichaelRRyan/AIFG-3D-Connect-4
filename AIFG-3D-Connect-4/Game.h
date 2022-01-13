@@ -10,6 +10,12 @@
 #include "GameBoard.h"
 #include "ConsoleGameBoardRenderer.h"
 #include "FourTechRulesHandler.h"
+#include "SfmlRenderer.h"
+#include "Window.h"
+#include "Grid.h"
+#include "SfmlInput.h"
+#include "ConsoleInput.h"
+#include "FourTechAI.h"
 
 class Game
 {
@@ -75,15 +81,15 @@ private:
 	/// <param name="t_winner">the winning piece colour.</param>
 	void onGameOver(PieceType t_winner);
 
-	const unsigned m_WINDOW_WIDTH;
-	const unsigned m_WINDOW_HEIGHT;
-
 	//sf::RenderWindow m_window; // main SFML window
 	Renderer * m_renderer;
 	bool m_exitGame; // control exiting game
 
 	GameBoard m_gameBoard;
 	FourTechRulesHandler m_rulesHandler;
+
+	// Repersents the grids within the game.
+	std::vector<Grid> m_grids;
 
 };
 

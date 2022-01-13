@@ -1,6 +1,8 @@
 #ifndef INPUT_H
 #define INPUT_H
+
 #include "Coordinate.h"
+
 /// <summary>
 /// This repersents an abstract input that will be used for AI and player input.
 /// </summary>

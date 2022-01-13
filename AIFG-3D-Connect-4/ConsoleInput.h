@@ -1,5 +1,6 @@
 #ifndef CONSOLE_INPUT_H
 #define CONSOLE_INPUT_H
+
 #include "Input.h"
 #include <iostream>
 #include "GameBoard.h"

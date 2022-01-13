@@ -26,9 +26,13 @@
     <ClCompile Include="FourTechRulesHandler.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameBoard.cpp" />
+    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Minimax.cpp" />
+    <ClCompile Include="SfmlInput.cpp" />
+    <ClCompile Include="SfmlRenderer.cpp" />
     <ClCompile Include="TurnHandler.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleGameBoardRenderer.h" />
@@ -39,12 +43,16 @@
     <ClInclude Include="FourTechRulesHandler.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameBoard.h" />
+    <ClInclude Include="Grid.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Minimax.h" />
     <ClInclude Include="Move.h" />
     <ClInclude Include="PieceType.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="SfmlInput.h" />
+    <ClInclude Include="SfmlRenderer.h" />
     <ClInclude Include="TurnHandler.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="ASSETS\IMAGES\SFML-LOGO.png">

@@ -31,6 +31,11 @@ public:
 	FourTechRulesHandler(GameBoard & t_board);
 
 	/// <summary>
+	/// Destrutor that cleans all heap allocated memory.
+	/// </summary>
+	~FourTechRulesHandler();
+
+	/// <summary>
 	/// Checks for input from the relevant player and checks for game over.
 	/// </summary>
 	void update();
@@ -45,7 +50,7 @@ public:
 	/// This will set the turn Handler.
 	/// </summary>
 	/// <param name="t_turnHandler">Turn handler that handles who's turn it is and the swithces of turns</param>
-	void setTurnHandler(TurnHandler t_turnHandler);
+	void setTurnHandler(TurnHandler* t_turnHandler);
 
 	// TEMPORARY.
 	void printMoves() const;
@@ -68,7 +73,7 @@ private:
 	size_t m_piecesPlaced;
 
 	// This repersents a turn handler, which handles turns and handles the change of turns.
-	TurnHandler m_turnHandler;
+	TurnHandler* m_turnHandler;
 
 	// TEMPORARY.
 	std::vector<Coordinate> m_moveHistory;
