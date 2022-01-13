@@ -3,6 +3,10 @@
 
 #include "Widget.h"
 
+/// <summary>
+/// A wrapper class for the SFML text to allow it to be added to treated as a
+///		widget.
+/// </summary>
 class Label : public Widget
 {
 public:
