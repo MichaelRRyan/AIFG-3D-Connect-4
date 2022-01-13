@@ -107,6 +107,8 @@ void Game::onGameOver(PieceType t_winner)
 	std::cout << std::endl;
 	//t_rulesHandler.printMoves();
 
+	m_sceneManager->render();
+
 	system("pause");
 
 	m_exitGame = true;

@@ -10,7 +10,8 @@ Due to time limitations:
 The team agreed that both members evenly split the work 50/50.
 
 ## Useful Links
-[Hosted Docs](http://www.michaelrryan.com/AIFG-3D-Connect-4/)
-[UML Class Diagram](https://drive.google.com/file/d/11pNOC9oilTlsbHKAdlmz-jHY0zf_UDEW/view?usp=sharing)
+Hosted Docs: http://www.michaelrryan.com/AIFG-3D-Connect-4/
+UML Class Diagram: https://drive.google.com/file/d/11pNOC9oilTlsbHKAdlmz-jHY0zf_UDEW/view?usp=sharing
 
-[Git Repo](https://github.com/MichaelRRyan/AIFG-3D-Connect-4)
+Git Repo: https://github.com/MichaelRRyan/AIFG-3D-Connect-4
+
