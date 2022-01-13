@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GAME_PLAY_SCENE_H
+#define GAME_PLAY_SCENE_H
 
 #include "Scene.h"
 #include "Grid.h"
@@ -9,15 +10,50 @@
 
 class Game;
 
+/// <summary>
+/// repersents the game play scene in the game.
+/// </summary>
 class GamePlayScene : public Scene
 {
 public:
+	/// <summary>
+	/// Constructor for the GamePlayScene.
+	/// </summary>
+	/// <param name="t_game">The game</param>
+	/// <param name="t_function">Function pointer to the on game over function.</param>
 	GamePlayScene(Game& t_game, std::function<void(Game&, PieceType)> t_function);
+
+	/// <summary>
+	/// Default destructor for the GamePlayScene.
+	/// </summary>
 	virtual ~GamePlayScene();
-	void update(float t_deltaTime) override; // Updates a scene.
-	const bool& isEnded() const override; // return if the scene has ended.
-	const GameState& getNewGameState() const override; // Gets the next scene after the current scene.
-	void render() override; // Renders a scene.
+
+	/// <summary>
+	/// Updates the GamePlayScene.
+	/// </summary>
+	void update(float t_deltaTime) override;
+
+	/// <summary>
+	/// Gets if the GamePlayScene has ended.
+	/// </summary>
+	/// <returns>A boolean to see if the GamePlayScene has ended.</returns>
+	const bool& isEnded() const override;
+
+	/// <summary>
+	/// Gets the new game state after the GamePlayScene.
+	/// </summary>
+	/// <returns>A new game state.</returns>
+	const GameState& getNewGameState() const override;
+
+	/// <summary>
+	/// Renders the GamePlayScene.
+	/// </summary>
+	void render() override;
+
+	/// <summary>
+	/// Handles process Events for the GamePlayScene.
+	/// </summary>
+	/// <param name="t_event">New event.</param>
 	void processEvent(sf::Event t_event) override;
 private:
 	std::vector<Grid> m_grids;
@@ -27,3 +63,4 @@ private:
 	GameState m_nextState = GameState::None;
 };
 #include "Game.h"
+#endif

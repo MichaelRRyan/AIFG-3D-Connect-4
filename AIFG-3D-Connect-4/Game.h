@@ -16,6 +16,7 @@
 #include "ConsoleInput.h"
 #include "FourTechAI.h"
 #include "SceneManager.h"
+
 class Game
 {
 public:

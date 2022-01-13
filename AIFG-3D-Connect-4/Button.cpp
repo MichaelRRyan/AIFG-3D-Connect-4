@@ -83,6 +83,7 @@ void Button::processEvents(sf::Event t_event)
 	}
 	else if (sf::Event::MouseMoved == t_event.type)
 	{
+		// On/Off focus effect when the mouse is over a button.
 		sf::Vector2f mousePos = Window::getWindow().mapPixelToCoords(sf::Mouse::getPosition(Window::getWindow()));
 		if (m_body.getGlobalBounds().contains(mousePos))
 		{

@@ -9,7 +9,14 @@
 class Renderer
 {
 public:
+	/// <summary>
+	/// Deafult Constructor for the Renderer.
+	/// </summary>
 	Renderer() = default;
+
+	/// <summary>
+	/// Default Destructor for the Renderer.
+	/// </summary>
 	~Renderer() = default;
 
 	/// <summary>
