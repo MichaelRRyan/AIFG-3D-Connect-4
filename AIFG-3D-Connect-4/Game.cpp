@@ -10,7 +10,9 @@
 Game::Game() :
 	m_exitGame{false}
 {
+#ifndef LARGER_WINDOW_SIZE
 	Window::getWindow().setView(sf::View({ 800.0f, 600.0f }, { 1600.0f, 1200.0f }));
+#endif
 
 	if (!m_font.loadFromFile("ASSETS//FONTS//ariblk.ttf")) {};
 	m_sceneManager = new SceneManager(*this, &Game::onGameOver, m_font);
@@ -71,6 +73,9 @@ void Game::processKeys(sf::Event t_event)
 ///////////////////////////////////////////////////////////////////////////////
 void Game::update(float t_delta)
 {
+	if (!Window::getWindow().isOpen())
+		exit();
+
 	m_sceneManager->update(t_delta);
 }
 
