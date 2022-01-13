@@ -2,9 +2,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 FourTechRulesHandler::FourTechRulesHandler(Game& t_game, GameBoard & t_board) :
-	m_TOTAL_BOARD_TILES{ 64u },
 	m_board{ t_board },
-	m_piecesPlaced{ 0u },
 	m_game(t_game)
 {
 }
@@ -33,7 +31,6 @@ void FourTechRulesHandler::update()
 	m_board.setPiece(pos, type);
 
 	// Increase the number of pieces placed and add the move to the history.
-	++m_piecesPlaced;
 	m_moveHistory.push_back(pos);
 	
 	// Checks if the move won the game.
@@ -41,7 +38,7 @@ void FourTechRulesHandler::update()
 		m_onGameOverFunction(m_game, type);
 
 	// Calls a draw if all tiles are filled with no win.
-	else if (m_piecesPlaced == m_TOTAL_BOARD_TILES)
+	else if (m_board.isFull())
 		m_onGameOverFunction(m_game, PieceType::None);
 
 	// Switches turn to either the player or the AI.

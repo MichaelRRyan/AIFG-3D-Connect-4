@@ -68,6 +68,13 @@ int Minimax::minimax(GameBoard & t_board, Move t_move,
 		// Performs the move we're checking.
 		t_board.setPiece(t_move.position, t_move.type);
 
+		// Returns a score of zero if this move results in a draw.
+		if (t_board.isFull())
+		{
+			t_board.setPiece(t_move.position, PieceType::None);
+			return 0;
+		}
+
 		// Calls the following lambda for each valid move.
 		forEachValidMove(t_board,
 			[&](Coordinate const& t_coord)

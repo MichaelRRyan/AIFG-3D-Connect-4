@@ -1,8 +1,7 @@
 #include "SfmlUIRenderer.h"
 
-SfmlUIRenderer::SfmlUIRenderer(Game& t_game, std::function<void(Game&, int)> t_function, sf::Font t_font, std::vector<Widget*>& t_widgets) : 
+SfmlUIRenderer::SfmlUIRenderer(sf::Font t_font, std::vector<Widget *> & t_widgets) :
 	m_font(t_font),
-	m_game(t_game),
 	m_widgets(t_widgets)
 {
 }

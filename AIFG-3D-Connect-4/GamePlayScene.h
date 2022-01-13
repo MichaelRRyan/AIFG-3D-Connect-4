@@ -7,6 +7,7 @@
 #include "FourTechRulesHandler.h"
 #include "SfmlInput.h"
 #include "FourTechAI.h"
+#include "PlayerType.h"
 
 class Game;
 
@@ -16,6 +17,7 @@ class Game;
 class GamePlayScene : public Scene
 {
 public:
+
 	/// <summary>
 	/// Constructor for the GamePlayScene.
 	/// </summary>
@@ -34,18 +36,6 @@ public:
 	void update(float t_deltaTime) override;
 
 	/// <summary>
-	/// Gets if the GamePlayScene has ended.
-	/// </summary>
-	/// <returns>A boolean to see if the GamePlayScene has ended.</returns>
-	const bool& isEnded() const override;
-
-	/// <summary>
-	/// Gets the new game state after the GamePlayScene.
-	/// </summary>
-	/// <returns>A new game state.</returns>
-	const GameState& getNewGameState() const override;
-
-	/// <summary>
 	/// Renders the GamePlayScene.
 	/// </summary>
 	void render() override;
@@ -55,12 +45,21 @@ public:
 	/// </summary>
 	/// <param name="t_event">New event.</param>
 	void processEvent(sf::Event t_event) override;
+
+	/// <summary>
+	/// Sets the input types of the players to either Human or AI.
+	/// </summary>
+	/// <param name="t_p1">Player 1 type.</param>
+	/// <param name="t_p2">Player 2 type.</param>
+	void setPlayerTypes(PlayerType t_p1, PlayerType t_p2);
+
 private:
+
 	std::vector<Grid> m_grids;
 	Renderer* m_renderer;
 	GameBoard m_gameBoard;
+	TurnHandler m_turnHandler;
 	FourTechRulesHandler m_rulesHandler;
-	GameState m_nextState = GameState::None;
 };
 #include "Game.h"
 #endif

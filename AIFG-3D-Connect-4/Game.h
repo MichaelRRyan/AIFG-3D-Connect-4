@@ -85,14 +85,11 @@ private:
 	/// <param name="t_winner">the winning piece colour.</param>
 	void onGameOver(PieceType t_winner);
 
-	void setDifficulty(int t_difficulty);
-
-
 	bool m_exitGame; // control exiting game
 
 	sf::Font m_font;
 
-	SceneManager m_sceneManager;
+	SceneManager * m_sceneManager;
 };
 #endif // !GAME_H
 

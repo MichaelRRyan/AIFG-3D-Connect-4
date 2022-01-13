@@ -15,12 +15,18 @@ TurnHandler::~TurnHandler()
 ///////////////////////////////////////////////////////////////////////////////
 void TurnHandler::setPlayer1(Input* t_player1)
 {
+	// Cleans up the previous input.
+	if (m_player1) delete m_player1;
+
 	m_player1 = t_player1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void TurnHandler::setPlayer2(Input* t_player2)
 {
+	// Cleans up the previous input.
+	if (m_player2) delete m_player2;
+
 	m_player2 = t_player2;
 }
 

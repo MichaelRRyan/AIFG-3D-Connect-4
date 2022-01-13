@@ -39,6 +39,12 @@ public:
 	/// <returns>The PieceType of the piece at the given coordinates.</returns>
 	PieceType const & getPiece(Coordinate const& t_position) const;
 
+	/// <summary>
+	/// Returns whether or not the board is full of pieces.
+	/// </summary>
+	/// <returns>Whether or not the board is full of pieces.</returns>
+	bool isFull() const;
+
 public: // PUBLIC VARIABLES.
 	
 	/// The max value of each axis.
@@ -46,6 +52,12 @@ public: // PUBLIC VARIABLES.
 
 private: // PRIVATE VARIABLES.
 	
+	/// The total number of positions a piece can be placed in on the board.
+	size_t const m_TOTAL_TILES;
+
+	/// The total number of pieces placed by this rules handler.
+	size_t m_piecesPlaced;
+
 	// Holds all the game board data.
 	std::array<std::array<std::array<PieceType, SIZE>, SIZE>, SIZE> m_pieces;
 

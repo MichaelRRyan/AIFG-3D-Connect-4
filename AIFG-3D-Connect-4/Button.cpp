@@ -1,10 +1,8 @@
 #include "Button.h"
 
-Button::Button(Game& t_game, sf::Vector2f t_size, std::function<void(Game&, int)> t_function, sf::Vector2f t_pos, std::string t_buttonText, sf::Font& t_font, int t_depthLevel) :
-	m_font(t_font),
-	m_game(&t_game),
-	m_function(t_function),
-	m_depthLevel(t_depthLevel)
+///////////////////////////////////////////////////////////////////////////////
+Button::Button(sf::Vector2f t_size, sf::Vector2f t_pos, std::string t_buttonText, sf::Font& t_font, Callback t_function) :
+	m_callback(t_function)
 {
 	m_body.setSize(t_size);
 	m_body.setPosition(t_pos);
@@ -15,30 +13,31 @@ Button::Button(Game& t_game, sf::Vector2f t_size, std::function<void(Game&, int)
 	m_text.setFillColor(sf::Color::Black);
 }
 
+///////////////////////////////////////////////////////////////////////////////
 Button::~Button()
 {
 }
 
+///////////////////////////////////////////////////////////////////////////////
 void Button::onButtonPress()
 {
-	// HANDLES IF THE USER PRESS A BUTTON.
-	if (m_function != nullptr)
-	{
-		m_function(*m_game, m_depthLevel);
-	}
-	// HANDLES IF THE USER PRESS A BUTTON.
+	if (m_callback != nullptr)
+		m_callback(*this);
 }
 
+///////////////////////////////////////////////////////////////////////////////
 void Button::update(float t_deltaTime)
 {
 }
 
+///////////////////////////////////////////////////////////////////////////////
 void Button::draw(sf::RenderWindow& t_window) const
 {
 	t_window.draw(m_body);
 	t_window.draw(m_text);
 }
 
+///////////////////////////////////////////////////////////////////////////////
 void Button::setPosition(sf::Vector2f t_newPos)
 {
 	m_body.setPosition(t_newPos);
@@ -49,6 +48,19 @@ void Button::setPosition(sf::Vector2f t_newPos)
 	);
 }
 
+///////////////////////////////////////////////////////////////////////////////
+void Button::setCallback(Callback t_callback)
+{
+	m_callback = t_callback;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Button::setString(std::string const& t_string)
+{
+	m_text.setString(t_string);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void Button::centerText()
 {
 	// CENTERS THE TEXT TO THE BUTTON.
@@ -59,16 +71,16 @@ void Button::centerText()
 		textRect.top + textRect.height / 2.0f);
 
 	sf::FloatRect rectBounds = m_body.getGlobalBounds();
-	m_body.setScale((textBounds.width / rectBounds.width * 1.5), (textBounds.height / rectBounds.height * 1.75));
-	rectBounds = m_body.getGlobalBounds();
+	/*m_body.setScale((textBounds.width / rectBounds.width * 1.5f), (textBounds.height / rectBounds.height * 1.75f));
+	rectBounds = m_body.getGlobalBounds();*/
 
 	m_text.setPosition(
 		rectBounds.left + (rectBounds.width / 2),
 		rectBounds.top + (rectBounds.height / 2)
 	);
-	// CENTERS THE TEXT TO THE BUTTON.
 }
 
+///////////////////////////////////////////////////////////////////////////////
 void Button::processEvents(sf::Event t_event)
 {
 	if (sf::Event::MouseButtonPressed == t_event.type)
@@ -93,3 +105,5 @@ void Button::processEvents(sf::Event t_event)
 		}
 	}
 }
+
+///////////////////////////////////////////////////////////////////////////////

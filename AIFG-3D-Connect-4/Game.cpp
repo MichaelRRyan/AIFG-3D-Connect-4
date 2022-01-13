@@ -11,7 +11,7 @@ Game::Game() :
 	m_exitGame{false}
 {
 	if (!m_font.loadFromFile("ASSETS//FONTS//ariblk.ttf")) {};
-	m_sceneManager = SceneManager(*this, &Game::setDifficulty, &Game::onGameOver, m_font);
+	m_sceneManager = new SceneManager(*this, &Game::onGameOver, m_font);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -55,7 +55,7 @@ void Game::processEvents()
 			processKeys(newEvent);
 		if (sf::Event::MouseButtonPressed == newEvent.type || sf::Event::MouseMoved == newEvent.type)
 		{
-			m_sceneManager.processEvent(newEvent);
+			m_sceneManager->processEvent(newEvent);
 		}
 	}
 }
@@ -70,13 +70,13 @@ void Game::processKeys(sf::Event t_event)
 ///////////////////////////////////////////////////////////////////////////////
 void Game::update(float t_delta)
 {
-	m_sceneManager.update(t_delta);
+	m_sceneManager->update(t_delta);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Game::render()
 {
-	m_sceneManager.render();
+	m_sceneManager->render();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -101,12 +101,6 @@ void Game::onGameOver(PieceType t_winner)
 	//t_rulesHandler.printMoves();
 
 	m_exitGame = true;
-}
-
-void Game::setDifficulty(int t_difficulty)
-{
-	Minimax::setMaxDepth(t_difficulty);
-	m_sceneManager.setNewGameState(m_sceneManager.getCurrentScene()->getNewGameState());
 }
 
 ///////////////////////////////////////////////////////////////////////////////
