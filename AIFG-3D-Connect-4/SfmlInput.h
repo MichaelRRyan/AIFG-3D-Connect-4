@@ -6,6 +6,10 @@
 #include <vector>
 #include "Grid.h"
 
+/// <summary>
+/// Gets mouse clicks on the game board and translates the mouse position to 
+///		game board coordinates.
+/// </summary>
 class SfmlInput : public Input
 {
 public:

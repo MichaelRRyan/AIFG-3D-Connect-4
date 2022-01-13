@@ -4,6 +4,9 @@
 #include <iostream>
 #include "Renderer.h"
 
+/// <summary>
+/// Renders the game board and all its pieces to the console.
+/// </summary>
 class ConsoleGameBoardRenderer : public Renderer
 {
 public:
