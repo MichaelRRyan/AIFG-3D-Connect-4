@@ -18,9 +18,6 @@ GamePlayScene::~GamePlayScene()
 
 void GamePlayScene::update(float t_deltaTime)
 {
-	system("cls");
-	m_rulesHandler.printMoves();
-	std::cout << std::endl;
 	m_rulesHandler.update();
 }
 

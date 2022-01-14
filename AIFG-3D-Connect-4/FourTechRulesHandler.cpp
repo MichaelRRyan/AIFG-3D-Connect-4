@@ -5,6 +5,7 @@ FourTechRulesHandler::FourTechRulesHandler(Game& t_game, GameBoard & t_board) :
 	m_board{ t_board },
 	m_game(t_game)
 {
+	std::cout << "Move History:" << std::endl;
 }
 
 FourTechRulesHandler::~FourTechRulesHandler()
@@ -33,17 +34,17 @@ void FourTechRulesHandler::update()
 		// Handle the case of the input closing the window.
 		if (!Window::getWindow().isOpen()) return;
 	}
-	Coordinate pos = move.position;
-	// Get the piece type and place it.
-	PieceType type = move.type;
-	m_board.setPiece(pos, type);
 
-	// Increase the number of pieces placed and add the move to the history.
-	m_moveHistory.push_back(pos);
+	// Get the piece type and place it.
+	m_board.setPiece(move.position, move.type);
+
+	// Prints the move to the console.
+	std::cout << (PieceType::Red == move.type ? "X: " : "O: ")
+		<< move.position.x << " " << move.position.y << " " << move.position.z << std::endl;
 	
 	// Checks if the move won the game.
-	if (FourTechEvaluator::isMoveAWin(m_board, { pos, type }))
-		m_onGameOverFunction(m_game, type);
+	if (FourTechEvaluator::isMoveAWin(m_board, move))
+		m_onGameOverFunction(m_game, move.type);
 
 	// Calls a draw if all tiles are filled with no win.
 	else if (m_board.isFull())
@@ -63,19 +64,6 @@ void FourTechRulesHandler::setOnGameOverFunction(OnGameOverFunction t_function)
 void FourTechRulesHandler::setTurnHandler(TurnHandler* t_turnHandler)
 {
 	m_turnHandler = t_turnHandler;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void FourTechRulesHandler::printMoves() const
-{
-	std::cout << "History:" << std::endl;
-	bool redsTurn = true;
-	for (Coordinate const & move : m_moveHistory)
-	{
-		std::cout << (redsTurn ? "X: " : "O: ")
-			<< move.x << " " << move.y << " " << move.z << std::endl;
-		redsTurn = !redsTurn;
-	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
