@@ -6,6 +6,8 @@ Due to time limitations:
 - The result of a game (who won, or if there's a draw) are outputted exclusively through the console, along with a record of all previous moves (where X represents the red player and O represents the yellow player),
 - And the game must be restarted manually by re-running the exe.
 
+If you fancy a larger window size, uncomment line 33 in Window.h.
+
 ## Notes for Grading
 The team agreed that both members evenly split the work 50/50.
 
