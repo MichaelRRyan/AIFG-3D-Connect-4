@@ -38,8 +38,8 @@ Coordinate Minimax::getCoordinate(GameBoard & t_board,
 
 			// If the move has the same score as the best, 2% chance of 
 			//		taking the new one instead.
-			else if (v == alpha && rand() % 50 == 0)
-				bestCoord = t_coord;
+			/*else if (v == alpha && rand() % 50 == 0)
+				bestCoord = t_coord;*/
 
 			return false;
 		});

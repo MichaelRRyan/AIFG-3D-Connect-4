@@ -54,9 +54,6 @@ public:
 	/// <param name="t_turnHandler">Turn handler that handles who's turn it is and the swithces of turns</param>
 	void setTurnHandler(TurnHandler* t_turnHandler);
 
-	// TEMPORARY.
-	void printMoves() const;
-		
 private: 
 
 	Game& m_game;
@@ -73,8 +70,6 @@ private:
 	// This repersents a turn handler, which handles turns and handles the change of turns.
 	TurnHandler* m_turnHandler;
 
-	// TEMPORARY.
-	std::vector<Coordinate> m_moveHistory;
 };
 #include "Game.h"
 #endif // !FOUR_TECH_RULES_HANDLER_H

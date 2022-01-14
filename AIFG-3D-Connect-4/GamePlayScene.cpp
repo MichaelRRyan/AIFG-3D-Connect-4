@@ -18,9 +18,6 @@ GamePlayScene::~GamePlayScene()
 
 void GamePlayScene::update(float t_deltaTime)
 {
-	system("cls");
-	m_rulesHandler.printMoves();
-	std::cout << std::endl;
 	m_rulesHandler.update();
 }
 
@@ -46,4 +43,16 @@ void GamePlayScene::setPlayerTypes(PlayerType t_p1, PlayerType t_p2)
 		m_turnHandler.setPlayer2(new SfmlInput(m_gameBoard, m_grids));
 	else
 		m_turnHandler.setPlayer2(new FourTechAI(m_gameBoard, PieceType::Yellow));
+
+	// Start the game with a random piece if it's AI vs AI.
+	if (PlayerType::AI == t_p1 && PlayerType::AI == t_p2)
+	{
+		using t = Coordinate::Type;
+		Move move{
+			{ (t)rand() % 4, (t)rand() % 4, (t)rand() % 4 },
+			PieceType::Red
+		};
+		m_gameBoard.setPiece(move.position, move.type);
+		m_turnHandler.changeTurn();
+	}
 }

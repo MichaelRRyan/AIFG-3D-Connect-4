@@ -8,7 +8,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Game::Game() :
-	m_exitGame{false}
+	m_exitGame{ false },
+	m_freezeUntilInput{ false }
 {
 #ifndef LARGER_WINDOW_SIZE
 	Window::getWindow().setView(sf::View({ 800.0f, 600.0f }, { 1600.0f, 1200.0f }));
@@ -68,6 +69,9 @@ void Game::processKeys(sf::Event t_event)
 {
 	if (sf::Keyboard::Escape == t_event.key.code)
 		exit();
+
+	if (m_freezeUntilInput)
+		m_exitGame = true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -76,7 +80,8 @@ void Game::update(float t_delta)
 	if (!Window::getWindow().isOpen())
 		exit();
 
-	m_sceneManager->update(t_delta);
+	if (!m_freezeUntilInput)
+		m_sceneManager->update(t_delta);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -95,7 +100,7 @@ void Game::exit()
 ///////////////////////////////////////////////////////////////////////////////
 void Game::onGameOver(PieceType t_winner)
 {
-	system("cls");
+	std::cout << std::endl;
 
 	if (PieceType::None == t_winner)
 		std::cout << "The game was a draw!" << std::endl;
@@ -105,13 +110,11 @@ void Game::onGameOver(PieceType t_winner)
 		std::cout << "The yellow player won!" << std::endl;
 
 	std::cout << std::endl;
-	//t_rulesHandler.printMoves();
+
+	std::cout << "Press any key to exit..." << std::endl;
 
 	m_sceneManager->render();
-
-	system("pause");
-
-	m_exitGame = true;
+	m_freezeUntilInput = true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

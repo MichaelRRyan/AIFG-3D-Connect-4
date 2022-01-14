@@ -82,6 +82,7 @@ private:
 	/// <param name="t_winner">the winning piece colour.</param>
 	void onGameOver(PieceType t_winner);
 
+	bool m_freezeUntilInput;
 	bool m_exitGame; // control exiting game
 
 	sf::Font m_font;
